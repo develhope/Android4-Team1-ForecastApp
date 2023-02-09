@@ -2,4 +2,12 @@
     <string name="app_name">meteoapp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">home</string>
+    <string name="oggi">oggi</string>
+    <string name="domani">domani</string>
+    <string name="cerca">cerca</string>
+    <string name="Home">Home</string>
+    <string name="Oggi">Oggi</string>
+    <string name="Domani">Domani</string>
+    <string name="Cerca">Cerca</string>
 </resources>
