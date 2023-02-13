@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/oggiFragment"
-        android:name="co.develhope.meteoapp.OggiFragment"
+        android:name="co.develhope.meteoapp.TodayFragment"
         android:label="fragment_oggi"
-        tools:layout="@layout/fragment_oggi" />
+        tools:layout="@layout/fragment_today" />
     <fragment
         android:id="@+id/domaniFragment"
-        android:name="co.develhope.meteoapp.DomaniFragment"
+        android:name="co.develhope.meteoapp.TomorrowFragment"
         android:label="fragment_domani"
-        tools:layout="@layout/fragment_domani" />
+        tools:layout="@layout/fragment_tomorrow" />
     <fragment
         android:id="@+id/cercaFragment"
-        android:name="co.develhope.meteoapp.CercaFragment"
+        android:name="co.develhope.meteoapp.SearchFragment"
         android:label="fragment_cerca"
-        tools:layout="@layout/fragment_cerca" />
+        tools:layout="@layout/fragment_search" />
 </navigation>
