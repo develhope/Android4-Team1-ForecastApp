@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Title  -->
+    <dimen name="title_textSize_home">32sp</dimen>
+    <dimen name="title_textSize_2_3screen">20sp</dimen>
+    <dimen name="title_home_margin_start">24dp</dimen>
+    <dimen name="title_home_margin_top">42dp</dimen>
+    <dimen name="title_home_margin_bottom_card_home">19dp</dimen>
+
+    <!--  subtitle/time  -->
+    <dimen name="text_time">15sp</dimen>
+    <dimen name="text_next_5_days">16sp</dimen>
+    <dimen name="text_temperature_percentage_2_3screen">20sp</dimen>
+    <dimen name="subtitle_textSize_2_3screen">15sp</dimen>
+    <dimen name="subtitle_2_3screen_margin_top">61dp</dimen>
+    <dimen name="subtitle_2_3screen_margin_start">24dp</dimen>
+
+    <!--  Layout  -->
+    <dimen name="layout_padding">24dp</dimen>
+
+    <!--  Card layout  -->
+    <dimen name="card_recyclerview_distance">10dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_padding_internal">18dp</dimen>
+    <dimen name="card_height_home">155dp</dimen>
+    <dimen name="card_height_2_3screen">213dp</dimen>
+    <dimen name="card_title_margin_start_top">18dp</dimen>
+
+    <!--  Card text  -->
+    <dimen name="card_text_data_home">20sp</dimen>
+    <dimen name="card_text_description">15sp</dimen>
+    <dimen name="card_text_data_2_3screen">16sp</dimen>
+
+    <!--  Bottom Navigation  -->
+    <dimen name="bottomNavigation_Height">50sp</dimen>
+
+
+
+</resources>

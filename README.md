@@ -1,4 +1,4 @@
-# Forecast App project
+ b# Forecast App project
 show the meteo info for a specific location
 
 We will follow [figma](https://www.figma.com/file/GPQcB8SKX8XqOfWA3T0o0r/UX%26Devs?node-id=6%3A2) design.
