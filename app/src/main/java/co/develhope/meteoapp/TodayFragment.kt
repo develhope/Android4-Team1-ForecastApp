@@ -1,59 +1,60 @@
 package co.develhope.meteoapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.Data.Data
+import co.develhope.meteoapp.databinding.FragmentTodayBinding
+import java.time.OffsetDateTime
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TodayFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TodayFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentTodayBinding? = null
+
+    private val  binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_today, container, false)
+    ): View {
+        _binding = FragmentTodayBinding.inflate(inflater, container, false)
+
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OggiFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TodayFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        /*val listItems = mutableListOf(
+            TodayCardInfo("11:00",Weather.SUNNY,31,0,45,5/10,60,7,24,0),
+            TodayCardInfo("12:00",Weather.SUNNY,29,0,45,5/10,60,7,24,0),
+            TodayCardInfo("13:00",Weather.SUNNY,30,0,45,5/10,60,7,24,0),
+            TodayCardInfo("14:00",Weather.RAINY,32,0,45,5/10,60,7,24,0),
+            TodayCardInfo("15:00",Weather.RAINY,28,0,45,5/10,60,7,24,0),
+            TodayCardInfo("16:00",Weather.CLOUDY,25,0,45,5/10,60,7,24,0),
+            TodayCardInfo("16:00",Weather.SUNNY,22,0,45,5/10,60,7,24,0),
+        )*/
+
+        var title = co.develhope.meteoapp.Data.Data.TodayScreenData.TodayTitle("Palermo","Sicilia",
+            OffsetDateTime.now())
+        var card1 = TodayCardInfo(OffsetDateTime.now(), Weather.SUNNY,31,0,45,5/10,60,7,24,0)
+        var card2 = TodayCardInfo(OffsetDateTime.now().plusHours(1), Weather.RAINY,31,0,38,8/10,70,9,30,0)
+        var card3 = TodayCardInfo(OffsetDateTime.now().plusHours(2), Weather.CLOUDY,31,0,41,6/10,65,12,24,0)
+        val list1 = listOf<co.develhope.meteoapp.Data.Data.TodayScreenData>(title, Data.TodayScreenData.ForecastData(card1), Data.TodayScreenData.ForecastData(card2), Data.TodayScreenData.ForecastData(card3))
+
+        val adapter = TodayScreenAdapter(list1)
+        binding.rvTodayScreen.adapter = adapter
+        binding.rvTodayScreen.layoutManager = LinearLayoutManager(context)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
