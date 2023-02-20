@@ -10,9 +10,7 @@
         android:id="@+id/frame_48"
         android:layout_width="354dp"
         android:layout_height="66dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="25dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
         android:layout_marginBottom="12dp"
         app:cardBackgroundColor = "@color/white">
 
@@ -29,7 +27,7 @@
             android:id="@+id/grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12°"
+            android:text="12"
             android:textSize="17sp"
             android:layout_marginStart="306dp"
             android:layout_marginTop="12dp"

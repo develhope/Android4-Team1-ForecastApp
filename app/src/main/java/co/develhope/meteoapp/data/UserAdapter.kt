@@ -14,7 +14,7 @@ import co.develhope.meteoapp.databinding.FragmentSearchBinding
 
 class UserAdapter(private val cardList: List<DataSearchFrag>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    private lateinit var context: Context;
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

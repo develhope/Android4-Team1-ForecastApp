@@ -36,16 +36,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun data1 (){
-        newArrayList = arrayListOf<DataSearchFrag>()
-
-        cityList = arrayOf("Milano", "Bergamo", "Catania", "Siracusa")
-        gradeList = arrayOf(12, 22, 31, 17)
-        weatherList = arrayOf("pioggioloso", "bruttobello", "ciao", "fa caldo")
-
-        for(i in cityList.indices){
-            val item = DataSearchFrag(cityList[i], gradeList[i], weatherList[i])
-            newArrayList.add(item)
-        }
+        newArrayList = listOf<DataSearchFrag>(
+            DataSearchFrag("Milano", 12, "Pioggia"),
+            DataSearchFrag("Bergamo", 22 ,"Nuvoloso"),
+            DataSearchFrag("Catania", 31 ,"PioParzialmenteggia"),
+            DataSearchFrag("Siragusa", 17 ,"Soleggiato"))
+                as ArrayList<DataSearchFrag>
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
