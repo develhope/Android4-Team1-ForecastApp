@@ -10,4 +10,5 @@
     <string name="Oggi">Oggi</string>
     <string name="Domani">Domani</string>
     <string name="Cerca">Cerca</string>
+    <string name="recent_search">Ricerche recenti</string>
 </resources>
