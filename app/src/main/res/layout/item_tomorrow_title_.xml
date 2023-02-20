@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/color_background">
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/title_home_margin_start"
+        android:layout_marginTop="61dp"
+        android:textColor="@color/color_title"
+        android:text="@string/palermo"
+        android:textSize="@dimen/subtitle_textSize_2_3screen" />
+
+    <TextView
+        android:id="@+id/region"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="61dp"
+        android:textColor="@color/color_title"
+        android:text="@string/sicilia"
+        android:textSize="@dimen/subtitle_textSize_2_3screen" />
+
+
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/luned_11_settembre"
+        android:layout_marginStart="@dimen/title_home_margin_start"
+        android:textColor="@color/color_title"
+        android:layout_marginTop="105dp"
+        android:textSize="@dimen/title_textSize_2_3screen"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/domani"
+        android:layout_marginStart="@dimen/title_home_margin_start"
+        android:textColor="@color/color_title"
+        android:layout_marginTop="81dp"
+        android:textSize="@dimen/title_textSize_2_3screen"
+        android:textStyle="bold" />
+
+</RelativeLayout>

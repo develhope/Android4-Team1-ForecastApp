@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_today" />
     <fragment
         android:id="@+id/domaniFragment"
-        android:name="co.develhope.meteoapp.TomorrowFragment"
+        android:name="co.develhope.meteoapp.tomorrow.TomorrowFragment"
         android:label="fragment_domani"
         tools:layout="@layout/fragment_tomorrow" />
     <fragment
