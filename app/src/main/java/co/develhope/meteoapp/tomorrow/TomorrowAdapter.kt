@@ -1,12 +1,9 @@
 package co.develhope.meteoapp.tomorrow
 
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.Data
+import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
@@ -15,7 +12,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 
-class TomorrowAdapter(private val item: List<Data.TomorrowSealed>) :
+class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val typeTitle = 0
@@ -23,7 +20,7 @@ class TomorrowAdapter(private val item: List<Data.TomorrowSealed>) :
 
     class TitleTomorrowViewHolder(private val titleBinding: ItemTomorrowTitleBinding) :
         RecyclerView.ViewHolder(titleBinding.root) {
-            fun bind (title: Data.TomorrowSealed.Title) {
+            fun bind (title: DataObject.TomorrowSealed.Title) {
 
                 titleBinding.city.text = title.titleTomorrow.city
                 titleBinding.region.text = title.titleTomorrow.region
@@ -38,7 +35,7 @@ class TomorrowAdapter(private val item: List<Data.TomorrowSealed>) :
 
     class RowTomorrowViewHolder(private val rowBinding: ItemTomorrowRowBinding) :
         RecyclerView.ViewHolder(rowBinding.root) {
-            fun bind(row: Data.TomorrowSealed.Row) {
+            fun bind(row: DataObject.TomorrowSealed.Row) {
 
                 //Row Elements
                 rowBinding.ivMoon.setImageResource(R.drawable.crescent_moon)
@@ -59,8 +56,8 @@ class TomorrowAdapter(private val item: List<Data.TomorrowSealed>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (item[position]){
-            is Data.TomorrowSealed.Title -> typeTitle
-            is Data.TomorrowSealed.Row -> typeRow
+            is DataObject.TomorrowSealed.Title -> typeTitle
+            is DataObject.TomorrowSealed.Row -> typeRow
         }
     }
 
@@ -76,8 +73,8 @@ class TomorrowAdapter(private val item: List<Data.TomorrowSealed>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder){
-            is TitleTomorrowViewHolder -> holder.bind(item[position] as Data.TomorrowSealed.Title)
-            is RowTomorrowViewHolder -> holder.bind(item[position] as Data.TomorrowSealed.Row)
+            is TitleTomorrowViewHolder -> holder.bind(item[position] as DataObject.TomorrowSealed.Title)
+            is RowTomorrowViewHolder -> holder.bind(item[position] as DataObject.TomorrowSealed.Row)
         }
 
         

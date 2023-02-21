@@ -2,7 +2,7 @@ package co.develhope.meteoapp.Data
 
 import java.time.OffsetDateTime
 
-object Data {
+object DataObject {
     data class TomorrowTitle(
         val city : String,
         val region : String,
