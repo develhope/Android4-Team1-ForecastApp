@@ -3,7 +3,10 @@ package co.develhope.meteoapp.Data
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.TodayCardInfo
 import co.develhope.meteoapp.Weather
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 object Data {
 
@@ -32,6 +35,8 @@ object Data {
             Weather.HEAVYRAIN -> R.drawable.sun_behind_rain_cloud
         }
     }
+
+
 
 
 

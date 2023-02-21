@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Data.Data
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 
 class TodayScreenAdapter(
@@ -55,7 +58,13 @@ class TodayScreenAdapter(
             "${title.city}, ${title.region}".also {
                 todayScreenTitleItemBinding.tvTodayLocation.text = it
             }
-            "Domani, \n${title.date}".also { todayScreenTitleItemBinding.tvTodayDate.text = it }
+
+            val todayDateTime = title.date
+            val todayOffSetDateTime =
+                OffsetDateTime.ofInstant(todayDateTime.toInstant(), ZoneOffset.UTC)
+            val todayFormattedDate =
+                DateTimeFormatter.ofPattern("dd MMMM YYYY").format(todayOffSetDateTime)
+            todayScreenTitleItemBinding.tvTodayDate.text = todayFormattedDate
         }
 
 
