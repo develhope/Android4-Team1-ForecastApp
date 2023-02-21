@@ -9,10 +9,11 @@
 
 
 
+
     //Title Strings
     <string name="palermo">Palermo,</string>
     <string name="luned_11_settembre">Lunedì 11 Settembre</string>
-    <string name="domani">Domani,</string>
+   
     <string name="sicilia">Sicilia</string>
     <string name="sereno">Sereno</string>
 
@@ -35,5 +36,8 @@
     <string name="tv_rain">%dcm</string>
     <string name="tv_UV_index">%d/10</string>
     <string name="tv_kmh">%dkm/h</string>
+
+
+    <string name="recent_search">Ricerche recenti</string>
 
 </resources>
