@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/domani"
+        android:text="@string/Domani"
         android:layout_marginStart="@dimen/title_home_margin_start"
         android:textColor="@color/color_title"
         android:layout_marginTop="81dp"
