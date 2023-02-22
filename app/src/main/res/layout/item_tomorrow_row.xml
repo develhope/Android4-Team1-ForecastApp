@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="13dp"
+    android:background="@color/color_background">
+
+
+    <ImageView
+        android:id="@+id/iv_moon"
+        app:srcCompat="@drawable/crescent_moon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="102dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/tv_time"
+        android:textColor="@color/color_title"
+        android:textSize="@dimen/subtitle_textSize_2_3screen" />
+
+    <TextView
+        android:id="@+id/degrees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:text="@string/tv_temperature"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_temperature_percentage_2_3screen"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iv_water_drop"
+        app:srcCompat="@drawable/water_drop"
+        android:layout_width="20dp"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="253dp"
+        android:layout_marginTop="3dp"
+        android:contentDescription="@string/water_drop" />
+
+    <TextView
+        android:id="@+id/percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="275dp"
+        android:text="@string/tv_percentage"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_temperature_percentage_2_3screen" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="24dp"
+        android:background="@color/color_view" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/expanded_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="42dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="342dp"
+            android:layout_height="@dimen/card_height_2_3screen"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="15dp"
+            android:visibility="visible"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/cv_perceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/percepita"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_degrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="38dp"
+                    android:text="@string/tv_temperature"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cv_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="198dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/indice_uv"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_number_UV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="198dp"
+                    android:layout_marginTop="37dp"
+                    android:text="@string/tv_UV_index"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/cv_first_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/color_view" />
+
+
+                <TextView
+                    android:id="@+id/cv_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="84dp"
+                    android:text="@string/umidit"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="198dp"
+                    android:layout_marginTop="84dp"
+                    android:text="@string/vento"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_percentage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="106dp"
+                    android:text="@string/tv_percentage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/NNE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="198dp"
+                    android:layout_marginTop="106dp"
+                    android:text="@string/tv_kmh"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/cv_second_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="139dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/color_view" />
+
+                <TextView
+                    android:id="@+id/cv_cover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="153dp"
+                    android:text="@string/copertura"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="175dp"
+                    android:text="@string/tv_percentage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cv_rain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="153dp"
+                    android:text="@string/pioggia"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_description" />
+
+                <TextView
+                    android:id="@+id/cv_rain_cm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="200dp"
+                    android:layout_marginTop="175dp"
+                    android:text="@string/tv_rain"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/card_text_data_2_3screen"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

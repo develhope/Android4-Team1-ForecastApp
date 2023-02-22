@@ -5,55 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.data.Data
+import co.develhope.meteoapp.data.DataSearchFrag
+import co.develhope.meteoapp.data.UserAdapter
+import co.develhope.meteoapp.databinding.FragmentSearchBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var newArrayList : ArrayList<DataSearchFrag>
+    private lateinit var cityList : Array<String>
+    private lateinit var gradeList : Array<Int>
+    private lateinit var weatherList : Array<String>
+
+    private lateinit var recycleView : RecyclerView
+
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get()=_binding!!
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        data1()
+        val layoutManager = LinearLayoutManager(context)
+        recycleView = view.findViewById(R.id.item_list)
+        recycleView.layoutManager = layoutManager
+        recycleView.setHasFixedSize(true)
+        recycleView.adapter = UserAdapter(newArrayList)
+    }
+
+    private fun data1 (){
+        newArrayList = listOf<DataSearchFrag>(
+            DataSearchFrag("Milano", 12, "Pioggia"),
+            DataSearchFrag("Bergamo", 22 ,"Nuvoloso"),
+            DataSearchFrag("Catania", 31 ,"PioParzialmenteggia"),
+            DataSearchFrag("Siragusa", 17 ,"Soleggiato"))
+                as ArrayList<DataSearchFrag>
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CercaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }
+
