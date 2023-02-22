@@ -9,12 +9,18 @@ import co.develhope.meteoapp.Data.Data
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding
+import org.threeten.bp.format.DateTimeFormatterBuilder
+import org.threeten.bp.temporal.ChronoField.DAY_OF_WEEK
+import org.threeten.bp.temporal.ChronoField.DAY_OF_MONTH
+import org.threeten.bp.temporal.ChronoField.MONTH_OF_YEAR
+import java.util.*
 
 
 class HomeAdapter(
     val list: List<Data.HomeScreenElements>,
     val onClick: (Data.HomeScreenElements?) -> Unit
 ) : RecyclerView.Adapter<HomeViewHolder>() {
+
     override fun getItemViewType(position: Int): Int {
         return when (list.getOrNull(position)) {
             is Data.HomeScreenElements.Title -> 1
@@ -22,7 +28,6 @@ class HomeAdapter(
             is Data.HomeScreenElements.HomeCards -> 3
             else -> -1
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -76,8 +81,32 @@ abstract class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(binding.root) {
     override fun onBind(elements: Data.HomeScreenElements) {
         if (elements is Data.HomeScreenElements.HomeCards) {
-            //binding.day.text = elements.day
-            //binding.data.text = elements.dataDay
+            if(elements.day != null){
+                binding.day.text = DateTimeFormatterBuilder()
+                    .appendText(DAY_OF_WEEK)
+                    .toFormatter(Locale.getDefault())
+                    .format(elements.day)
+                    .replaceFirstChar(Char::titlecase)
+
+                binding.data.text = DateTimeFormatterBuilder()
+                    .appendText(DAY_OF_MONTH)
+                    .appendLiteral("/")
+                    .appendValue(MONTH_OF_YEAR,2)
+                    .toFormatter(Locale.getDefault())
+                    .format(elements.day)
+
+            }else{
+                binding.day.text = ""
+                binding.data.text = ""
+            }
+
+            if(elements.key == "Today"){
+                binding.day.text = "Oggi"
+            }
+            else if (elements.key == "Tomorrow"){
+                binding.day.text = "Domani"
+            }
+
             binding.max.text = elements.max
             binding.min.text = elements.min
             //binding.itemMin.text = binding.itemMin.context.getString(element.min) quando saranno parametrizzati
@@ -88,11 +117,8 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
             binding.dataPercent.text = elements.dataPercent
             binding.dataKMH.text = elements.dataKMH
             elements.icon.let { binding.sun.setImageResource(it) }
-        }
 
-        /*binding.itemView2.setOnClickListener {
-            onClick.invoke(element)
-        }*/
+        }
     }
 }
 
