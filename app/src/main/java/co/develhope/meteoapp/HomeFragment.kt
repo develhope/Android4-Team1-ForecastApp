@@ -26,21 +26,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = HomeAdapter(getListAdapter()) {
-        }
+        binding.recyclerView.adapter = HomeAdapter(getListAdapter())
 
-        /*val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = HomeAdapter(getListAdapter(), onClick = { element ->
-            if (element != null) {
-                if (element is Data.HomeScreenElements.HomeCards && element.key == "Today") {
-                    findNavController().navigate(R.id.action_homeFragment_to_oggiFragment)
-                    view.findViewById<TextView>(R.id.day).text = "Oggi"
-                } else {
-                    Toast.makeText(requireActivity(), "Deve essere implementato", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-        recyclerView.adapter = adapter*/
     }
     override fun onDestroyView() {
         super.onDestroyView()

@@ -10,4 +10,6 @@
     <string name="Domani">Domani</string>
     <string name="Cerca">Cerca</string>
     <string name="recent_search">Ricerche recenti</string>
+    <string name="Tomorrow">Domani</string>
+    <string name="Today">Oggi</string>
 </resources>
