@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.Data.DataObject
+import co.develhope.meteoapp.Data.TodayScreenData
+import co.develhope.meteoapp.Data.TodayTitle
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
-import java.time.OffsetDateTime
+import org.threeten.bp.OffsetDateTime
 
 
 class TodayFragment : Fragment() {
 
     private var _binding: FragmentTodayBinding? = null
 
-    private val  binding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,17 +42,48 @@ class TodayFragment : Fragment() {
             TodayCardInfo("16:00",Weather.SUNNY,22,0,45,5/10,60,7,24,0),
         )*/
 
-        var title = co.develhope.meteoapp.Data.Data.TodayScreenData.TodayTitle("Palermo","Sicilia",
-            OffsetDateTime.now())
-        var card1 = TodayCardInfo(OffsetDateTime.now(), Weather.SUNNY,31,0,45,5/10,60,7,24,0)
-        var card2 = TodayCardInfo(OffsetDateTime.now().plusHours(1), Weather.RAINY,31,0,38,8/10,70,9,30,0)
-        var card3 = TodayCardInfo(OffsetDateTime.now().plusHours(2), Weather.CLOUDY,31,0,41,6/10,65,12,24,0)
-        val list1 = listOf<co.develhope.meteoapp.Data.Data.TodayScreenData>(title, Data.TodayScreenData.ForecastData(card1), Data.TodayScreenData.ForecastData(card2), Data.TodayScreenData.ForecastData(card3))
+        val title = TodayTitle(
+            "Palermo", "Sicilia",
+            OffsetDateTime.now()
+        )
+        val card1 =
+            TodayCardInfo(OffsetDateTime.now(), Weather.SUNNY, 31, 0, 45, 5 / 10, 60, 7, 24, 0)
+        val card2 = TodayCardInfo(
+            OffsetDateTime.now().plusHours(1),
+            Weather.RAINY,
+            31,
+            0,
+            38,
+            8 / 10,
+            70,
+            9,
+            30,
+            0
+        )
+        val card3 = TodayCardInfo(
+            OffsetDateTime.now().plusHours(2),
+            Weather.CLOUDY,
+            31,
+            0,
+            41,
+            6 / 10,
+            65,
+            12,
+            24,
+            0
+        )
+        val list1 = listOf<TodayScreenData>(
+            TodayScreenData.TodayTitleObject(title),
+            TodayScreenData.ForecastData(card1),
+            TodayScreenData.ForecastData(card2),
+            TodayScreenData.ForecastData(card3)
+        )
 
         val adapter = TodayScreenAdapter(list1)
+        binding.rvTodayScreen.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvTodayScreen.setHasFixedSize(true)
         binding.rvTodayScreen.adapter = adapter
-        binding.rvTodayScreen.layoutManager = LinearLayoutManager(context)
-
     }
 
     override fun onDestroyView() {

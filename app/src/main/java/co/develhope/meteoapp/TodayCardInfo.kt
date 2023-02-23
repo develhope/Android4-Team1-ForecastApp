@@ -1,6 +1,7 @@
 package co.develhope.meteoapp
 
-import java.time.OffsetDateTime
+import org.threeten.bp.OffsetDateTime
+
 
 data class TodayCardInfo(
     val date: OffsetDateTime,

@@ -4,15 +4,17 @@ package co.develhope.meteoapp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.Data.DataObject
+import co.develhope.meteoapp.Data.TodayScreenData
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.ZoneOffset
+import org.threeten.bp.format.DateTimeFormatter
 
 
 class TodayScreenAdapter(
-    private var items: List<Data.TodayScreenData>
+    private var items: List<TodayScreenData>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val forecastTodayScreen = 1
@@ -21,9 +23,9 @@ class TodayScreenAdapter(
 
     class TodayForecastCardViewHolder(private val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
-        fun bind(card: Data.TodayScreenData.ForecastData) {
+        fun bind(card: TodayScreenData.ForecastData) {
             rowCardForecastItemBinding.tvTodayHour.text = card.todayCardInfo.date.hour.toString()
-            rowCardForecastItemBinding.ivTodayIcon.setImageResource(Data.weatherIcon(card.todayCardInfo.weather))
+            rowCardForecastItemBinding.ivTodayIcon.setImageResource(DataObject.weatherIcon(card.todayCardInfo.weather))
             "${card.todayCardInfo.temperature}°".also {
                 rowCardForecastItemBinding.tvTodayTemperature.text = it
             }
@@ -47,26 +49,23 @@ class TodayScreenAdapter(
             }
             "${card.todayCardInfo.rain}cm".also { rowCardForecastItemBinding.tvRainValue.text = it }
 
-
         }
     }
 
     class TodayTitleViewHolder(private val todayScreenTitleItemBinding: TodayScreenTitleItemBinding) :
         RecyclerView.ViewHolder(todayScreenTitleItemBinding.root) {
-        fun bind(title: Data.TodayScreenData.TodayTitle) {
-            "${title.city}, ${title.region}".also {
+        fun bind(title: TodayScreenData.TodayTitleObject) {
+            "${title.title.city}, ${title.title.region}".also {
                 todayScreenTitleItemBinding.tvTodayLocation.text = it
             }
 
-            val todayDateTime = title.date
+            val todayDateTime = title.title.date
             val todayOffSetDateTime =
                 OffsetDateTime.ofInstant(todayDateTime.toInstant(), ZoneOffset.UTC)
             val todayFormattedDate =
                 DateTimeFormatter.ofPattern("dd MMMM YYYY").format(todayOffSetDateTime)
             todayScreenTitleItemBinding.tvTodayDate.text = todayFormattedDate
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -98,24 +97,20 @@ class TodayScreenAdapter(
 
         when (holder) {
 
-            is TodayForecastCardViewHolder -> holder.bind(items[position] as Data.TodayScreenData.ForecastData)
-            is TodayTitleViewHolder -> holder.bind(items[position] as Data.TodayScreenData.TodayTitle)
+            is TodayForecastCardViewHolder -> holder.bind(items[position] as TodayScreenData.ForecastData)
+            is TodayTitleViewHolder -> holder.bind(items[position] as TodayScreenData.TodayTitleObject)
         }
-
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
-
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
 
-            is Data.TodayScreenData.TodayTitle -> titleTodayScreen
-            is Data.TodayScreenData.ForecastData -> forecastTodayScreen
+            is TodayScreenData.TodayTitleObject -> titleTodayScreen
+            is TodayScreenData.ForecastData -> forecastTodayScreen
 
         }
-
     }
-
 }
