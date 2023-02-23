@@ -2,6 +2,14 @@
     <string name="app_name">meteoapp</string>
 
     //Bottom Nav Strings
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">home</string>
+    <string name="oggi">oggi</string>
+    <string name="domani">domani</string>
+    <string name="cerca">cerca</string>
+
+    //Bottom Nav Strings
+
     <string name="Home">Home</string>
     <string name="Oggi">Oggi</string>
     <string name="Domani">Domani,</string>
@@ -58,5 +66,7 @@
 
 
     <string name="recent_search">Ricerche recenti</string>
+    <string name="Tomorrow">Domani</string>
+    <string name="Today">Oggi</string>
 
 </resources>
