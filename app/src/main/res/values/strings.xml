@@ -4,7 +4,7 @@
     //Bottom Nav Strings
     <string name="Home">Home</string>
     <string name="Oggi">Oggi</string>
-    <string name="Domani">Domani</string>
+    <string name="Domani">Domani,</string>
     <string name="Cerca">Cerca</string>
 
 
