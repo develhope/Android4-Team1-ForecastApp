@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="day_date">Oggi, \nDomenica 10 Settembre</string>
+    <string name="today_hour">11:00</string>
+    <string name="tvTodayMaxTemp">31°</string>
+    <string name="tvTodayMaxHumidity">0%</string>
+    <string name="uv_index">Indice UV</string>
+    <string name="index_value">1/10</string>
+    <string name="humidity">Umidità</string>
+    <string name="humidityValue">60%</string>
+    <string name="wind">Vento</string>
+    <string name="windValue">SSE 7km/h</string>
+    <string name="coverage">Copertura</string>
+    <string name="rain">Pioggia</string>
+    <string name="rainValue">0 cm</string>
+    <string name="coverageValue">24%</string>
+</resources>

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">meteoapp</string>
+
+    //Bottom Nav Strings
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">home</string>
     <string name="oggi">oggi</string>
@@ -7,9 +9,61 @@
     <string name="cerca">cerca</string>
     <string name="Home">Home</string>
     <string name="Oggi">Oggi</string>
-    <string name="Domani">Domani</string>
+    <string name="Domani">Domani,</string>
     <string name="Cerca">Cerca</string>
+    <string name="city_region">$city, $region</string>
+    <string name="day_date"><b>Oggi</b>, \nDomenica 10 Settembre</string>
+    <string name="today_hour">11:00</string>
+    <string name="tvTodayMaxTemp"><b>31°</b></string>
+    <string name="tvTodayMaxHumidity">0%</string>
+    <string name="today_icon">Today Icon</string>
+    <string name="perceived">Percepita</string>
+    <string name="todayPerceivedTemperature"><b>45°</b></string>
+    <string name="uv_index">Indice UV</string>
+    <string name="index_value"><b>5/10</b></string>
+    <string name="humidity">Umidità</string>
+    <string name="humidityValue"><b>60%</b></string>
+    <string name="wind">Vento</string>
+    <string name="windValue"><b>SSE 7km/h</b></string>
+    <string name="coverage">Copertura</string>
+    <string name="rain">Pioggia</string>
+    <string name="rainValue"><b>0 cm</b></string>
+    <string name="coverageValue"><b>24%</b></string>
+
+
+
+
+
+    //Title Strings
+    <string name="palermo">Palermo,</string>
+    <string name="luned_11_settembre">Lunedì 11 Settembre</string>
+
+    <string name="sicilia">Sicilia</string>
+    <string name="sereno">Sereno</string>
+
+
+
+    //Row+Card Strings
+    <string name="water_drop">water drop</string>
+    <string name="percepita">Percepita</string>
+    <string name="indice_uv">Indice UV</string>
+    <string name="umidit">Umidità</string>
+    <string name="vento">Vento</string>
+    <string name="nne_1km_h">NNE 1km/h</string>
+    <string name="copertura">Copertura</string>
+    <string name="pioggia">Pioggia</string>
+
+    //Textview Tomorrow Strings
+    <string name="tv_time">%d:00</string>
+    <string name="tv_temperature">%d°</string>
+    <string name="tv_percentage">%d%%</string>
+    <string name="tv_rain">%dcm</string>
+    <string name="tv_UV_index">%d/10</string>
+    <string name="tv_kmh">%dkm/h</string>
+
+
     <string name="recent_search">Ricerche recenti</string>
     <string name="Tomorrow">Domani</string>
     <string name="Today">Oggi</string>
+
 </resources>

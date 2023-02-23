@@ -30,9 +30,13 @@
     <dimen name="card_text_data_home">20sp</dimen>
     <dimen name="card_text_description">15sp</dimen>
     <dimen name="card_text_data_2_3screen">16sp</dimen>
+    <dimen name="text_min_dimensions_card_info">16sp</dimen>
+
 
     <!--  Bottom Navigation  -->
     <dimen name="bottomNavigation_Height">50sp</dimen>
+
+
 
 
 
