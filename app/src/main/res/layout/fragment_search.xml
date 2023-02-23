@@ -16,7 +16,7 @@
         android:layout_marginStart="21dp"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="80dp"
-        android:textAppearance="Cerca città"
+        android:autofillHints="Cerca città"
         android:background="@drawable/rounded_corner"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_grey">#F0EFFF</color>
+    <color name="text_today_screen">#230EA5</color>
+    <color name="today_card_color">#66FFFFFF</color>
     <color name="color_title">#230EA5</color>
     <color name="color_view">#ABA4FF</color>
     <color name="color_background">#F0EFFF</color>

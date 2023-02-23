@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.DataSearchFrag
 import co.develhope.meteoapp.data.UserAdapter
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
