@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.Data
+import co.develhope.meteoapp.Data.HomeScreenElements
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding
@@ -16,14 +16,14 @@ import java.util.*
 
 
 class HomeAdapter(
-    val list: List<Data.HomeScreenElements>
+    val list: List<HomeScreenElements>, val onClick: (String) -> Unit
 ) : RecyclerView.Adapter<HomeViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (list.getOrNull(position)) {
-            is Data.HomeScreenElements.Title -> 1
-            is Data.HomeScreenElements.Next5Days -> 2
-            is Data.HomeScreenElements.HomeCards -> 3
+            is HomeScreenElements.TitleHome -> 1
+            is HomeScreenElements.SubTitleHome -> 2
+            is HomeScreenElements.CardsHome -> 3
             else -> -1
         }
     }
@@ -53,7 +53,7 @@ class HomeAdapter(
             )
             else ->
                 object : HomeViewHolder(View(parent.context)) {
-                    override fun onBind(elements: Data.HomeScreenElements) {
+                    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
                     }
                 }
         }
@@ -62,7 +62,7 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val element = list.getOrNull(position)
         if (element != null) {
-            holder.onBind(element)
+            holder.onBind(element, onClick)
         }
     }
 
@@ -73,73 +73,69 @@ class HomeAdapter(
 }
 
 abstract class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    abstract fun onBind(elements: Data.HomeScreenElements)
+    abstract fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit)
 }
 
 class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(binding.root) {
 
-    override fun onBind(elements: Data.HomeScreenElements) {
-        if (elements is Data.HomeScreenElements.HomeCards) {
-            if (elements.day != null) {
-                binding.day.text = DateTimeFormatterBuilder()
-                    .appendText(DAY_OF_WEEK)
-                    .toFormatter(Locale.getDefault())
-                    .format(elements.day)
-                    .replaceFirstChar(Char::titlecase)
+    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+        if (elements is HomeScreenElements.CardsHome) {
+            if (elements.cardsHome.day != null) {
+
 
                 binding.data.text = DateTimeFormatterBuilder()
                     .appendText(DAY_OF_MONTH)
                     .appendLiteral("/")
                     .appendValue(MONTH_OF_YEAR, 2)
                     .toFormatter(Locale.getDefault())
-                    .format(elements.day)
+                    .format(elements.cardsHome.day)
 
             } else {
                 binding.day.text = ""
                 binding.data.text = ""
             }
 
-            if (elements.key == "Today") {
+            if (elements.cardsHome.key == "Today") {
                 binding.day.text = itemView.context.getString(R.string.Today)
-            } else if (elements.key == "Tomorrow") {
+            } else if (elements.cardsHome.key == "Tomorrow") {
                 binding.day.text = itemView.context.getString(R.string.Tomorrow)
+            } else if (elements.cardsHome.day != null) {
+                binding.day.text = DateTimeFormatterBuilder()
+                    .appendText(DAY_OF_WEEK)
+                    .toFormatter(Locale.getDefault())
+                    .format(elements.cardsHome.day)
+                    .replaceFirstChar(Char::titlecase)
             }
-            binding.max.text = elements.max
-            binding.min.text = elements.min
-           // binding.min.text = binding.min.context.getString(elements.min)
-            binding.rain.text = elements.rain
-            binding.data6.text = elements.wind
-            binding.degree.text = elements.degree
-            binding.degree2.text = elements.degree2
-            binding.dataPercent.text = elements.dataPercent
-            binding.dataKMH.text = elements.dataKMH
-            elements.icon.let { binding.sun.setImageResource(it) }
+            binding.max.text = elements.cardsHome.max
+            binding.min.text = elements.cardsHome.min
+            // binding.min.text = binding.min.context.getString(elements.min)
+            binding.rain.text = elements.cardsHome.rain
+            binding.data6.text = elements.cardsHome.wind
+            binding.degree.text = elements.cardsHome.degree
+            binding.degree2.text = elements.cardsHome.degree2
+            binding.dataPercent.text = elements.cardsHome.dataPercent
+            binding.dataKMH.text = elements.cardsHome.dataKMH
+            elements.cardsHome.icon.let { binding.sun.setImageResource(it) }
 
             binding.cardView.setOnClickListener {
-                val choosenFragment =
-                    when (elements.key) {
-                        "Today" -> R.id.oggiFragment
-                        "Tomorrow" -> R.id.domaniFragment
-                        else -> R.id.homeFragment
-                    }
-                it.findNavController().navigate(choosenFragment)
+                onClick.invoke(elements.cardsHome.key)
             }
         }
     }
 }
 
 class TitleViewHolder(val binding: HomeTitleCityBinding) : HomeViewHolder(binding.root) {
-    override fun onBind(elements: Data.HomeScreenElements) {
-        if (elements is Data.HomeScreenElements.Title) {
-            binding.city.text = elements.city
+    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+        if (elements is HomeScreenElements.TitleHome) {
+            binding.city.text = elements.title.city
         }
     }
 }
 
 class SubTitleViewHolder(val binding: HomeSubTitleBinding) : HomeViewHolder(binding.root) {
-    override fun onBind(elements: Data.HomeScreenElements) {
-        if (elements is Data.HomeScreenElements.Next5Days) {
-            binding.next5Days.text = elements.next5Days
+    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+        if (elements is HomeScreenElements.SubTitleHome) {
+            binding.next5Days.text = elements.subTileHome.next5Days
         }
     }
 }
