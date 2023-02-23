@@ -1,15 +1,12 @@
 package co.develhope.meteoapp.Data
 
-import co.develhope.meteoapp.R
-import co.develhope.meteoapp.TodayCardInfo
-import co.develhope.meteoapp.Weather
 import java.time.OffsetDateTime
 
 object DataObject {
     data class TomorrowTitle(
-        val city: String,
-        val region: String,
-        val day: OffsetDateTime,
+        val city : String,
+        val region : String,
+        val day : OffsetDateTime,
     )
 
     data class TomorrowRow(
@@ -28,9 +25,9 @@ object DataObject {
     )
 
 
-    sealed class TomorrowSealed() {
-        data class Title(val titleTomorrow: TomorrowTitle) : TomorrowSealed()
-        data class Row(val tomorrowRow: TomorrowRow) : TomorrowSealed()
+    sealed class TomorrowSealed(){
+        data class Title (val titleTomorrow : TomorrowTitle) : TomorrowSealed()
+        data class Row (val tomorrowRow: TomorrowRow) : TomorrowSealed()
     }
 
     //TODAY SCREEN DATA

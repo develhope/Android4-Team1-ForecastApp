@@ -7,12 +7,12 @@ import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.ZoneOffset
+import org.threeten.bp.format.DateTimeFormatter
 
 
-class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
+class TomorrowAdapter(private val item: List<TomorrowSealed>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val typeTitle = 0
@@ -20,13 +20,13 @@ class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
 
     class TitleTomorrowViewHolder(private val titleBinding: ItemTomorrowTitleBinding) :
         RecyclerView.ViewHolder(titleBinding.root) {
-            fun bind (title: DataObject.TomorrowSealed.Title) {
+            fun bind (title: TomorrowSealed.Title) {
 
                 titleBinding.city.text = title.titleTomorrow.city
                 titleBinding.region.text = title.titleTomorrow.region
 
                 val dateTime = title.titleTomorrow.day
-                val offsetDateTime = OffsetDateTime.ofInstant(dateTime.toInstant(),ZoneOffset.UTC)
+                val offsetDateTime = OffsetDateTime.ofInstant(dateTime.toInstant(), ZoneOffset.UTC)
                 val formattedDate = DateTimeFormatter.ofPattern("dd MMMM yyyy").format(offsetDateTime.plusDays(1))
                 titleBinding.day.text = formattedDate
             }
@@ -35,7 +35,7 @@ class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
 
     class RowTomorrowViewHolder(private val rowBinding: ItemTomorrowRowBinding) :
         RecyclerView.ViewHolder(rowBinding.root) {
-            fun bind(row: DataObject.TomorrowSealed.Row) {
+            fun bind(row: TomorrowSealed.Row) {
 
                 //Row Elements
                 rowBinding.ivMoon.setImageResource(R.drawable.crescent_moon)
@@ -56,8 +56,8 @@ class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
 
     override fun getItemViewType(position: Int): Int {
         return when (item[position]){
-            is DataObject.TomorrowSealed.Title -> typeTitle
-            is DataObject.TomorrowSealed.Row -> typeRow
+            is TomorrowSealed.Title -> typeTitle
+            is TomorrowSealed.Row -> typeRow
         }
     }
 
@@ -73,8 +73,8 @@ class TomorrowAdapter(private val item: List<DataObject.TomorrowSealed>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder){
-            is TitleTomorrowViewHolder -> holder.bind(item[position] as DataObject.TomorrowSealed.Title)
-            is RowTomorrowViewHolder -> holder.bind(item[position] as DataObject.TomorrowSealed.Row)
+            is TitleTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Title)
+            is RowTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Row)
         }
 
         
