@@ -12,7 +12,7 @@
     <item
         android:id="@+id/domaniFragment"
         android:icon="@drawable/calendar_icon2"
-        android:title="@string/Domani" />
+        android:title="@string/Tomorrow" />
     <item
         android:id="@+id/cercaFragment"
         android:icon="@drawable/search_2"
