@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.Data
+package co.develhope.meteoapp.Home
 
 sealed class HomeScreenElements() {
     data class TitleHome(val title : Title) : HomeScreenElements()

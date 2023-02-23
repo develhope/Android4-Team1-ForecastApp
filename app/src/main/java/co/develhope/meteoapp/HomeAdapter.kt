@@ -4,9 +4,8 @@ package co.develhope.meteoapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.HomeScreenElements
+import co.develhope.meteoapp.Home.HomeScreenElements
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding

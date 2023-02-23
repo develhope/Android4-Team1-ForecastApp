@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.Data.*
+import co.develhope.meteoapp.Home.HomeCards
+import co.develhope.meteoapp.Home.HomeScreenElements
+import co.develhope.meteoapp.Home.Next5Days
+import co.develhope.meteoapp.Home.Title
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
 import org.threeten.bp.OffsetDateTime
 
