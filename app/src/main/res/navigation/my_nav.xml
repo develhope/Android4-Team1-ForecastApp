@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="co.develhope.meteoapp.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_oggiFragment"
+            app:destination="@id/oggiFragment" />
+    </fragment>
     <fragment
         android:id="@+id/oggiFragment"
         android:name="co.develhope.meteoapp.TodayFragment"

@@ -2,83 +2,149 @@ package co.develhope.meteoapp
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.HomeAdapter
-import co.develhope.meteoapp.Data.RecyclerElement
-import java.text.SimpleDateFormat
-import java.util.*
+import co.develhope.meteoapp.Data.*
+import co.develhope.meteoapp.Home.HomeCards
+import co.develhope.meteoapp.Home.HomeScreenElements
+import co.develhope.meteoapp.Home.Next5Days
+import co.develhope.meteoapp.Home.Title
+import co.develhope.meteoapp.databinding.FragmentHomeBinding
+import org.threeten.bp.OffsetDateTime
 
 class HomeFragment : Fragment() {
-    private var adapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>? = null
+    private var baseContainerBinding: FragmentHomeBinding? = null
+    private val binding get() = baseContainerBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        baseContainerBinding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dateFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
-        val calendar = Calendar.getInstance()
-
-        view.findViewById<TextView>(R.id.day).text = "Oggi"
-        view.findViewById<TextView>(R.id.city).text = "Palermo, Sicilia"
-        view.findViewById<TextView>(R.id.degree).text = "13°"
-        view.findViewById<TextView>(R.id.degree2).text = "26°"
-        view.findViewById<TextView>(R.id.dataPercent).text = "3%"
-        view.findViewById<TextView>(R.id.dataKMH).text = "20kmh"
-        view.findViewById<TextView>(R.id.data).text = dateFormat.format(calendar.time)
-
-
-        fun getIconSun(weather : String ) : Int{
-            return if (weather == "sunny"){
-                R.drawable.ic_launcher_foreground
-            } else{
-                R.drawable.sun_icon
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = HomeAdapter(getListAdapter(), onClick = {
+            when (it) {
+                "Today" -> this.findNavController().navigate(R.id.oggiFragment)
+                "Tomorrow" -> this.findNavController().navigate(R.id.domaniFragment)
             }
-        }
+        })
 
-
-        calendar.add(Calendar.DAY_OF_YEAR, 1)
-        val list = mutableListOf<RecyclerElement>()
-        for (i in 0 until 5) {
-            val dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
-            val capitalizedDayOfWeek = dayOfWeek.replaceFirstChar { it.uppercase() }
-            val recyclerElement = RecyclerElement(
-                capitalizedDayOfWeek,
-                dateFormat.format(calendar.time),
-                "min",
-                "max",
-                "precip.",
-                "vento",
-                getIconSun("cloudy"),
-                "20°",
-                "31°",
-                "0%",
-                "12kmh")
-            list.add(recyclerElement)
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-
-
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = HomeAdapter(list) {
-            // GESTIONE DEL CLICK DA IMPREMENTARE
-        }
-        recyclerView.adapter = adapter
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        baseContainerBinding = null
+    }
+
+    fun getListAdapter(): List<HomeScreenElements> {
+        return listOf(
+            HomeScreenElements.TitleHome(Title("Palermo, Sicilia")),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now(),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "20°",
+                    "31°",
+                    "0%",
+                    "12kmh",
+                    "Today"
+                )
+            ),
+            HomeScreenElements.SubTitleHome(Next5Days("NEXT 5 DAYS")),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now().plusDays(1),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "18°",
+                    "29°",
+                    "0%",
+                    "20kmh",
+                    "Tomorrow"
+                )
+            ),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now().plusDays(2),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "21°",
+                    "30°",
+                    "10%",
+                    "10kmh",
+                    "2day"
+                )
+            ),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now().plusDays(3),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "22°",
+                    "31°",
+                    "0%",
+                    "5kmh",
+                    "3day"
+                )
+            ),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now().plusDays(4),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "10°",
+                    "21°",
+                    "0%",
+                    "6kmh",
+                    "4day"
+                )
+            ),
+            HomeScreenElements.CardsHome(
+                HomeCards(
+                    OffsetDateTime.now().plusDays(5),
+                    "min",
+                    "max",
+                    "precip.",
+                    "vento",
+                    DataObject.weatherIcon(Weather.SUNNY),
+                    "25°",
+                    "30°",
+                    "0%",
+                    "11kmh",
+                    "5day"
+                )
+            )
+
+        )
+    }
+
+
 }
+
 

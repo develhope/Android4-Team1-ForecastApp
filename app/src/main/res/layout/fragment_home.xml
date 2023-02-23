@@ -1,48 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_weight="1"
     android:background="#5145de"
-    android:orientation="vertical"
-    android:paddingHorizontal="24dp">
-
-    <TextView
-        android:id="@+id/city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Palermo, Sicilia"
-        android:layout_marginTop="42dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"/>
-
-    <include
-        layout="@layout/card_layout_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:textSize="16sp"
-        android:text="PROSSIMI 5 GIORNI"
-        android:textColor="@color/white"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:listitem="@layout/card_layout_home"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
-
-
-
-</LinearLayout>
+    android:paddingHorizontal="24dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/card_layout_home" />
