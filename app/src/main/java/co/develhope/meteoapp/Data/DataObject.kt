@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.Data
 
+import co.develhope.meteoapp.R
+import co.develhope.meteoapp.Weather
 import java.time.OffsetDateTime
 
 object DataObject {
