@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.data
+package co.develhope.meteoapp.Data
 
 import android.content.Context
 import android.view.LayoutInflater
