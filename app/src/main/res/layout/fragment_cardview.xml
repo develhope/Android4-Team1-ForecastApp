@@ -1,68 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F0EFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+
+    android:id="@+id/frame_48"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F0EFFF"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardBackgroundColor = "@color/white">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:id="@+id/frame_48"
-        android:layout_width="354dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="12dp"
-        app:cardBackgroundColor = "@color/white">
-
-
-        <LinearLayout
-            android:id="@+id/frame_47"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient_drawable"
-            android:orientation="vertical"
-            android:padding="120dp" />
+        android:id="@+id/frame_47"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_drawable"
+        android:padding="16dp" >
 
         <TextView
             android:id="@+id/grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12"
-            android:textSize="17sp"
-            android:layout_marginStart="306dp"
-            android:layout_marginTop="12dp"
-            android:textColor="@color/white">
+            app:layout_constraintTop_toTopOf="@id/city_name"
+            app:layout_constraintBottom_toBottomOf="@id/city_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/card_title_margin_start_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="16dp"/>
 
-        </TextView>
 
         <TextView
             android:id="@+id/wather_status"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="soleggiato"
             android:textSize="11sp"
             android:textAlignment="textEnd"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="21dp"
-            android:textColor="@color/white">
-
-        </TextView>
-
-            <TextView
-                android:id="@+id/city_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="20dp"
-                android:text="Palermo"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="normal"/>
+            app:layout_constraintTop_toBottomOf="@id/grade"
+            app:layout_constraintEnd_toEndOf="@id/grade"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/white"/>
 
 
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Palermo"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+</androidx.cardview.widget.CardView>
 
 

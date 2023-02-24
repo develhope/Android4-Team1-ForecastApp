@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.data.DataSearchFrag
-import co.develhope.meteoapp.data.UserAdapter
+import co.develhope.meteoapp.Data.DataSearchFrag
+import co.develhope.meteoapp.Data.UserAdapter
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
 
-    private lateinit var newArrayList : ArrayList<DataSearchFrag>
+    private lateinit var newArrayList : List<DataSearchFrag>
     private lateinit var cityList : Array<String>
     private lateinit var gradeList : Array<Int>
     private lateinit var weatherList : Array<String>
@@ -22,6 +22,19 @@ class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get()=_binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,20 +53,9 @@ class SearchFragment : Fragment() {
             DataSearchFrag("Bergamo", 22 ,"Nuvoloso"),
             DataSearchFrag("Catania", 31 ,"PioParzialmenteggia"),
             DataSearchFrag("Siragusa", 17 ,"Soleggiato"))
-                as ArrayList<DataSearchFrag>
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+
 }
 
