@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/title_home_margin_start"
         android:layout_marginTop="61dp"
-        android:textColor="@color/color_title"
+        android:textColor="@color/text_today_screen"
         android:text="@string/palermo"
         android:textSize="@dimen/subtitle_textSize_2_3screen" />
 

@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.today
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.Data.DataObject
-import co.develhope.meteoapp.Data.TodayScreenData
-import co.develhope.meteoapp.Data.TodayTitle
+import co.develhope.meteoapp.Weather
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import org.threeten.bp.OffsetDateTime
 

@@ -53,13 +53,20 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_temperature_percentage_2_3screen" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="355dp"
+        android:src="@drawable/toggle_icon"/>
+
 
     <View
-        android:layout_width="match_parent"
+        android:layout_width="370dp"
         android:layout_height="1dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="45dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="20dp"
         android:background="@color/color_view" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
