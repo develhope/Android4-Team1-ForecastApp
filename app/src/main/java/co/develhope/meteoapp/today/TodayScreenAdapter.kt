@@ -1,11 +1,11 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.today
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Data.DataObject
-import co.develhope.meteoapp.Data.TodayScreenData
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
 import org.threeten.bp.OffsetDateTime
@@ -24,7 +24,7 @@ class TodayScreenAdapter(
     class TodayForecastCardViewHolder(private val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
         fun bind(card: TodayScreenData.ForecastData) {
-            rowCardForecastItemBinding.tvTodayHour.text = card.todayCardInfo.date.hour.toString()
+            rowCardForecastItemBinding.tvTodayHour.text = itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
             rowCardForecastItemBinding.ivTodayIcon.setImageResource(DataObject.weatherIcon(card.todayCardInfo.weather))
             "${card.todayCardInfo.temperature}°".also {
                 rowCardForecastItemBinding.tvTodayTemperature.text = it

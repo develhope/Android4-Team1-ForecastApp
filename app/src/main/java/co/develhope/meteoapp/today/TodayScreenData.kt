@@ -1,6 +1,4 @@
-package co.develhope.meteoapp.Data
-
-import co.develhope.meteoapp.TodayCardInfo
+package co.develhope.meteoapp.today
 
 sealed class TodayScreenData() {
 

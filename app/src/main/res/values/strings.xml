@@ -15,7 +15,7 @@
     <string name="Domani">Domani,</string>
     <string name="Cerca">Cerca</string>
     <string name="city_region">$city, $region</string>
-    <string name="day_date"><b>Oggi</b>, \nDomenica 10 Settembre</string>
+    <string name="day_date"><b>Domenica 10 Settembre</b></string>
     <string name="today_hour">11:00</string>
     <string name="tvTodayMaxTemp"><b>31°</b></string>
     <string name="tvTodayMaxHumidity">0%</string>
@@ -32,6 +32,7 @@
     <string name="rain">Pioggia</string>
     <string name="rainValue"><b>0 cm</b></string>
     <string name="coverageValue"><b>24%</b></string>
+
 
 
 
@@ -55,6 +56,7 @@
     <string name="nne_1km_h">NNE 1km/h</string>
     <string name="copertura">Copertura</string>
     <string name="pioggia">Pioggia</string>
+    <string name="tvTodayPercentage"><b>0%</b></string>
 
     //Textview Tomorrow Strings
     <string name="tv_time">%d:00</string>
@@ -68,5 +70,6 @@
     <string name="recent_search">Ricerche recenti</string>
     <string name="Tomorrow">Domani</string>
     <string name="Today">Oggi</string>
+    <string name="Today2">Oggi,</string>
 
 </resources>

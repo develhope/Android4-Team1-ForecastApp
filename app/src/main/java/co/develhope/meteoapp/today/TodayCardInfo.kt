@@ -1,5 +1,6 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.today
 
+import co.develhope.meteoapp.Weather
 import org.threeten.bp.OffsetDateTime
 
 

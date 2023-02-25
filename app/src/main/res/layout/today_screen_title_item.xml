@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/color_background">
 
     <TextView
         android:id="@+id/tvTodayLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="61dp"
         android:text="@string/city_region"
         android:textColor="@color/text_today_screen"
@@ -17,13 +19,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Today2"
+        android:layout_marginStart="@dimen/title_home_margin_start"
+        android:textColor="@color/color_title"
+        android:layout_marginTop="81dp"
+        android:textSize="@dimen/title_textSize_2_3screen"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/tvTodayDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/day_date"
-        android:textColor="@color/text_today_screen"
+        android:layout_marginStart="@dimen/title_home_margin_start"
+        android:textColor="@color/color_title"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTodayLocation" />
+        android:textStyle="bold"
+        android:layout_marginTop="105dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
