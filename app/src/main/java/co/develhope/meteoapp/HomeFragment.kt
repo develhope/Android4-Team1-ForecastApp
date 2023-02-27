@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
                     "Today"
                 )
             ),
-            HomeScreenElements.SubTitleHome(Next5Days("NEXT 5 DAYS")),
+            HomeScreenElements.SubTitleHome(Next5Days("PROSSIMI 5 GIORNI")),
             HomeScreenElements.CardsHome(
                 HomeCards(
                     OffsetDateTime.now().plusDays(1),

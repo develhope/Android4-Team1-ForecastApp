@@ -51,7 +51,7 @@ class SearchFragment : Fragment() {
         newArrayList = listOf<DataSearchFrag>(
             DataSearchFrag("Milano", 12, "Pioggia"),
             DataSearchFrag("Bergamo", 22 ,"Nuvoloso"),
-            DataSearchFrag("Catania", 31 ,"PioParzialmenteggia"),
+            DataSearchFrag("Catania", 31 ,"Parzialmente"),
             DataSearchFrag("Siragusa", 17 ,"Soleggiato"))
 
     }
