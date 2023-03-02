@@ -14,9 +14,9 @@ import co.develhope.meteoapp.databinding.FragmentSearchBinding
 class SearchFragment : Fragment() {
 
     private lateinit var newArrayList : List<DataSearchFrag>
-    private lateinit var cityList : Array<String>
-    private lateinit var gradeList : Array<Int>
-    private lateinit var weatherList : Array<String>
+    //private lateinit var cityList : Array<String>
+    //private lateinit var gradeList : Array<Int>
+    //private lateinit var weatherList : Array<String>
 
     private lateinit var recycleView : RecyclerView
 

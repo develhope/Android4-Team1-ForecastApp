@@ -3,7 +3,6 @@ package co.develhope.meteoapp.tomorrow
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
@@ -43,6 +42,8 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
                 rowBinding.degrees.text = itemView.context.getString(R.string.tv_temperature,row.tomorrowRow.degrees)
                 rowBinding.time.text = itemView.context.getString(R.string.tv_time,row.tomorrowRow.time.hour)
                 rowBinding.percentage.text = itemView.context.getString(R.string.tv_percentage,row.tomorrowRow.percentage)
+                rowBinding.toggle.setImageResource(R.drawable.toggle_icon_up)
+
 
                 //Card Elements
                 rowBinding.cvDegrees.text = itemView.context.getString(R.string.tv_temperature,row.tomorrowRow.cvDegrees)
@@ -75,7 +76,9 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
         when (holder){
             is TitleTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Title)
             is RowTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Row)
+
         }
+
 
         
     }
