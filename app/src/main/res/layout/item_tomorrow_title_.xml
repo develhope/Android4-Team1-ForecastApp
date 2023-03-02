@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@color/color_background">
+    android:background="@color/color_background"
+    android:id="@+id/relativeLayout2">
 
     <TextView
         android:id="@+id/city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/title_home_margin_start"
         android:layout_marginTop="61dp"
         android:textColor="@color/text_today_screen"
         android:text="@string/palermo"
-        android:textSize="@dimen/subtitle_textSize_2_3screen" />
+        android:textSize="@dimen/subtitle_textSize_2_3screen"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/region"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="61dp"
         android:textColor="@color/color_title"
         android:text="@string/sicilia"
-        android:textSize="@dimen/subtitle_textSize_2_3screen" />
+        android:textSize="@dimen/subtitle_textSize_2_3screen"
+        app:layout_constraintTop_toTopOf="@id/city"
+        app:layout_constraintStart_toEndOf="@id/city" />
 
 
 
@@ -31,21 +34,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/luned_11_settembre"
-        android:layout_marginStart="@dimen/title_home_margin_start"
         android:textColor="@color/color_title"
-        android:layout_marginTop="105dp"
         android:textSize="@dimen/title_textSize_2_3screen"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/tomorrow"
+        app:layout_constraintTop_toBottomOf="@id/tomorrow"/>
 
 
     <TextView
+        android:id="@+id/tomorrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Domani"
-        android:layout_marginStart="@dimen/title_home_margin_start"
         android:textColor="@color/color_title"
-        android:layout_marginTop="81dp"
         android:textSize="@dimen/title_textSize_2_3screen"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/city"
+        app:layout_constraintStart_toStartOf="@id/city" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
