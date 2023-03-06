@@ -2,18 +2,22 @@ package co.develhope.meteoapp
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.Data.*
+import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.Home.HomeCards
 import co.develhope.meteoapp.Home.HomeScreenElements
 import co.develhope.meteoapp.Home.Next5Days
 import co.develhope.meteoapp.Home.Title
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
+import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
+import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
 class HomeFragment : Fragment() {
@@ -38,6 +42,15 @@ class HomeFragment : Fragment() {
                 "Tomorrow" -> this.findNavController().navigate(R.id.domaniFragment)
             }
         })
+
+
+        lifecycleScope.launch {
+            try {
+                //RetrofitInstanceApiOpenMeteo.getDayDetails() metti la nuova funzione
+            } catch (e: Exception) {
+                Log.e("HomeFragment", "Error: ${e.message}")
+            }
+        }
 
     }
 
@@ -143,8 +156,6 @@ class HomeFragment : Fragment() {
 
         )
     }
-
-
 }
 
 
