@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.today
+package co.develhope.meteoapp
 
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.Weather
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
+import co.develhope.meteoapp.today.TodayCardInfo
+import co.develhope.meteoapp.today.TodayScreenAdapter
+import co.develhope.meteoapp.today.TodayScreenData
+import co.develhope.meteoapp.today.TodayTitle
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -33,6 +36,14 @@ class TodayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            try {
+                RetrofitInstanceApiOpenMeteo.getDayDetails()
+            } catch (e: Exception) {
+                Log.e("TodayFragment", "Error: ${e.message}")
+            }
+        }
 
         /*val listItems = mutableListOf(
             TodayCardInfo("11:00",Weather.SUNNY,31,0,45,5/10,60,7,24,0),
@@ -87,13 +98,7 @@ class TodayFragment : Fragment() {
         binding.rvTodayScreen.setHasFixedSize(true)
         binding.rvTodayScreen.adapter = adapter
 
-        lifecycleScope.launch {
-            try {
-                RetrofitInstanceApiOpenMeteo.getDayDetails()
-            } catch (e: Exception) {
-                Log.e("TodayFragment", "Error: ${e.message}")
-            }
-        }
+
     }
 
     override fun onDestroyView() {
