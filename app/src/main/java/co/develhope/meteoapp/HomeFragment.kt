@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "20°",
                     "31°",
-                    "0%",
+                    "0mm",
                     "12kmh",
                     key = HomeScreenEvents.Today
                 )
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "18°",
                     "29°",
-                    "0%",
+                    "0mm",
                     "20kmh",
                     key = HomeScreenEvents.Tomorrow
                 )
@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "21°",
                     "30°",
-                    "10%",
+                    "10mm",
                     "10kmh",
                     key = HomeScreenEvents.OtherDay(3)
                 )
@@ -127,7 +127,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "22°",
                     "31°",
-                    "0%",
+                    "0mm",
                     "5kmh",
                     key = HomeScreenEvents.OtherDay(4)
                 )
@@ -142,7 +142,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "10°",
                     "21°",
-                    "0%",
+                    "0mm",
                     "6kmh",
                     key = HomeScreenEvents.OtherDay(5)
                 )
@@ -157,7 +157,7 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "25°",
                     "30°",
-                    "0%",
+                    "0mm",
                     "11kmh",
                     key = HomeScreenEvents.OtherDay(6)
                 )
