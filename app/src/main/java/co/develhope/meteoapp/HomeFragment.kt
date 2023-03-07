@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.Home.*
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
+import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -55,7 +56,7 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
-                //RetrofitInstanceApiOpenMeteo.getDayDetails() metti la nuova funzione
+                RetrofitInstanceApiOpenMeteo.getWeeklyDetails()
             } catch (e: Exception) {
                 Log.e("HomeFragment", "Error: ${e.message}")
             }
