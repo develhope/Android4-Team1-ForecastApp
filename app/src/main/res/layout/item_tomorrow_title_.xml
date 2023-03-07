@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:background="@color/color_background"
-    android:id="@+id/relativeLayout2">
+    android:id="@+id/constraintTitle">
 
     <TextView
         android:id="@+id/city"

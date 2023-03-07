@@ -15,4 +15,5 @@ data class TomorrowRow(
         var cvNNE: String,
         var cvPercentage: Int,
         var cvRainCM: Int,
+        var visibility: Boolean = false
     )
