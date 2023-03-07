@@ -13,5 +13,5 @@ data class HomeCards(
     val degree2: String,
     val dataPercent: String,
     val dataKMH: String,
-    val key : String
+    val key : HomeScreenEvents
         )
