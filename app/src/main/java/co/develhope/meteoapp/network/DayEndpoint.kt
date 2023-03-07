@@ -22,5 +22,6 @@ interface DayEndpoint {
         @Query("end_date") end_date: String,
     ): DayData
 
+
     //suspend fun settimana ecc
 }

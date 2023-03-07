@@ -50,6 +50,17 @@ class RetrofitInstanceApiOpenMeteo {
                 end_date = endDate
             )
         }
+
+        fun getWeeklyEndPoint(): WeeklyEndPoint {
+            return getRetrofitInstanceApiOpenMeteo().create(WeeklyEndPoint::class.java)
+        }
+
+        suspend fun getWeeklyDetails(): WeeklyData {
+
+            return getWeeklyEndPoint().getWeeklyEndPointDetails(
+
+            )
+        }
     }
 }
 /*val retrofitOpen = Retrofit.Builder()
