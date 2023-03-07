@@ -53,7 +53,10 @@ class HomeAdapter(
             )
             else ->
                 object : HomeViewHolder(View(parent.context)) {
-                    override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
+                    override fun onBind(
+                        elements: HomeScreenElements,
+                        onClick: (HomeScreenEvents) -> Unit
+                    ) {
                     }
                 }
         }
@@ -81,8 +84,6 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
     override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
         if (elements is HomeScreenElements.CardsHome) {
             if (elements.cardsHome.day != null) {
-
-
                 binding.data.text = DateTimeFormatterBuilder()
                     .appendText(DAY_OF_MONTH)
                     .appendLiteral("/")
@@ -95,28 +96,24 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
                 binding.data.text = ""
             }
 
+            fun setDayHomeCards() {
+                return when (elements.cardsHome.key) {
+                    HomeScreenEvents.Today -> binding.day.text =
+                        itemView.context.getString(R.string.Today)
+                    HomeScreenEvents.Tomorrow -> binding.day.text =
+                        itemView.context.getString(R.string.Tomorrow)
+                    else -> {
+                        binding.day.text = DateTimeFormatterBuilder()
+                            .appendText(DAY_OF_WEEK)
+                            .toFormatter(Locale.getDefault())
+                            .format(elements.cardsHome.day)
+                            .replaceFirstChar(Char::titlecase)
+                    }
+                }
+            }
 
 
-
-
-            /*if (elements.cardsHome.key == "Today") { // crea una funzione che prende una data e restituisce un testo con un when e l'evento
-                binding.day.text = itemView.context.getString(R.string.Today)
-            } else if (elements.cardsHome.key == "Tomorrow") {
-                binding.day.text = itemView.context.getString(R.string.Tomorrow)
-            } else if (elements.cardsHome.day != null) {
-                binding.day.text = DateTimeFormatterBuilder()
-                    .appendText(DAY_OF_WEEK)
-                    .toFormatter(Locale.getDefault())
-                    .format(elements.cardsHome.day)
-                    .replaceFirstChar(Char::titlecase)
-            }*/
-
-            binding.day.text = DateTimeFormatterBuilder()
-                .appendText(DAY_OF_WEEK)
-                .toFormatter(Locale.getDefault())
-                .format(elements.cardsHome.day)
-                .replaceFirstChar(Char::titlecase)
-
+            setDayHomeCards()
             binding.max.text = elements.cardsHome.max
             binding.min.text = elements.cardsHome.min
             // binding.min.text = binding.min.context.getString(elements.min)
