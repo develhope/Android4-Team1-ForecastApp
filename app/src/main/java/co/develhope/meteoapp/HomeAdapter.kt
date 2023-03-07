@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Home.HomeScreenElements
+import co.develhope.meteoapp.Home.HomeScreenEvents
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding
@@ -15,7 +16,7 @@ import java.util.*
 
 
 class HomeAdapter(
-    val list: List<HomeScreenElements>, val onClick: (String) -> Unit
+    private val list: List<HomeScreenElements>, private val onClick: (HomeScreenEvents) -> Unit
 ) : RecyclerView.Adapter<HomeViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -52,7 +53,10 @@ class HomeAdapter(
             )
             else ->
                 object : HomeViewHolder(View(parent.context)) {
-                    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+                    override fun onBind(
+                        elements: HomeScreenElements,
+                        onClick: (HomeScreenEvents) -> Unit
+                    ) {
                     }
                 }
         }
@@ -72,16 +76,14 @@ class HomeAdapter(
 }
 
 abstract class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    abstract fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit)
+    abstract fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit)
 }
 
 class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(binding.root) {
 
-    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+    override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
         if (elements is HomeScreenElements.CardsHome) {
             if (elements.cardsHome.day != null) {
-
-
                 binding.data.text = DateTimeFormatterBuilder()
                     .appendText(DAY_OF_MONTH)
                     .appendLiteral("/")
@@ -94,17 +96,24 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
                 binding.data.text = ""
             }
 
-            if (elements.cardsHome.key == "Today") {
-                binding.day.text = itemView.context.getString(R.string.Today)
-            } else if (elements.cardsHome.key == "Tomorrow") {
-                binding.day.text = itemView.context.getString(R.string.Tomorrow)
-            } else if (elements.cardsHome.day != null) {
-                binding.day.text = DateTimeFormatterBuilder()
-                    .appendText(DAY_OF_WEEK)
-                    .toFormatter(Locale.getDefault())
-                    .format(elements.cardsHome.day)
-                    .replaceFirstChar(Char::titlecase)
+            fun setDayHomeCards() {
+                return when (elements.cardsHome.key) {
+                    HomeScreenEvents.Today -> binding.day.text =
+                        itemView.context.getString(R.string.Today)
+                    HomeScreenEvents.Tomorrow -> binding.day.text =
+                        itemView.context.getString(R.string.Tomorrow)
+                    else -> {
+                        binding.day.text = DateTimeFormatterBuilder()
+                            .appendText(DAY_OF_WEEK)
+                            .toFormatter(Locale.getDefault())
+                            .format(elements.cardsHome.day)
+                            .replaceFirstChar(Char::titlecase)
+                    }
+                }
             }
+
+
+            setDayHomeCards()
             binding.max.text = elements.cardsHome.max
             binding.min.text = elements.cardsHome.min
             // binding.min.text = binding.min.context.getString(elements.min)
@@ -117,14 +126,18 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
             elements.cardsHome.icon.let { binding.sun.setImageResource(it) }
 
             binding.cardView.setOnClickListener {
-                onClick.invoke(elements.cardsHome.key)
+                when (elements.cardsHome.key) {
+                    HomeScreenEvents.Today -> onClick(HomeScreenEvents.Today)
+                    HomeScreenEvents.Tomorrow -> onClick(HomeScreenEvents.Tomorrow)
+                    else -> onClick(HomeScreenEvents.OtherDay())
+                }
             }
         }
     }
 }
 
 class TitleViewHolder(val binding: HomeTitleCityBinding) : HomeViewHolder(binding.root) {
-    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+    override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
         if (elements is HomeScreenElements.TitleHome) {
             binding.city.text = elements.title.city
         }
@@ -132,7 +145,7 @@ class TitleViewHolder(val binding: HomeTitleCityBinding) : HomeViewHolder(bindin
 }
 
 class SubTitleViewHolder(val binding: HomeSubTitleBinding) : HomeViewHolder(binding.root) {
-    override fun onBind(elements: HomeScreenElements, onClick: (String) -> Unit) {
+    override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
         if (elements is HomeScreenElements.SubTitleHome) {
             binding.next5Days.text = elements.subTileHome.next5Days
         }

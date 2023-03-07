@@ -6,17 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.Data.DataObject
-import co.develhope.meteoapp.Home.HomeCards
-import co.develhope.meteoapp.Home.HomeScreenElements
-import co.develhope.meteoapp.Home.Next5Days
-import co.develhope.meteoapp.Home.Title
+import co.develhope.meteoapp.Home.*
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
-import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -38,9 +35,21 @@ class HomeFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = HomeAdapter(getListAdapter(), onClick = {
             when (it) {
-                "Today" -> this.findNavController().navigate(R.id.oggiFragment)
-                "Tomorrow" -> this.findNavController().navigate(R.id.domaniFragment)
+                HomeScreenEvents.Today -> this.findNavController()
+                    .navigate(R.id.oggiFragment)
+                HomeScreenEvents.Tomorrow -> this.findNavController()
+                    .navigate(R.id.domaniFragment)
+                HomeScreenEvents.OtherDay() -> Toast.makeText(
+                    context,
+                    "da implementare",
+                    Toast.LENGTH_SHORT
+                ).show()
+                else -> {Toast.makeText(
+                    context,
+                    "error",
+                    Toast.LENGTH_SHORT).show()}
             }
+
         })
 
 
@@ -72,9 +81,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "20°",
                     "31°",
-                    "0%",
+                    "0mm",
                     "12kmh",
-                    "Today"
+                    key = HomeScreenEvents.Today
                 )
             ),
             HomeScreenElements.SubTitleHome(Next5Days("PROSSIMI 5 GIORNI")),
@@ -88,9 +97,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "18°",
                     "29°",
-                    "0%",
+                    "0mm",
                     "20kmh",
-                    "Tomorrow"
+                    key = HomeScreenEvents.Tomorrow
                 )
             ),
             HomeScreenElements.CardsHome(
@@ -103,9 +112,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "21°",
                     "30°",
-                    "10%",
+                    "10mm",
                     "10kmh",
-                    "2day"
+                    key = HomeScreenEvents.OtherDay(3)
                 )
             ),
             HomeScreenElements.CardsHome(
@@ -118,9 +127,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "22°",
                     "31°",
-                    "0%",
+                    "0mm",
                     "5kmh",
-                    "3day"
+                    key = HomeScreenEvents.OtherDay(4)
                 )
             ),
             HomeScreenElements.CardsHome(
@@ -133,9 +142,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "10°",
                     "21°",
-                    "0%",
+                    "0mm",
                     "6kmh",
-                    "4day"
+                    key = HomeScreenEvents.OtherDay(5)
                 )
             ),
             HomeScreenElements.CardsHome(
@@ -148,9 +157,9 @@ class HomeFragment : Fragment() {
                     DataObject.weatherIcon(Weather.SUNNY),
                     "25°",
                     "30°",
-                    "0%",
+                    "0mm",
                     "11kmh",
-                    "5day"
+                    key = HomeScreenEvents.OtherDay(6)
                 )
             )
 
