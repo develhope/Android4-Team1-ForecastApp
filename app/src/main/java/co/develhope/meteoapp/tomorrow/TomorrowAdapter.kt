@@ -69,8 +69,10 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
                     TransitionManager.beginDelayedTransition(
                         rowBinding.expandable,
                         AutoTransition()
+
                     )
                     rowBinding.expandable.visibility = View.VISIBLE
+                    rowBinding.myView.visibility = View.GONE
                     rowBinding.toggle.rotation = 180F
                 } else {
                     TransitionManager.beginDelayedTransition(
@@ -78,6 +80,7 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
                         AutoTransition()
                     )
                     rowBinding.expandable.visibility = View.GONE
+                    rowBinding.myView.visibility = View.VISIBLE
                     rowBinding.toggle.rotation = 0F
 
 
