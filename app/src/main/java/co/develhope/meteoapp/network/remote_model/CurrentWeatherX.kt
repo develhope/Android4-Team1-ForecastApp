@@ -1,6 +1,6 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
 
-data class CurrentWeatherXX(
+data class CurrentWeatherX(
     val temperature: Double,
     val time: String,
     val weathercode: Int,

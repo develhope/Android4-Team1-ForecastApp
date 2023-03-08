@@ -1,6 +1,6 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
 
-data class DailyUnits(
+data class DailyUnitsX(
     val precipitation_sum: String,
     val rain_sum: String,
     val sunrise: String,

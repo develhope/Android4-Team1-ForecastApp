@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.network
 
+import co.develhope.meteoapp.network.remote_model.DayData
+import co.develhope.meteoapp.network.remote_model.WeeklyData
 import retrofit2.http.GET
 import retrofit2.http.Query
 

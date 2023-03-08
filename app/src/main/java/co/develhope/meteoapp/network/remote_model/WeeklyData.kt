@@ -1,4 +1,8 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
+
+import co.develhope.meteoapp.network.remote_model.CurrentWeatherX
+import co.develhope.meteoapp.network.remote_model.Daily
+import co.develhope.meteoapp.network.remote_model.DailyUnits
 
 data class WeeklyData(
     val current_weather: CurrentWeatherX,
