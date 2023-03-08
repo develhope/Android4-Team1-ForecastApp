@@ -1,15 +1,20 @@
 package co.develhope.meteoapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Data.DataSearchFrag
 import co.develhope.meteoapp.Data.UserAdapter
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
+import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
+import co.develhope.meteoapp.network.RetrofitInstanceGeocoding
+import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
@@ -45,6 +50,15 @@ class SearchFragment : Fragment() {
         recycleView.layoutManager = layoutManager
         recycleView.setHasFixedSize(true)
         recycleView.adapter = UserAdapter(newArrayList)
+
+
+        lifecycleScope.launch {
+            try {
+                RetrofitInstanceGeocoding().getSearchDetails()
+            } catch (e: Exception) {
+                Log.e("SearchFragment", "Error: ${e.message}")
+            }
+        }
     }
 
     private fun data1 (){
