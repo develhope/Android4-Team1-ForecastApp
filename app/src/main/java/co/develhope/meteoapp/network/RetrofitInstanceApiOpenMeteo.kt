@@ -14,7 +14,6 @@ class RetrofitInstanceApiOpenMeteo {
     companion object {
 
         val BASE_URL = "https://api.open-meteo.com/"
-        //val logging = HttpLoggingInterceptor()
         val client = OkHttpClient.Builder()
             .addInterceptor(getLoggingBody())
             .build()
@@ -51,21 +50,10 @@ class RetrofitInstanceApiOpenMeteo {
             )
         }
 
-        fun getWeeklyEndPoint(): WeeklyEndPoint {
-            return getRetrofitInstanceApiOpenMeteo().create(WeeklyEndPoint::class.java)
-        }
 
         suspend fun getWeeklyDetails(): WeeklyData {
-
-            return getWeeklyEndPoint().getWeeklyEndPointDetails(
-
-            )
+            return getDayEndpoint().getWeeklyEndPointDetails()
         }
     }
 }
-/*val retrofitOpen = Retrofit.Builder()
-    .client(client)
-    .baseUrl(BASE_URL)
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()*/
 

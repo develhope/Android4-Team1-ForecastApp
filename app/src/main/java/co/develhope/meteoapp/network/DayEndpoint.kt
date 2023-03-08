@@ -15,13 +15,27 @@ interface DayEndpoint {
             "snowfall",
             "weathercode",
             "windspeed_10m"
-        ),//andrà nell'endpoint
+        ),
         @Query("current_weather") current_weather: Boolean = true,
-        @Query("timezone") timezone: String = "Europe/Berlin",//endpoint
+        @Query("timezone") timezone: String = "Europe/Berlin",
         @Query("start_date") start_date: String,
         @Query("end_date") end_date: String,
     ): DayData
 
-
-    //suspend fun settimana ecc
+    @GET("v1/forecast")
+    suspend fun getWeeklyEndPointDetails(
+        @Query("latitude") latitude: Double = 41.8955,
+        @Query("longitude") longitude: Double = 12.4823,
+        @Query("daily") daily: List<String> = listOf(
+            "weathercode",
+            "temperature_2m_max",
+            "temperature_2m_min",
+            "sunrise",
+            "sunset",
+            "precipitation_sum",
+            "rain_sum",
+        ),
+        @Query("current_weather") current_weather: Boolean = true,
+        @Query("timezone") timezone: String = "Europe/Berlin",
+    ): WeeklyData
 }

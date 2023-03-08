@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/oggiFragment"
-        android:name="co.develhope.meteoapp.today.TodayFragment"
+        android:name="co.develhope.meteoapp.TodayFragment"
         android:label="fragment_oggi"
         tools:layout="@layout/fragment_today" />
     <fragment

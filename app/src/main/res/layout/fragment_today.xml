@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_grey"
-    tools:context=".today.TodayFragment">
+    tools:context=".TodayFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_todayScreen"
