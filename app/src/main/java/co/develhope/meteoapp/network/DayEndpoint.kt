@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.network
 
+import co.develhope.meteoapp.network.remote_model.DayData
+import co.develhope.meteoapp.network.remote_model.WeeklyData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -34,6 +36,7 @@ interface DayEndpoint {
             "sunset",
             "precipitation_sum",
             "rain_sum",
+            "windspeed_10m_max"
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",

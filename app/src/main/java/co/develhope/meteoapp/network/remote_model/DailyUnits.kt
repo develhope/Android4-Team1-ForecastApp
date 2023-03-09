@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
 
 data class DailyUnits(
     val precipitation_sum: String,
@@ -8,5 +8,6 @@ data class DailyUnits(
     val temperature_2m_max: String,
     val temperature_2m_min: String,
     val time: String,
-    val weathercode: String
+    val weathercode: String,
+    val windspeed_10m_max: String
 )

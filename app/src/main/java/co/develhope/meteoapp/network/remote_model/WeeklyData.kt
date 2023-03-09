@@ -1,7 +1,7 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
 
 data class WeeklyData(
-    val current_weather: CurrentWeatherX,
+    val current_weather: CurrentWeather,
     val daily: Daily,
     val daily_units: DailyUnits,
     val elevation: Double,
@@ -10,5 +10,5 @@ data class WeeklyData(
     val longitude: Double,
     val timezone: String,
     val timezone_abbreviation: String,
-    val utc_offset_seconds: Int
+    val utc_offset_seconds: Int,
 )

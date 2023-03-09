@@ -1,6 +1,7 @@
-package co.develhope.meteoapp.network
+package co.develhope.meteoapp.network.remote_model
 
 
+import co.develhope.meteoapp.network.remote_model.Result
 import com.google.gson.annotations.SerializedName
 
 data class SearchData(

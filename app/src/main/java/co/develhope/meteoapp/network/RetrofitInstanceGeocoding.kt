@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.network
 
+import co.develhope.meteoapp.network.remote_model.SearchData
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
