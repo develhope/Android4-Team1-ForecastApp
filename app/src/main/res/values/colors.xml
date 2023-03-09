@@ -13,4 +13,6 @@
     <color name="color_title">#230EA5</color>
     <color name="color_view">#ABA4FF</color>
     <color name="color_background">#F0EFFF</color>
+    <color name="home_cards_background">#968eec</color>
+    <color name="home_background">#5145de</color>
 </resources>

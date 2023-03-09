@@ -18,10 +18,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(0)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[0]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(0)?.toInt()?.toString() ?: ""
@@ -44,10 +44,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(1)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[1]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(1)?.toInt()?.toString() ?: ""
@@ -69,10 +69,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(2)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[2]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(2)?.toInt()?.toString() ?: ""
@@ -94,10 +94,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(3)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[3]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(3)?.toInt()?.toString() ?: ""
@@ -119,10 +119,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(4)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[4]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(4)?.toInt()?.toString() ?: ""
@@ -144,10 +144,10 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
                 LocalDate.parse(this.daily.time.getOrNull(5)?.toString() ?: "")
                     .atStartOfDay(ZoneOffset.UTC)
                     .toOffsetDateTime(),
-                "min",
-                "max",
-                "precip.",
-                "vento",
+                R.string.min,
+                R.string.max,
+                R.string.precip,
+                R.string.vento_home,
                 intToEnumToIcon(this.daily.weathercode[5]),
                 "${
                     this.daily.temperature_2m_min.getOrNull(5)?.toInt()?.toString() ?: ""

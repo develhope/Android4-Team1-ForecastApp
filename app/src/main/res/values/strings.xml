@@ -72,4 +72,14 @@
     <string name="Today">Oggi</string>
     <string name="Today2">Oggi,</string>
 
+
+    //Home Cards
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="precip">precip.</string>
+    <string name="vento_home">vento</string>
+
+
+
+
 </resources>

@@ -114,11 +114,10 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
 
 
             setDayHomeCards()
-            binding.max.text = elements.cardsHome.max
-            binding.min.text = elements.cardsHome.min
-            // binding.min.text = binding.min.context.getString(elements.min)
-            binding.rain.text = elements.cardsHome.rain
-            binding.data6.text = elements.cardsHome.wind
+            binding.min.text = binding.min.context.getString(R.string.min)
+            binding.max.text = binding.max.context.getString(R.string.max)
+            binding.rain.text = binding.rain.context.getString(R.string.precip)
+            binding.data6.text = binding.data6.context.getString(R.string.vento_home)
             binding.degree.text = elements.cardsHome.degree
             binding.degree2.text = elements.cardsHome.degree2
             binding.dataPercent.text = elements.cardsHome.dataPercent

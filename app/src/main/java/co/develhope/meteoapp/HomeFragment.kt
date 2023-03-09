@@ -27,10 +27,16 @@ class HomeFragment : Fragment() {
     ): View {
         baseContainerBinding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /*val window = activity?.window
+        if (window != null) {
+            window.statusBarColor = context?.getColor(R.color.home_background) ?: 0
+        }*/
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
