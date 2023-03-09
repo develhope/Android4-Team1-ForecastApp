@@ -36,6 +36,7 @@ interface DayEndpoint {
             "sunset",
             "precipitation_sum",
             "rain_sum",
+            "windspeed_10m_max"
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
