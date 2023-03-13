@@ -1,11 +1,14 @@
 package co.develhope.meteoapp.network.mapping
 
-import co.develhope.meteoapp.Data.DataObject
-import co.develhope.meteoapp.Data.DataObject.weatherIcon
-import co.develhope.meteoapp.Home.*
+import co.develhope.meteoapp.network.DataObject.weatherIcon
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.Weather
-import co.develhope.meteoapp.network.remote_model.WeeklyData
+import co.develhope.meteoapp.network.domainmodel.Weather
+import co.develhope.meteoapp.network.domainmodel.HomeCards
+import co.develhope.meteoapp.network.dto.WeeklyData
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
+import co.develhope.meteoapp.ui.adapter.home_adapter.Next5Days
+import co.develhope.meteoapp.ui.adapter.home_adapter.Title
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneOffset
 
@@ -15,9 +18,7 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         HomeScreenElements.TitleHome(Title("Palermo, Sicilia")),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(0)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(0),
                 R.string.min,
                 R.string.max,
                 R.string.precip,
@@ -41,9 +42,7 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         HomeScreenElements.SubTitleHome(Next5Days("PROSSIMI 5 GIORNI")),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(1)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(1),
                 R.string.min,
                 R.string.max,
                 R.string.precip,
@@ -66,9 +65,8 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         ),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(2)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(2),
+
                 R.string.min,
                 R.string.max,
                 R.string.precip,
@@ -91,9 +89,8 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         ),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(3)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(3),
+
                 R.string.min,
                 R.string.max,
                 R.string.precip,
@@ -116,9 +113,8 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         ),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(4)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(4),
+
                 R.string.min,
                 R.string.max,
                 R.string.precip,
@@ -141,9 +137,8 @@ fun WeeklyData.toHomeCards(): List<HomeScreenElements> {
         ),
         HomeScreenElements.CardsHome(
             HomeCards(
-                LocalDate.parse(this.daily.time.getOrNull(5)?.toString() ?: "")
-                    .atStartOfDay(ZoneOffset.UTC)
-                    .toOffsetDateTime(),
+                this.daily.time.getOrNull(5),
+
                 R.string.min,
                 R.string.max,
                 R.string.precip,
