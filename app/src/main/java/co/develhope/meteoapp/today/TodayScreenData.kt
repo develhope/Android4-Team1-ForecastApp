@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.today
 
+import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
+
 sealed class TodayScreenData() {
 
     data class TodayTitleObject(

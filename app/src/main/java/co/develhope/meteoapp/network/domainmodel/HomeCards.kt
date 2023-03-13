@@ -1,5 +1,6 @@
-package co.develhope.meteoapp.Home
+package co.develhope.meteoapp.network.domainmodel
 
+import co.develhope.meteoapp.Home.HomeScreenEvents
 import org.threeten.bp.OffsetDateTime
 
 data class HomeCards(
@@ -13,5 +14,5 @@ data class HomeCards(
     val degree2: String,
     val dataPercent: String,
     val dataKMH: String,
-    val key : HomeScreenEvents
-        )
+    val key: HomeScreenEvents
+)

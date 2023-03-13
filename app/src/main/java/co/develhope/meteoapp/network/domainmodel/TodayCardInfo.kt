@@ -1,9 +1,6 @@
-package co.develhope.meteoapp.today
+package co.develhope.meteoapp.network.domainmodel
 
-import co.develhope.meteoapp.Weather
 import org.threeten.bp.OffsetDateTime
-
-
 data class TodayCardInfo(
     val date: OffsetDateTime,
     val weather: Weather,

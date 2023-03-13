@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.network.domainmodel
 
 enum class Weather {
 
