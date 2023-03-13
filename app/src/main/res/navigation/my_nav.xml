@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="co.develhope.meteoapp.HomeFragment"
+        android:name="co.develhope.meteoapp.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,17 +16,17 @@
     </fragment>
     <fragment
         android:id="@+id/oggiFragment"
-        android:name="co.develhope.meteoapp.TodayFragment"
+        android:name="co.develhope.meteoapp.ui.TodayFragment"
         android:label="fragment_oggi"
         tools:layout="@layout/fragment_today" />
     <fragment
         android:id="@+id/domaniFragment"
-        android:name="co.develhope.meteoapp.tomorrow.TomorrowFragment"
+        android:name="co.develhope.meteoapp.ui.TomorrowFragment"
         android:label="fragment_domani"
         tools:layout="@layout/fragment_tomorrow" />
     <fragment
         android:id="@+id/cercaFragment"
-        android:name="co.develhope.meteoapp.SearchFragment"
+        android:name="co.develhope.meteoapp.ui.SearchFragment"
         android:label="fragment_cerca"
         tools:layout="@layout/fragment_search" />
 </navigation>

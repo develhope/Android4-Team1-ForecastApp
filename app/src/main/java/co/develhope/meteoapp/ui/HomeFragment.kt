@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui
 
 
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.Home.HomeScreenEvents
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
 import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import co.develhope.meteoapp.network.mapping.toHomeCards

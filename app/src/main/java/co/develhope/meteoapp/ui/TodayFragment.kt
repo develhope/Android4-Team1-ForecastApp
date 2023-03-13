@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +12,6 @@ import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.Weather
-import co.develhope.meteoapp.today.TodayScreenAdapter
-import co.develhope.meteoapp.today.TodayScreenData
-import co.develhope.meteoapp.today.TodayTitle
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 

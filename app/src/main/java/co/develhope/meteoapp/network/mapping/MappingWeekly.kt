@@ -1,11 +1,14 @@
 package co.develhope.meteoapp.network.mapping
 
 import co.develhope.meteoapp.network.DataObject.weatherIcon
-import co.develhope.meteoapp.Home.*
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.network.domainmodel.Weather
 import co.develhope.meteoapp.network.domainmodel.HomeCards
 import co.develhope.meteoapp.network.dto.WeeklyData
+import co.develhope.meteoapp.ui.HomeScreenElements
+import co.develhope.meteoapp.ui.HomeScreenEvents
+import co.develhope.meteoapp.ui.Next5Days
+import co.develhope.meteoapp.ui.Title
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneOffset
 

@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.Home
+package co.develhope.meteoapp.ui
 
 data class Title(
             val city: String,

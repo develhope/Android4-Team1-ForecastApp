@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.today
+package co.develhope.meteoapp.ui
 
 
 import android.view.LayoutInflater

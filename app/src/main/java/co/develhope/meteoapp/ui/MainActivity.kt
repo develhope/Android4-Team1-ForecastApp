@@ -1,18 +1,13 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui
 
 
-import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
-import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.onNavDestinationSelected
+import co.develhope.meteoapp.R
 
 
 class MainActivity : AppCompatActivity() {

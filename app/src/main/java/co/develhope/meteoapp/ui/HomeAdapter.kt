@@ -1,12 +1,11 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui
 
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Home.HomeScreenElements
-import co.develhope.meteoapp.Home.HomeScreenEvents
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding

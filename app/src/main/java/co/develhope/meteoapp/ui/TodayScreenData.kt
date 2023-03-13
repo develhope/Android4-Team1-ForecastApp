@@ -1,8 +1,8 @@
-package co.develhope.meteoapp.today
+package co.develhope.meteoapp.ui
 
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 
-sealed class TodayScreenData() {
+sealed class TodayScreenData {
 
     data class TodayTitleObject(
         val title: TodayTitle

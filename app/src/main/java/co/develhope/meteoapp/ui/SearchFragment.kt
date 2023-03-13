@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Data.DataSearchFrag
-import co.develhope.meteoapp.Data.SearchPlaceAdapter
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
 import co.develhope.meteoapp.network.RetrofitInstanceGeocoding
 import kotlinx.coroutines.launch
