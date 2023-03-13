@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.ui.adapter
 
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 

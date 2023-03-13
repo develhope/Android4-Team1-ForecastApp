@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentTomorrowBinding
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
+import co.develhope.meteoapp.ui.adapter.TomorrowSealed
+import co.develhope.meteoapp.ui.adapter.TomorrowTitle
 import org.threeten.bp.OffsetDateTime
 
 

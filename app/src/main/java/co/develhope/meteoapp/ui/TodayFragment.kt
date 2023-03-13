@@ -13,6 +13,8 @@ import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.Weather
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
+import co.develhope.meteoapp.ui.adapter.TodayScreenData
+import co.develhope.meteoapp.ui.adapter.TodayTitle
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
