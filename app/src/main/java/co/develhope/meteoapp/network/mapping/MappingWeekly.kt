@@ -1,11 +1,10 @@
 package co.develhope.meteoapp.network.mapping
 
-import co.develhope.meteoapp.Data.DataObject
 import co.develhope.meteoapp.Data.DataObject.weatherIcon
 import co.develhope.meteoapp.Home.*
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.Weather
-import co.develhope.meteoapp.network.remote_model.WeeklyData
+import co.develhope.meteoapp.network.dto.WeeklyData
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneOffset
 

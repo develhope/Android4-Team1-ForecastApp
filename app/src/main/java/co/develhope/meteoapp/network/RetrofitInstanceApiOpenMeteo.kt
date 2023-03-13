@@ -1,7 +1,7 @@
 package co.develhope.meteoapp.network
 
-import co.develhope.meteoapp.network.remote_model.DayData
-import co.develhope.meteoapp.network.remote_model.WeeklyData
+import co.develhope.meteoapp.network.dto.DayData
+import co.develhope.meteoapp.network.dto.WeeklyData
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

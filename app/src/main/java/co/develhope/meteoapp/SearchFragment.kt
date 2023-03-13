@@ -10,9 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.Data.DataSearchFrag
-import co.develhope.meteoapp.Data.UserAdapter
+import co.develhope.meteoapp.Data.SearchPlaceAdapter
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
-import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import co.develhope.meteoapp.network.RetrofitInstanceGeocoding
 import kotlinx.coroutines.launch
 
@@ -49,7 +48,7 @@ class SearchFragment : Fragment() {
         recycleView = view.findViewById(R.id.item_list)
         recycleView.layoutManager = layoutManager
         recycleView.setHasFixedSize(true)
-        recycleView.adapter = UserAdapter(newArrayList)
+        recycleView.adapter = SearchPlaceAdapter(newArrayList)
 
 
         lifecycleScope.launch {
