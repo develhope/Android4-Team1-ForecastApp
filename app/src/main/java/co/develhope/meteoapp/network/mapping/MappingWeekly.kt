@@ -5,10 +5,10 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.network.domainmodel.Weather
 import co.develhope.meteoapp.network.domainmodel.HomeCards
 import co.develhope.meteoapp.network.dto.WeeklyData
-import co.develhope.meteoapp.ui.HomeScreenElements
-import co.develhope.meteoapp.ui.HomeScreenEvents
-import co.develhope.meteoapp.ui.Next5Days
-import co.develhope.meteoapp.ui.Title
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
+import co.develhope.meteoapp.ui.adapter.home_adapter.Next5Days
+import co.develhope.meteoapp.ui.adapter.home_adapter.Title
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneOffset
 

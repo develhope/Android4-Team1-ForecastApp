@@ -9,6 +9,8 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.CardLayoutHomeBinding
 import co.develhope.meteoapp.databinding.HomeSubTitleBinding
 import co.develhope.meteoapp.databinding.HomeTitleCityBinding
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.temporal.ChronoField.*
 import java.util.*

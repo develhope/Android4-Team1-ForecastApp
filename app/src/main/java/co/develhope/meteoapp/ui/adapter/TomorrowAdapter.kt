@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.ui.adapter
 
 import android.transition.AutoTransition
 import android.transition.TransitionManager
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
+import co.develhope.meteoapp.ui.TomorrowSealed
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter

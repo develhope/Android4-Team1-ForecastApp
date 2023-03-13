@@ -15,6 +15,7 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
 import co.develhope.meteoapp.network.RetrofitInstanceApiOpenMeteo
 import co.develhope.meteoapp.network.mapping.toHomeCards
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {

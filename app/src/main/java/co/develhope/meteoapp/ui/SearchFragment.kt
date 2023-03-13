@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.DataSearchFrag
+import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
 import co.develhope.meteoapp.network.RetrofitInstanceGeocoding
+import co.develhope.meteoapp.ui.adapter.SearchPlaceAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
-    private lateinit var newArrayList : List<DataSearchFrag>
+    private lateinit var newArrayList : List<Place>
     //private lateinit var cityList : Array<String>
     //private lateinit var gradeList : Array<Int>
     //private lateinit var weatherList : Array<String>
@@ -61,11 +62,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun data1 (){
-        newArrayList = listOf<DataSearchFrag>(
-            DataSearchFrag("Milano", 12, "Pioggia"),
-            DataSearchFrag("Bergamo", 22 ,"Nuvoloso"),
-            DataSearchFrag("Catania", 31 ,"Parzialmente"),
-            DataSearchFrag("Siragusa", 17 ,"Soleggiato"))
+        newArrayList = listOf<Place>(
+            Place("Milano", 12, "Pioggia"),
+            Place("Bergamo", 22 ,"Nuvoloso"),
+            Place("Catania", 31 ,"Parzialmente"),
+            Place("Siragusa", 17 ,"Soleggiato")
+        )
 
     }
 

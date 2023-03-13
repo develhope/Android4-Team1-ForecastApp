@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.ui.adapter
 
 
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
+import co.develhope.meteoapp.ui.TodayScreenData
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter

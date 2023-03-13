@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.ui.adapter.home_adapter
 
 sealed class HomeScreenEvents {
     object Today : HomeScreenEvents()

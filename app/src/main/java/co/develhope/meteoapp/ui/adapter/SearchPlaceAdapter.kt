@@ -1,14 +1,14 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.Data.DataSearchFrag
+import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.R
 
-class SearchPlaceAdapter(private val cardList: List<DataSearchFrag>) : RecyclerView.Adapter<SearchPlaceAdapter.ViewHolder>() {
+class SearchPlaceAdapter(private val cardList: List<Place>) : RecyclerView.Adapter<SearchPlaceAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
@@ -23,7 +23,7 @@ class SearchPlaceAdapter(private val cardList: List<DataSearchFrag>) : RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val currentItem = cardList[position]
-        holder.cityName.text = currentItem.cityList
+        holder.cityName.text = currentItem.name
         holder.cityWeather.text = currentItem.weather
         holder.cityGrade.text = currentItem.dataList.toString()
     }

@@ -1,6 +1,6 @@
 package co.develhope.meteoapp.network.domainmodel
 
-import co.develhope.meteoapp.ui.HomeScreenEvents
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import org.threeten.bp.OffsetDateTime
 
 data class HomeCards(
