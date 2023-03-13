@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
-import co.develhope.meteoapp.network.RetrofitInstanceGeocoding
+import co.develhope.meteoapp.network.Repository
+import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.ui.adapter.SearchPlaceAdapter
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
 
-    private lateinit var newArrayList : List<Place>
-    //private lateinit var cityList : Array<String>
-    //private lateinit var gradeList : Array<Int>
-    //private lateinit var weatherList : Array<String>
+    private val newArrayList : List<Place>  = listOf<Place>(
+    Place("Milano", 0.0, 0.0, "Lombardia"),
+    Place("Bergamo", 0.0, 0.0, "Lombardia"),
+    Place("Catania", 0.0, 0.0, "Sicilia"),
+    Place("Siragusa", 0.0, 0.0, "Sicilia"),
+    )
 
     private lateinit var recycleView : RecyclerView
 
@@ -44,7 +47,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        data1()
+
         val layoutManager = LinearLayoutManager(context)
         recycleView = view.findViewById(R.id.item_list)
         recycleView.layoutManager = layoutManager
@@ -54,23 +57,13 @@ class SearchFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
-                RetrofitInstanceGeocoding().getSearchDetails()
+                //prender e irisultati e passarli all'adapter
+                Repository().getSearchDetails("")
+
             } catch (e: Exception) {
                 Log.e("SearchFragment", "Error: ${e.message}")
             }
         }
     }
-
-    private fun data1 (){
-        newArrayList = listOf<Place>(
-            Place("Milano", 12, "Pioggia"),
-            Place("Bergamo", 22 ,"Nuvoloso"),
-            Place("Catania", 31 ,"Parzialmente"),
-            Place("Siragusa", 17 ,"Soleggiato")
-        )
-
-    }
-
-
 }
 

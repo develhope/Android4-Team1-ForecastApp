@@ -24,8 +24,8 @@ class SearchPlaceAdapter(private val cardList: List<Place>) : RecyclerView.Adapt
 
         val currentItem = cardList[position]
         holder.cityName.text = currentItem.name
-        holder.cityWeather.text = currentItem.weather
-        holder.cityGrade.text = currentItem.dataList.toString()
+        //holder.cityWeather.text = currentItem.weather
+        //holder.cityGrade.text = currentItem.dataList.toString()
     }
 
     class ViewHolder(itemView: View) :

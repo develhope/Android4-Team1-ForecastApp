@@ -5,7 +5,7 @@ import co.develhope.meteoapp.network.dto.WeeklyData
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface DayEndpoint {
+interface ForecastApiService {
     @GET("v1/forecast")
     suspend fun getDayEndPointDetails(
         @Query("latitude") latitude: Double = 41.8955,

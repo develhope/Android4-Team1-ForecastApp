@@ -33,11 +33,9 @@ class TomorrowFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.tomorrowRecyclerView.layoutManager = layoutManager
         binding.tomorrowRecyclerView.setHasFixedSize(true)
+        //DOv'è la chiamata di rete?
+
         binding.tomorrowRecyclerView.adapter = TomorrowAdapter(tomorrowItems)
-
-
-
-
     }
 
     private val titleTomorrowScreen = TomorrowTitle("Palermo,", "Sicilia", OffsetDateTime.now())

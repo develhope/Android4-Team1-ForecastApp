@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.network.dto
 
 import co.develhope.meteoapp.network.domainmodel.HomeCards
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import org.threeten.bp.OffsetDateTime
 
 data class Daily(
@@ -27,7 +28,7 @@ data class Daily(
                 degree2 = "",
                 dataPercent = "",
                 dataKMH = "",
-                key =
+                key = HomeScreenEvents.Today //da eliminare le logiche vanno attuate sulle date
             )
         }
     }

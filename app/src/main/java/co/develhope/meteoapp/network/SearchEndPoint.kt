@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface SearchEndPoint {
         @GET("v1/search")
         suspend fun getDayEndPointDetails(
-            @Query("name") name: String = "Palermo",
+            @Query("name") name: String,
         ): SearchData
 }
