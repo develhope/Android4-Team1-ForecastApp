@@ -35,10 +35,12 @@ class OffsetDateTimeTypeAdapter : JsonSerializer<OffsetDateTime>, JsonDeserializ
         Log.d("TypeAdapter", "$string")
 
         return if(string.contains("T")){
+            Log.d("TypeAdapter with Time", "$string")
             val date = LocalDateTime.parse(string).atZone(ZoneOffset.UTC)
             Log.d("TypeAdapter with Time", "$date")
             date.toOffsetDateTime()
         }else{
+            Log.d("TypeAdapter without time", "$string")
             val date = LocalDate.parse(string)
                 .atStartOfDay(ZoneOffset.UTC)
 
