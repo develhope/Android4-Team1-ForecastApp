@@ -20,25 +20,12 @@ data class Hourly(
     val windspeed10m: List<Double>,
     @SerializedName("relativehumidity_2m")
     val relativeHumidity: List<Int>,
+    @SerializedName("uv_index_max")
+    val uvindexmax: List<Int>,
+    @SerializedName("cloudcover")
+    val cloudcover: List<Int>,
 
-    ) {
-    fun toDomain(): List<TomorrowRow> {
-        return time.mapIndexed { index, hourly ->
-            TomorrowRow(
-                time = hourly,
-                degrees = "${temperature2m.getOrNull(index)?.toInt().toString()}°",
-                percentage = "${relativeHumidity.getOrNull(index)?.toInt().toString()}%",
-                cvDegrees = "${temperature2m.getOrNull(index)?.toInt().toString()}°",
-                cvNumberUV = 0,
-                cvPercentage2 = 0,
-                cvNNE = windspeed10m.getOrNull(index)?.toInt().toString(),
-                cvPercentage = 0,
-                cvRainCM = rain.getOrNull(index)?.toInt().toString()
-            )
-        }
-
-    }
-}
+    )
 
 
 

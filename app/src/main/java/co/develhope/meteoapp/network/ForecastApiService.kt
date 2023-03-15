@@ -17,7 +17,8 @@ interface ForecastApiService {
             "snowfall",
             "weathercode",
             "windspeed_10m",
-            "relativehumidity_2m"
+            "relativehumidity_2m",
+            "cloudcover"
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
