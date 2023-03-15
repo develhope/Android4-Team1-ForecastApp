@@ -44,16 +44,16 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
             rowBinding.ivMoon.setImageResource(R.drawable.crescent_moon)
             rowBinding.ivWaterDrop.setImageResource(R.drawable.water_drop)
             rowBinding.degrees.text =
-                itemView.context.getString(R.string.tv_temperature, row.tomorrowRow.degrees)
+               row.tomorrowRow.degrees
             rowBinding.time.text =
                 itemView.context.getString(R.string.tv_time, row.tomorrowRow.time.hour)
             rowBinding.percentage.text =
-                itemView.context.getString(R.string.tv_percentage, row.tomorrowRow.percentage)
+                row.tomorrowRow.percentage
             rowBinding.toggle.setImageResource(R.drawable.toggle_icon_up)
 
             //Card Elements
             rowBinding.cvDegrees.text =
-                itemView.context.getString(R.string.tv_temperature, row.tomorrowRow.cvDegrees)
+                row.tomorrowRow.cvDegrees
             rowBinding.cvNumberUV.text =
                 itemView.context.getString(R.string.tv_UV_index, row.tomorrowRow.cvNumberUV)
             rowBinding.cvPercentage2.text =
@@ -61,7 +61,7 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
             rowBinding.cvPercentage.text =
                 itemView.context.getString(R.string.tv_percentage, row.tomorrowRow.cvPercentage)
             rowBinding.cvRainCm.text =
-                itemView.context.getString(R.string.tv_rain, row.tomorrowRow.cvRainCM)
+                row.tomorrowRow.cvRainCM
             rowBinding.NNE.text = row.tomorrowRow.cvNNE
 
             rowBinding.toggle.setOnClickListener {
