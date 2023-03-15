@@ -8,7 +8,7 @@ import org.threeten.bp.OffsetDateTime
 fun List<TomorrowRow>.toTomorrowRow(): List<TomorrowSealed> {
 
     return listOf(
-        TomorrowSealed.Title(TomorrowTitle("Roma ","Lazio",OffsetDateTime.now())),
+        TomorrowSealed.Title(TomorrowTitle("Roma,","Lazio",OffsetDateTime.now())),
         *this.map { TomorrowSealed.Row(it) }.toTypedArray(),
     )
 }

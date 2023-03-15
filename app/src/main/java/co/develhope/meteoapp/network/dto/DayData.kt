@@ -1,6 +1,8 @@
 package co.develhope.meteoapp.network.dto
 
+import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
+import co.develhope.meteoapp.network.domainmodel.Weather
 import com.google.gson.annotations.SerializedName
 import org.threeten.bp.OffsetDateTime
 
@@ -25,7 +27,41 @@ data class DayData(
     val timezoneAbbreviation: String,
     @SerializedName("utc_offset_seconds")
     val utcOffsetSeconds: Int
-)
+){
+    fun toDomain(): List<TomorrowRow> {
+        return hourly.time.mapIndexed { index, time ->
+            TomorrowRow(
+                time = time,
+                iconTomorrow = intToEnumToIcon(hourly.weathercode.getOrNull(index)),
+                degrees = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
+                percentage = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
+                cvDegrees = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
+                cvNumberUV = "0",
+                cvPercentage2 = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
+                cvNNE = "${hourly.windspeed10m.getOrNull(index)?.toInt().toString()}${hourlyUnits.windspeed10m}",
+                cvPercentage = "${hourly.cloudcover.getOrNull(index)?.toInt().toString()}%",
+                cvRainCM = "${hourly.rain.getOrNull(index)?.toInt().toString()}${hourlyUnits.rain}"
+
+            )
+        }
+
+    }
+
+    private fun intToEnumToIcon(code: Int?): Int {
+        return when (code) {
+            0 -> DataObject.weatherIcon(Weather.SUNNY)
+            1, 2, 3 -> DataObject.weatherIcon(Weather.CLOUDY)
+            45, 48 -> DataObject.weatherIcon(Weather.FOGGY)
+            51, 53, 55 -> DataObject.weatherIcon(Weather.RAINY)
+            56, 57 -> DataObject.weatherIcon(Weather.RAINY)
+            71, 73, 75 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
+            80, 81, 82 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
+            95 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
+            96, 99 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
+            else -> DataObject.weatherIcon(Weather.SUNNY)
+        }
+    }
+}
 
 
 
