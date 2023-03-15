@@ -147,7 +147,7 @@ class TitleViewHolder(val binding: HomeTitleCityBinding) : HomeViewHolder(bindin
 class SubTitleViewHolder(val binding: HomeSubTitleBinding) : HomeViewHolder(binding.root) {
     override fun onBind(elements: HomeScreenElements, onClick: (HomeScreenEvents) -> Unit) {
         if (elements is HomeScreenElements.SubTitleHome) {
-            binding.next5Days.text = elements.subTileHome.next5Days
+            binding.next5Days.text = binding.next5Days.context.getString(R.string.next5days)
         }
     }
 }
