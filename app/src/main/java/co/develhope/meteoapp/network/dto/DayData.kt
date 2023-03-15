@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.network.dto
 
 import co.develhope.meteoapp.network.DataObject
+import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 import co.develhope.meteoapp.network.domainmodel.Weather
 import com.google.gson.annotations.SerializedName
@@ -42,6 +43,24 @@ data class DayData(
                 cvPercentage = "${hourly.cloudcover.getOrNull(index)?.toInt().toString()}%",
                 cvRainCM = "${hourly.rain.getOrNull(index)?.toInt().toString()}${hourlyUnits.rain}"
 
+            )
+        }
+
+    }
+
+    fun toDomainToday(): List<TodayCardInfo> {
+        return hourly.time.mapIndexed { index, time ->
+            TodayCardInfo(
+                date = time,
+                iconToday = intToEnumToIcon(hourly.weathercode.getOrNull(index)),
+                temperature = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
+                precipitation = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
+                perc_temperature = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
+                UV_Index = "0",
+                humidity = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
+                wind = "${hourly.windspeed10m.getOrNull(index)?.toInt().toString()}${hourlyUnits.windspeed10m}",
+                coverage = "${hourly.cloudcover.getOrNull(index)?.toInt().toString()}%",
+                rain = "${hourly.rain.getOrNull(index)?.toInt().toString()}${hourlyUnits.rain}"
             )
         }
 

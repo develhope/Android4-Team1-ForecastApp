@@ -1,105 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/today_constraint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="13dp"
-    android:background="@color/color_background">
-
-    <ImageView
-        android:id="@+id/ivTodayIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="102dp"
-        android:contentDescription="@string/today_icon"
-        tools:srcCompat="@drawable/sun_icon" />
+    android:background="@color/color_background"
+    android:paddingBottom="15dp">
 
     <TextView
         android:id="@+id/tvTodayHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginTop="14dp"
         android:text="@string/today_hour"
         android:textColor="@color/color_title"
-        android:textSize="@dimen/subtitle_textSize_2_3screen"/>
+        android:textSize="@dimen/subtitle_textSize_2_3screen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <ImageView
+        android:id="@+id/ivTodayIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:contentDescription="@string/today_icon"
+        tools:srcCompat="@drawable/sun_icon"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayHour"
+        app:layout_constraintEnd_toStartOf="@+id/tvTodayTemperature"
+        app:layout_constraintStart_toEndOf="@+id/tvTodayHour"
+        app:layout_constraintTop_toTopOf="@id/tvTodayHour"/>
 
     <TextView
         android:id="@+id/tvTodayTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
         android:text="@string/tvTodayMaxTemp"
         android:textColor="@color/black"
         android:textSize="@dimen/text_temperature_percentage_2_3screen"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvTodayHumidity"
+        app:layout_constraintStart_toEndOf="@id/ivTodayIcon"
+        app:layout_constraintTop_toTopOf="@id/tvTodayHour"/>
 
     <ImageView
         android:id="@+id/iv_water_drop"
         app:srcCompat="@drawable/water_drop"
-        android:layout_width="20dp"
-        android:layout_height="22dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="253dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayHumidity"
+        app:layout_constraintEnd_toStartOf="@+id/tvTodayHumidity"
+        app:layout_constraintTop_toTopOf="@id/tvTodayHumidity"
         android:contentDescription="@string/water_drop" />
 
     <TextView
         android:id="@+id/tvTodayHumidity"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="275dp"
-        android:layout_marginTop="3dp"
+        android:layout_height="wrap_content"
         android:text="@string/tvTodayMaxHumidity"
-        android:textSize="20sp"
-        android:textColor="@color/black"/>
+        android:textSize="@dimen/text_temperature_percentage_2_3screen"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/toggle"
+        app:layout_constraintStart_toEndOf="@id/tvTodayTemperature"
+        app:layout_constraintTop_toTopOf="@id/tvTodayHour"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginRight="24dp"
-        android:background="@color/color_view" />
+    <ImageButton
+        android:id="@+id/toggle"
+        android:layout_width="32dp"
+        android:layout_height="48dp"
+        android:src="@drawable/toggle_icon_up"
+        android:visibility="visible"
+        android:contentDescription="toggle"
+        android:background="@color/color_background"
+        app:layout_constraintBottom_toBottomOf="@id/tvTodayHumidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTodayHumidity" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/expanded_layout"
+    <ImageView
+        android:id="@+id/myView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="42dp">
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/vector_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvTodayCard" />
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvTodayCard"
-        android:layout_width="342dp"
-        android:layout_height="@dimen/card_height_2_3screen"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:elevation="15dp"
-        android:visibility="visible"
-        app:cardBackgroundColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        app:cardElevation="6dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="5dp"
         app:cardCornerRadius="@dimen/card_radius"
-        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvTodayHour"
+        android:visibility="gone">
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:padding="18dp">
 
 
             <TextView
                 android:id="@+id/tvPerceivedTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/perceived"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description" />
@@ -108,9 +123,8 @@
                 android:id="@+id/tvPerceivedTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="37dp"
+                app:layout_constraintStart_toStartOf="@id/tvPerceivedTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvPerceivedTitle"
                 android:text="@string/todayPerceivedTemperature"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description"
@@ -120,53 +134,52 @@
                 android:id="@+id/tvIndexTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginEnd="75dp"
                 android:text="@string/uv_index"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_text_description" />
+                android:textSize="@dimen/card_text_description"
+                app:layout_constraintBottom_toBottomOf="@id/tvPerceivedTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvPerceivedTitle"/>
 
             <TextView
                 android:id="@+id/tvIndexValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="37dp"
+                app:layout_constraintStart_toStartOf="@id/tvIndexTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvIndexTitle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description"
                 android:textStyle="bold"
                 tools:text="@string/index_value" />
 
-            <View
+            <ImageView
                 android:id="@+id/cv_first_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_view" />
+                android:layout_marginTop="14dp"
+                android:src="@drawable/vector_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPerceivedTemperature" />
 
 
             <TextView
                 android:id="@+id/tvhumidityTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="14dp"
                 android:text="@string/humidity"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_text_description" />
+                android:textSize="@dimen/card_text_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_first_view" />
 
             <TextView
                 android:id="@+id/tvHumidityValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="106dp"
+                app:layout_constraintStart_toStartOf="@id/tvhumidityTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvhumidityTitle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description"
                 android:textStyle="bold"
@@ -176,9 +189,8 @@
                 android:id="@+id/tvWindTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="84dp"
+                app:layout_constraintStart_toStartOf="@id/tvIndexTitle"
+                app:layout_constraintTop_toTopOf="@id/tvhumidityTitle"
                 android:text="@string/wind"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description" />
@@ -187,41 +199,39 @@
                 android:id="@+id/tvWindValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="106dp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_text_description"
+                android:textSize="@dimen/card_text_data_2_3screen"
                 android:textStyle="bold"
-                tools:text="@string/windValue" />
+                tools:text="@string/windValue"
+                app:layout_constraintStart_toStartOf="@id/tvWindTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvWindTitle" />
 
-            <View
+            <ImageView
                 android:id="@+id/cv_second_view"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="139dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_view" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/vector_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvHumidityValue" />
 
             <TextView
                 android:id="@+id/tvCoverageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="153dp"
+                android:layout_marginTop="14dp"
                 android:text="@string/coverage"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_text_description" />
+                android:textSize="@dimen/card_text_description"
+                app:layout_constraintStart_toStartOf="@id/tvhumidityTitle"
+                app:layout_constraintTop_toBottomOf="@id/cv_second_view" />
 
             <TextView
                 android:id="@+id/tvCoverageValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="175dp"
+                app:layout_constraintStart_toStartOf="@id/tvCoverageTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvCoverageTitle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description"
                 android:textStyle="bold"
@@ -231,9 +241,8 @@
                 android:id="@+id/tvRainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="153dp"
+                app:layout_constraintStart_toStartOf="@id/tvWindTitle"
+                app:layout_constraintTop_toTopOf="@id/tvCoverageTitle"
                 android:text="@string/rain"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description" />
@@ -242,18 +251,16 @@
                 android:id="@+id/tvRainValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="198dp"
-                android:layout_marginTop="175dp"
+                app:layout_constraintStart_toStartOf="@id/tvRainTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvRainTitle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/card_text_description"
                 android:textStyle="bold"
                 tools:text="@string/rainValue" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</RelativeLayout>
