@@ -49,7 +49,7 @@ class TodayFragment : Fragment() {
             try {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(start_date = "2023-03-16", end_date = "2023-03-17").toDomainToday()
+                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails().toDomainToday()
 
                 binding.rvTodayScreen.adapter = TodayScreenAdapter(
                     items = response.toTodayCardInfo()

@@ -22,8 +22,6 @@ interface ForecastApiService {
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
-        @Query("start_date") start_date: String,
-        @Query("end_date") end_date: String,
     ): DayData
 
     @GET("v1/forecast")

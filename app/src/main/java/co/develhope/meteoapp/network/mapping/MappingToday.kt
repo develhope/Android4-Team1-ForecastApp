@@ -7,10 +7,15 @@ import org.threeten.bp.OffsetDateTime
 
 fun List<TodayCardInfo>.toTodayCardInfo(): List<TodayScreenData> {
 
+    val today = OffsetDateTime.now().toLocalDate()
+
     return listOf(
-        TodayScreenData.TodayTitleObject(TodayTitle("Roma,","Lazio",OffsetDateTime.now())),
-        *this.map { TodayScreenData.ForecastData(it) }.toTypedArray(),
+        TodayScreenData.TodayTitleObject(TodayTitle("Roma,", "Lazio", OffsetDateTime.now())),
+
+        *this.filter { it.date.toLocalDate() == today }.map { TodayScreenData.ForecastData(it) }
+            .toTypedArray(),
     )
+
 }
 
 
