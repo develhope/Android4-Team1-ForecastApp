@@ -17,13 +17,7 @@ class Repository {
 
     suspend fun getDayDetails(): DayData {
 
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val startDate = OffsetDateTime.now().format(formatter)
-        val endDate = OffsetDateTime.now().plusDays(5).format(formatter)
-
         return RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
-            start_date = startDate,
-            end_date = endDate
         )
     }
 

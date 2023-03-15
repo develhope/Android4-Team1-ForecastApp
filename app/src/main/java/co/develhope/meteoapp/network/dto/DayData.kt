@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.network.dto
 
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
@@ -33,7 +34,11 @@ data class DayData(
         return hourly.time.mapIndexed { index, time ->
             TomorrowRow(
                 time = time,
-                iconTomorrow = intToEnumToIcon(hourly.weathercode.getOrNull(index)),
+                iconTomorrow = if (time.hour in 0..5) {
+                    R.drawable.crescent_moon
+                } else {
+                    DataObject.intToEnumToIcon(hourly.weathercode.getOrNull(index))
+                },
                 degrees = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
                 percentage = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
                 cvDegrees = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
@@ -52,7 +57,11 @@ data class DayData(
         return hourly.time.mapIndexed { index, time ->
             TodayCardInfo(
                 date = time,
-                iconToday = intToEnumToIcon(hourly.weathercode.getOrNull(index)),
+                iconToday = if (time.hour in 0..5) {
+                    R.drawable.crescent_moon
+                } else {
+                    DataObject.intToEnumToIcon(hourly.weathercode.getOrNull(index))
+                },
                 temperature = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
                 precipitation = "${hourly.relativeHumidity.getOrNull(index)?.toInt().toString()}${hourlyUnits.relativehumidity2m}",
                 perc_temperature = "${hourly.temperature2m.getOrNull(index)?.toInt().toString()}${hourlyUnits.temperature2m}",
@@ -66,20 +75,7 @@ data class DayData(
 
     }
 
-    private fun intToEnumToIcon(code: Int?): Int {
-        return when (code) {
-            0 -> DataObject.weatherIcon(Weather.SUNNY)
-            1, 2, 3 -> DataObject.weatherIcon(Weather.CLOUDY)
-            45, 48 -> DataObject.weatherIcon(Weather.FOGGY)
-            51, 53, 55 -> DataObject.weatherIcon(Weather.RAINY)
-            56, 57 -> DataObject.weatherIcon(Weather.RAINY)
-            71, 73, 75 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
-            80, 81, 82 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
-            95 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
-            96, 99 -> DataObject.weatherIcon(Weather.HEAVYRAIN)
-            else -> DataObject.weatherIcon(Weather.SUNNY)
-        }
-    }
+
 }
 
 
