@@ -6,7 +6,6 @@ import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 import co.develhope.meteoapp.network.domainmodel.Weather
 import com.google.gson.annotations.SerializedName
-import org.threeten.bp.OffsetDateTime
 
 data class DayData(
     @SerializedName("current_weather")
