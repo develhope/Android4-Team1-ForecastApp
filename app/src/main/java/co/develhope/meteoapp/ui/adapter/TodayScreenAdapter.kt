@@ -84,7 +84,7 @@ class TodayScreenAdapter(
     class TodayTitleViewHolder(private val todayScreenTitleItemBinding: TodayScreenTitleItemBinding) :
         RecyclerView.ViewHolder(todayScreenTitleItemBinding.root) {
         fun bind(title: TodayScreenData.TodayTitleObject) {
-            "${title.title.city}, ${title.title.region}".also {
+            "${title.title.city} ${title.title.region}".also {
                 todayScreenTitleItemBinding.tvTodayLocation.text = it
             }
 
