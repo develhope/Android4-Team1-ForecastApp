@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/today_hour"
+        android:text="@string/tv_time"
         android:textColor="@color/color_title"
         android:textSize="@dimen/subtitle_textSize_2_3screen"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +38,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_temperature_percentage_2_3screen"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/tvTodayHumidity"
-        app:layout_constraintStart_toEndOf="@id/ivTodayIcon"
+        app:layout_constraintEnd_toStartOf="@id/toggle"
+        app:layout_constraintStart_toEndOf="@id/tvTodayHour"
         app:layout_constraintTop_toTopOf="@id/tvTodayHour"/>
 
     <ImageView
@@ -58,6 +58,8 @@
         android:layout_height="wrap_content"
         android:text="@string/tvTodayMaxHumidity"
         android:textSize="@dimen/text_temperature_percentage_2_3screen"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/toggle"
         app:layout_constraintStart_toEndOf="@id/tvTodayTemperature"
