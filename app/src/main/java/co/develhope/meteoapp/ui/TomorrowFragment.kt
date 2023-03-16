@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTomorrowBinding
+import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 import co.develhope.meteoapp.network.mapping.toHomeCards
@@ -49,7 +50,9 @@ class TomorrowFragment : Fragment() {
             try {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails().toDomain()
+                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
+                        DataObject.cityLatitude,
+                        DataObject.cityLongitude).toDomain()
 
                 binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
                     item = response.toTomorrowRow()

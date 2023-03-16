@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
+import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.Repository
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
@@ -49,7 +50,9 @@ class TodayFragment : Fragment() {
             try {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails().toDomainToday()
+                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
+                        DataObject.cityLatitude,
+                        DataObject.cityLongitude).toDomainToday()
 
                 binding.rvTodayScreen.adapter = TodayScreenAdapter(
                     items = response.toTodayCardInfo()

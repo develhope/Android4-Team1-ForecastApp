@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.homeFragment -> {
-                    if (!navController.popBackStack(R.id.homeFragment, false)) {
+                R.id.cercaFragment -> {
+                    if (!navController.popBackStack(R.id.cercaFragment, false)) {
                         it.onNavDestinationSelected(navController)
                     }
 

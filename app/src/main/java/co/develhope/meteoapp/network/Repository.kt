@@ -17,12 +17,11 @@ class Repository {
 
     suspend fun getDayDetails(): DayData {
 
-        return RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
-        )
+        return RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(DataObject.cityLatitude,DataObject.cityLongitude)
     }
 
 
     suspend fun getWeeklyDetails(): WeeklyData {
-        return RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails()
+        return RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(DataObject.cityLatitude,DataObject.cityLongitude)
     }
 }
