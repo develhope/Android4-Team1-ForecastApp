@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.network
 
+import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.network.dto.DayData
 import co.develhope.meteoapp.network.dto.SearchData
 import co.develhope.meteoapp.network.dto.WeeklyData
@@ -24,6 +25,12 @@ class RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
+    }
+
+    suspend fun getPlaces (userSearch : String) : List<Place> {
+
+        return this.serviceGeoCodingApi.getDayEndPointDetails(userSearch).toDomain()
+
     }
     private fun provideRetrofit(
         client: OkHttpClient,
@@ -70,6 +77,6 @@ class RetrofitInstance {
     )
 
     val serviceMeteoApi = retrofitMeteoApi.create(ForecastApiService::class.java)
-    val serviceGeoCodingApi = retrofitGeoCodingApi.create(SearchEndPoint::class.java)
+    val serviceGeoCodingApi : SearchEndPoint = retrofitGeoCodingApi.create(SearchEndPoint::class.java)
 
 }

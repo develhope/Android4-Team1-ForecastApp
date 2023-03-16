@@ -14,6 +14,6 @@ interface
 SearchEndPoint {
         @GET("v1/search")
         suspend fun getDayEndPointDetails(
-            @Query("name") name: String,
+            @Query("name") name: String
         ): SearchData
 }
