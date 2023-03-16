@@ -7,19 +7,24 @@ import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 
 object DataObject {
 
-    lateinit var  cityName : String
+    lateinit var cityName: String
+    lateinit var cityCountry: String
+    var cityLatitude: Double = 41.8955
+    var cityLongitude: Double = 12.4823
 
-    private var selectedCity : Place? = Place(
+    private var selectedCity: Place? = Place(
         name = "Napoli",
         region = "Campania",
         latitude = 40.8531,
         longitude = 14.3055
     )
-    fun setSelectedCity(place: Place){
+
+    fun setSelectedCity(place: Place) {
         selectedCity = place
     }
-    fun getSelectedCity(): Place?{
-        return  selectedCity
+
+    fun getSelectedCity(): Place? {
+        return selectedCity
     }
 
     fun weatherIcon(weather: Weather): Int {
@@ -33,15 +38,16 @@ object DataObject {
         }
     }
 
-NetworkSearchMap
-    val getItemSearchList : List<HourlyItem> = listOf(
-        HourlyItem(12, Weather.SUNNY, Place("Palermo", 13.33561, 38.13205,"Sicilia" )),
-        HourlyItem(12, Weather.CLOUDY, Place("Catanzaro", 16.60008600,38.8824700,"Calabria" )),
-        HourlyItem(12, Weather.RAINY, Place("Roma", 41.891930012,12.5113300,"Lazio", )))
+    val getItemSearchList: List<HourlyItem> = listOf(
+        HourlyItem(12, Weather.SUNNY, Place("Palermo", 38.13205, 13.33561, "Sicilia")),
+        HourlyItem(12, Weather.CLOUDY, Place("Catanzaro", 38.88247, 16.60086, "Calabria")),
+        HourlyItem(12, Weather.RAINY, Place("Roma", 41.89193, 12.51133, "Lazio"))
+    )
 
-    fun getSearchCity() : List<HourlyItem>{
+    fun getSearchCity(): List<HourlyItem> {
 
         return getItemSearchList
+    }
 
     fun intToEnumToIcon(code: Int?): Int {
         return when (code) {

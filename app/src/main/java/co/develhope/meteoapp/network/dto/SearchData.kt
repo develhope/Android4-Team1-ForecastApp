@@ -9,10 +9,17 @@ data class SearchData(
     val generationtimeMs: Double,
     @SerializedName("results")
     val results: List<Result>
-){
+) {
 
-    fun toDomain() : List<Place>  {
-        return results.map { Place(name = it.name, latitude = it.latitude, longitude = it.longitude, region = it.admin1) }
+    fun toDomain(): List<Place> {
+        return results.map {
+            Place(
+                name = it.name,
+                latitude = it.latitude,
+                longitude = it.longitude,
+                region = it.country
+            )
+        }
 
 
     }

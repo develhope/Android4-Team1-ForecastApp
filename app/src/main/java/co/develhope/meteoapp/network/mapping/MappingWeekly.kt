@@ -12,7 +12,7 @@ fun List<HomeCards>.toHomeCards(): List<HomeScreenElements> {
 
     return listOf(
 
-        HomeScreenElements.TitleHome(Title(DataObject.cityName)),
+        HomeScreenElements.TitleHome(Title("${DataObject.cityName}, ${DataObject.cityCountry}")),
         HomeScreenElements.CardsHome(this.first()),
         HomeScreenElements.SubTitleHome(Next5Days(R.string.next5days)),
     ) +

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
+import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.mapping.toHomeCards
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
@@ -46,7 +47,9 @@ class HomeFragment : Fragment() {
             try {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails().toDomain()
+                    RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
+                        DataObject.cityLatitude,
+                        DataObject.cityLongitude).toDomain()
 
                 binding.recyclerView.adapter = HomeAdapter(
                     list = response.toHomeCards(),

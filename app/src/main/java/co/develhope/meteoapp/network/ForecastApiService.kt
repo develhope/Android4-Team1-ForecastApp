@@ -8,8 +8,8 @@ import retrofit2.http.Query
 interface ForecastApiService {
     @GET("v1/forecast")
     suspend fun getDayEndPointDetails(
-        @Query("latitude") latitude: Double = 41.8955,
-        @Query("longitude") longitude: Double = 12.4823,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
         @Query("hourly") hourly: List<String> = listOf(
             "temperature_2m",
             "rain",
@@ -26,8 +26,8 @@ interface ForecastApiService {
 
     @GET("v1/forecast")
     suspend fun getWeeklyEndPointDetails(
-        @Query("latitude") latitude: Double = 41.8955,
-        @Query("longitude") longitude: Double = 12.4823,
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double,
         @Query("daily") daily: List<String> = listOf(
             "weathercode",
             "temperature_2m_max",
