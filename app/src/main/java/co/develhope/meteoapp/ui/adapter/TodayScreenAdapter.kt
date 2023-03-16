@@ -1,7 +1,10 @@
 package co.develhope.meteoapp.ui.adapter
 
 
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.network.DataObject
@@ -25,29 +28,55 @@ class TodayScreenAdapter(
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
         fun bind(card: TodayScreenData.ForecastData) {
             rowCardForecastItemBinding.tvTodayHour.text = itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
-            rowCardForecastItemBinding.ivTodayIcon.setImageResource(DataObject.weatherIcon(card.todayCardInfo.weather))
-            "${card.todayCardInfo.temperature}°".also {
+            rowCardForecastItemBinding.ivTodayIcon.setImageResource(card.todayCardInfo.iconToday)
+            card.todayCardInfo.temperature.also {
                 rowCardForecastItemBinding.tvTodayTemperature.text = it
             }
-            "${card.todayCardInfo.precipitation}%".also {
+            card.todayCardInfo.precipitation.also {
                 rowCardForecastItemBinding.tvTodayHumidity.text = it
             }
-            "${card.todayCardInfo.perc_temperature}°".also {
+            card.todayCardInfo.perc_temperature.also {
                 rowCardForecastItemBinding.tvPerceivedTemperature.text = it
             }
 
             rowCardForecastItemBinding.tvIndexValue.text = card.todayCardInfo.UV_Index.toString()
 
-            "${card.todayCardInfo.humidity}%".also {
+            card.todayCardInfo.humidity.also {
                 rowCardForecastItemBinding.tvHumidityValue.text = it
             }
-            "SSE ${card.todayCardInfo.wind}km/h".also {
+            card.todayCardInfo.wind.also {
                 rowCardForecastItemBinding.tvWindValue.text = it
             }
-            "${card.todayCardInfo.coverage}%".also {
+            card.todayCardInfo.coverage.also {
                 rowCardForecastItemBinding.tvCoverageValue.text = it
             }
-            "${card.todayCardInfo.rain}cm".also { rowCardForecastItemBinding.tvRainValue.text = it }
+            card.todayCardInfo.rain.also { rowCardForecastItemBinding.tvRainValue.text = it }
+
+            rowCardForecastItemBinding.ivWaterDrop.setImageResource(R.drawable.water_drop)
+            rowCardForecastItemBinding.toggle.setImageResource(R.drawable.toggle_icon_up)
+
+            rowCardForecastItemBinding.toggle.setOnClickListener {
+                if (rowCardForecastItemBinding.cvTodayCard.visibility == View.GONE) {
+                    TransitionManager.beginDelayedTransition(
+                        rowCardForecastItemBinding.cvTodayCard,
+                        AutoTransition()
+
+                    )
+                    rowCardForecastItemBinding.cvTodayCard.visibility = View.VISIBLE
+                    rowCardForecastItemBinding.myView.visibility = View.GONE
+                    rowCardForecastItemBinding.toggle.rotation = 180F
+                } else {
+                    TransitionManager.beginDelayedTransition(
+                        rowCardForecastItemBinding.cvTodayCard,
+                        AutoTransition()
+                    )
+                    rowCardForecastItemBinding.cvTodayCard.visibility = View.GONE
+                    rowCardForecastItemBinding.myView.visibility = View.VISIBLE
+                    rowCardForecastItemBinding.toggle.rotation = 0F
+
+
+                }
+            }
 
         }
     }
@@ -55,7 +84,7 @@ class TodayScreenAdapter(
     class TodayTitleViewHolder(private val todayScreenTitleItemBinding: TodayScreenTitleItemBinding) :
         RecyclerView.ViewHolder(todayScreenTitleItemBinding.root) {
         fun bind(title: TodayScreenData.TodayTitleObject) {
-            "${title.title.city}, ${title.title.region}".also {
+            "${title.title.city} ${title.title.region}".also {
                 todayScreenTitleItemBinding.tvTodayLocation.text = it
             }
 

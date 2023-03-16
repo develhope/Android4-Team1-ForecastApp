@@ -10,11 +10,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.Repository
+import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.network.domainmodel.Weather
+import co.develhope.meteoapp.network.mapping.toTodayCardInfo
+import co.develhope.meteoapp.network.mapping.toTomorrowRow
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
 import co.develhope.meteoapp.ui.adapter.TodayScreenData
 import co.develhope.meteoapp.ui.adapter.TodayTitle
+import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -37,18 +41,21 @@ class TodayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvTodayScreen.layoutManager = layoutManager
+        binding.rvTodayScreen.setHasFixedSize(true)
 
         lifecycleScope.launch {
             try {
-               val list1 =  Repository().getDayDetails()
-                val adapter = TodayScreenAdapter(emptyList()) // contervire la lista di domain objet in lista di elelemnti ui
-                binding.rvTodayScreen.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.rvTodayScreen.setHasFixedSize(true)
-                binding.rvTodayScreen.adapter = adapter
+                //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
+                val response =
+                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails().toDomainToday()
+
+                binding.rvTodayScreen.adapter = TodayScreenAdapter(
+                    items = response.toTodayCardInfo()
+                )
             } catch (e: Exception) {
-                Log.e("TodayFragment", "Error: ${e.message}")
+                Log.e("HomeFragment", "Error: ${e.message}")
             }
         }
 

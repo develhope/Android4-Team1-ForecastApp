@@ -17,5 +17,7 @@ data class HourlyUnits(
     @SerializedName("weathercode")
     val weathercode: String?,
     @SerializedName("windspeed_10m")
-    val windspeed10m: String?
+    val windspeed10m: String?,
+    @SerializedName("relativehumidity_2m")
+    val relativehumidity2m: String?,
 )

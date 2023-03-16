@@ -33,6 +33,7 @@ object DataObject {
         }
     }
 
+NetworkSearchMap
     val getItemSearchList : List<HourlyItem> = listOf(
         HourlyItem(12, Weather.SUNNY, Place("Palermo", 13.33561, 38.13205,"Sicilia" )),
         HourlyItem(12, Weather.CLOUDY, Place("Catanzaro", 16.60008600,38.8824700,"Calabria" )),
@@ -41,6 +42,21 @@ object DataObject {
     fun getSearchCity() : List<HourlyItem>{
 
         return getItemSearchList
+
+    fun intToEnumToIcon(code: Int?): Int {
+        return when (code) {
+            0 -> weatherIcon(Weather.SUNNY)
+            1, 2, 3 -> weatherIcon(Weather.CLOUDY)
+            45, 48 -> weatherIcon(Weather.FOGGY)
+            51, 53, 55 -> weatherIcon(Weather.RAINY)
+            56, 57 -> weatherIcon(Weather.RAINY)
+            71, 73, 75 -> weatherIcon(Weather.HEAVYRAIN)
+            80, 81, 82 -> weatherIcon(Weather.HEAVYRAIN)
+            95 -> weatherIcon(Weather.HEAVYRAIN)
+            96, 99 -> weatherIcon(Weather.HEAVYRAIN)
+            else -> weatherIcon(Weather.SUNNY)
+        }
+
     }
 
 }

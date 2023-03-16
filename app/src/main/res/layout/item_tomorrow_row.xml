@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv_moon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/crescent_moon"
         app:layout_constraintBottom_toBottomOf="@id/time"
         app:layout_constraintEnd_toStartOf="@+id/degrees"
@@ -22,8 +22,8 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:text="@string/tv_time"
+        android:layout_marginTop="4dp"
         android:textColor="@color/color_title"
         android:textSize="@dimen/subtitle_textSize_2_3screen"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +37,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_temperature_percentage_2_3screen"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/percentage"
-        app:layout_constraintStart_toEndOf="@id/iv_moon"
+        app:layout_constraintEnd_toStartOf="@id/toggle"
+        app:layout_constraintStart_toEndOf="@id/time"
         app:layout_constraintTop_toTopOf="@id/time" />
 
     <ImageView
@@ -57,6 +57,8 @@
         android:layout_height="wrap_content"
         android:text="@string/tv_percentage"
         android:textColor="@color/black"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
         android:textSize="@dimen/text_temperature_percentage_2_3screen"
         app:layout_constraintEnd_toStartOf="@id/toggle"
         app:layout_constraintStart_toEndOf="@id/degrees"

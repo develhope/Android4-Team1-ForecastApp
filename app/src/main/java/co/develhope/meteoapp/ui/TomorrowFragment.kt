@@ -49,7 +49,7 @@ class TomorrowFragment : Fragment() {
             try {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(start_date = "2023-03-16", end_date = "2023-03-17").hourly.toDomain()
+                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails().toDomain()
 
                 binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
                     item = response.toTomorrowRow()
