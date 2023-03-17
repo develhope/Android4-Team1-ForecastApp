@@ -34,17 +34,12 @@
     <string name="coverageValue"><b>24%</b></string>
 
 
-
-
-
-
     //Title Strings
     <string name="palermo">Palermo,</string>
     <string name="luned_11_settembre">Lunedì 11 Settembre</string>
 
     <string name="sicilia">Sicilia</string>
     <string name="sereno">Sereno</string>
-
 
 
     //Row+Card Strings
@@ -79,8 +74,6 @@
     <string name="precip">precip.</string>
     <string name="vento_home">vento</string>
     <string name="next5days">PROSSIMI 5 GIORNI</string>
-
-
 
 
 </resources>

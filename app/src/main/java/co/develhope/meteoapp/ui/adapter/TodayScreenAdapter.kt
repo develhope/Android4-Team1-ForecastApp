@@ -24,6 +24,7 @@ class TodayScreenAdapter(
     private val titleTodayScreen = 0
 
 
+
     class TodayForecastCardViewHolder(private val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
         fun bind(card: TodayScreenData.ForecastData) {
@@ -123,6 +124,7 @@ class TodayScreenAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
 
         when (holder) {
 

@@ -45,11 +45,13 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
+                binding.loadingView.visibility = View.VISIBLE
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
                     RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
                         DataObject.cityLatitude,
-                        DataObject.cityLongitude).toDomain()
+                        DataObject.cityLongitude
+                    ).toDomain()
 
                 binding.recyclerView.adapter = HomeAdapter(
                     list = response.toHomeCards(),
@@ -65,16 +67,21 @@ class HomeFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             else -> {
-                                Toast.makeText(
+                                this@HomeFragment.findNavController()
+                                    .navigate(R.id.errorFragment)
+                                /*Toast.makeText(
                                     context,
                                     "error",
                                     Toast.LENGTH_SHORT
-                                ).show()
+                                ).show()*/
                             }
                         }
                     })
+                binding.loadingView.visibility = View.GONE
             } catch (e: Exception) {
                 Log.e("HomeFragment", "Error: ${e.message}")
+                this@HomeFragment.findNavController()
+                    .navigate(R.id.errorFragment)
             }
         }
 
