@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.Repository
@@ -48,6 +50,7 @@ class TodayFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
+                binding.loadingView.visibility = View.VISIBLE
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
                     RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
@@ -57,8 +60,11 @@ class TodayFragment : Fragment() {
                 binding.rvTodayScreen.adapter = TodayScreenAdapter(
                     items = response.toTodayCardInfo()
                 )
+                binding.loadingView.visibility = View.GONE
             } catch (e: Exception) {
-                Log.e("HomeFragment", "Error: ${e.message}")
+                Log.e("TodayFragment", "Error: ${e.message}")
+                this@TodayFragment.findNavController()
+                    .navigate(R.id.errorFragment)
             }
         }
 

@@ -48,6 +48,7 @@ class TomorrowFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
+                binding.loadingView.visibility = View.VISIBLE
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
                     RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
@@ -57,8 +58,11 @@ class TomorrowFragment : Fragment() {
                 binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
                     item = response.toTomorrowRow()
                     )
+                binding.loadingView.visibility = View.GONE
             } catch (e: Exception) {
                 Log.e("HomeFragment", "Error: ${e.message}")
+                this@TomorrowFragment.findNavController()
+                    .navigate(R.id.errorFragment)
             }
         }
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentErrorBinding
 
 class ErrorFragment : Fragment() {
@@ -30,7 +31,8 @@ class ErrorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.retryButton.setOnClickListener {
-            findNavController().navigateUp()
+            this@ErrorFragment.findNavController()
+                .navigate(R.id.cercaFragment)
         }
     }
 
