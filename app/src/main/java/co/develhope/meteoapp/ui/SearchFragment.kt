@@ -30,10 +30,7 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val searchAdapter = SearchPlaceAdapter(getSearchCity()) {
-        DataObject.cityName = it.name
-        DataObject.cityCountry = it.region
-        DataObject.cityLatitude = it.latitude
-        DataObject.cityLongitude = it.longitude
+       DataObject.setSelectedCity(it)
         findNavController().navigate(R.id.homeFragment)
 
     }
@@ -55,7 +52,7 @@ class SearchFragment : Fragment() {
         binding.itemList.adapter = searchAdapter
 
 
-        callingApi("Palermo")
+        callingApi("Palermo")//qua deve prendere quello che scrive l'utente
 
     }
 
@@ -66,7 +63,7 @@ class SearchFragment : Fragment() {
                 //prendere i risultati e passarli all'adapter
                 RetrofitInstance().getPlaces(userSearch)
                 val response =
-                    RetrofitInstance().serviceGeoCodingApi.getDayEndPointDetails(DataObject.cityName)
+                    RetrofitInstance().serviceGeoCodingApi.getDayEndPointDetails(userSearch)
                         .toDomain()
 
 

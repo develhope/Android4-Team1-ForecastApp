@@ -7,23 +7,13 @@ import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 
 object DataObject {
 
-    lateinit var cityName: String
-    lateinit var cityCountry: String
-    var cityLatitude: Double = 41.8955
-    var cityLongitude: Double = 12.4823
+    private var selectedCity: Place? = null
 
-    private var selectedCity: Place? = Place(
-        name = "Napoli",
-        region = "Campania",
-        latitude = 40.8531,
-        longitude = 14.3055
-    )
-
-    fun setSelectedCity(place: Place) {
+    fun setSelectedCity(place: Place) {//salviamo
         selectedCity = place
     }
 
-    fun getSelectedCity(): Place? {
+    fun getSelectedCity(): Place? {//leggiamo
         return selectedCity
     }
 

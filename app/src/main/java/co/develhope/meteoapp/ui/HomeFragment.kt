@@ -49,8 +49,8 @@ class HomeFragment : Fragment() {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
                     RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
-                        DataObject.cityLatitude,
-                        DataObject.cityLongitude
+                        DataObject.getSelectedCity()?.latitude,//if != null fai la chiamata, altrimenti verso search
+                        DataObject.getSelectedCity()?.longitude
                     ).toDomain()
 
                 binding.recyclerView.adapter = HomeAdapter(
@@ -79,6 +79,7 @@ class HomeFragment : Fragment() {
                     })
                 binding.loadingView.visibility = View.GONE
             } catch (e: Exception) {
+                binding.loadingView.visibility = View.GONE
                 Log.e("HomeFragment", "Error: ${e.message}")
                 this@HomeFragment.findNavController()
                     .navigate(R.id.errorFragment)
