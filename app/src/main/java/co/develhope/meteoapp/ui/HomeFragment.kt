@@ -49,8 +49,8 @@ class HomeFragment : Fragment() {
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
                     RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
-                        DataObject.getSelectedCity()?.latitude,//if != null fai la chiamata, altrimenti verso search
-                        DataObject.getSelectedCity()?.longitude
+                        DataObject.getSelectedCity()!!.latitude,//if != null fai la chiamata, altrimenti verso search
+                        DataObject.getSelectedCity()!!.longitude
                     ).toDomain()
 
                 binding.recyclerView.adapter = HomeAdapter(
