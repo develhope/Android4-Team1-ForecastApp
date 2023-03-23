@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,15 +13,9 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTomorrowBinding
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.RetrofitInstance
-import co.develhope.meteoapp.network.domainmodel.TomorrowRow
-import co.develhope.meteoapp.network.mapping.toHomeCards
 import co.develhope.meteoapp.network.mapping.toTomorrowRow
 import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
-import co.develhope.meteoapp.ui.adapter.TomorrowSealed
-import co.develhope.meteoapp.ui.adapter.TomorrowTitle
-import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import kotlinx.coroutines.launch
-import org.threeten.bp.OffsetDateTime
 
 
 class TomorrowFragment : Fragment() {
@@ -51,13 +44,17 @@ class TomorrowFragment : Fragment() {
                 binding.loadingView.visibility = View.VISIBLE
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
-                        DataObject.cityLatitude,
-                        DataObject.cityLongitude).toDomain()
-
+                    if (DataObject.getSelectedCity()?.latitude != null && DataObject.getSelectedCity()?.longitude != null) {
+                        RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
+                            DataObject.getSelectedCity()!!.latitude,
+                            DataObject.getSelectedCity()!!.longitude
+                        ).toDomain()
+                    } else {
+                        null
+                    }
                 binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
                     item = response.toTomorrowRow()
-                    )
+                )
                 binding.loadingView.visibility = View.GONE
             } catch (e: Exception) {
                 Log.e("HomeFragment", "Error: ${e.message}")
@@ -69,5 +66,5 @@ class TomorrowFragment : Fragment() {
     }
 
 
-    }
+}
 

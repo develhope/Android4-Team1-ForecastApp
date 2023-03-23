@@ -6,15 +6,15 @@ import co.develhope.meteoapp.ui.adapter.TodayScreenData
 import co.develhope.meteoapp.ui.adapter.TodayTitle
 import org.threeten.bp.OffsetDateTime
 
-fun List<TodayCardInfo>.toTodayCardInfo(): List<TodayScreenData> {
-
+fun List<TodayCardInfo>?.toTodayCardInfo(): List<TodayScreenData> {
+    if(this == null) return listOf()
     val today = OffsetDateTime.now().toLocalDate()
 
     return listOf(
         TodayScreenData.TodayTitleObject(
             TodayTitle(
-                "${DataObject.cityName},",
-                DataObject.cityCountry,
+                "${DataObject.getSelectedCity()?.name},",
+                DataObject.getSelectedCity()?.region.orEmpty(),
                 OffsetDateTime.now()
             )
         ),

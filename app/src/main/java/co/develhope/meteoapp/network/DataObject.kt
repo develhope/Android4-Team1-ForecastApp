@@ -9,11 +9,11 @@ object DataObject {
 
     private var selectedCity: Place? = null
 
-    fun setSelectedCity(place: Place) {//salviamo
+    fun setSelectedCity(place: Place) {
         selectedCity = place
     }
 
-    fun getSelectedCity(): Place? {//leggiamo
+    fun getSelectedCity(): Place? {
         return selectedCity
     }
 

@@ -12,18 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.DataObject
-import co.develhope.meteoapp.network.Repository
 import co.develhope.meteoapp.network.RetrofitInstance
-import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
-import co.develhope.meteoapp.network.domainmodel.Weather
 import co.develhope.meteoapp.network.mapping.toTodayCardInfo
-import co.develhope.meteoapp.network.mapping.toTomorrowRow
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
-import co.develhope.meteoapp.ui.adapter.TodayScreenData
-import co.develhope.meteoapp.ui.adapter.TodayTitle
-import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
 import kotlinx.coroutines.launch
-import org.threeten.bp.OffsetDateTime
 
 
 class TodayFragment : Fragment() {
@@ -53,9 +45,14 @@ class TodayFragment : Fragment() {
                 binding.loadingView.visibility = View.VISIBLE
                 //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
                 val response =
-                    RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
-                        DataObject.cityLatitude,
-                        DataObject.cityLongitude).toDomainToday()
+                    if (DataObject.getSelectedCity()?.latitude != null && DataObject.getSelectedCity()?.longitude != null) {
+                        RetrofitInstance().serviceMeteoApi.getDayEndPointDetails(
+                            DataObject.getSelectedCity()!!.latitude,
+                            DataObject.getSelectedCity()!!.longitude
+                        ).toDomainToday()
+                    } else {
+                        null
+                    }
 
                 binding.rvTodayScreen.adapter = TodayScreenAdapter(
                     items = response.toTodayCardInfo()
@@ -67,8 +64,6 @@ class TodayFragment : Fragment() {
                     .navigate(R.id.errorFragment)
             }
         }
-
-
 
 
     }
