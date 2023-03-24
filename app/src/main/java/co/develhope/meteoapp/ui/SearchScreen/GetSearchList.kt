@@ -5,10 +5,10 @@ import co.develhope.meteoapp.network.domainmodel.Weather
 
 
 data class HourlyItem(
-        val degrees: Int,
-        val weather: Weather,
-        val city: Place
-    )
+    val degrees: Int?,
+    val weather: Weather?,
+    val city: Place?
+)
 
 
 

@@ -35,49 +35,53 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val window = activity?.window
-        if (window != null) {
-            window.statusBarColor = context?.getColor(R.color.home_background) ?: 0
-        }*/
+        if (DataObject.getSelectedCity() == null) {
+            this@HomeFragment.findNavController()
+                .navigate(R.id.cercaFragment)
+        } else {
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+            binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
 
-        lifecycleScope.launch {
-            try {
-                //val response = RetrofitInstanceApiOpenMeteo.getWeeklyDetails().toDomain()
-                val response =
-                    RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
-                        DataObject.cityLatitude,
-                        DataObject.cityLongitude).toDomain()
+            lifecycleScope.launch {
+                try {
+                    binding.loadingView.visibility = View.VISIBLE
 
-                binding.recyclerView.adapter = HomeAdapter(
-                    list = response.toHomeCards(),
-                    onClick = {
-                        when (it) {
-                            HomeScreenEvents.Today -> this@HomeFragment.findNavController()
-                                .navigate(R.id.oggiFragment)
-                            HomeScreenEvents.Tomorrow -> this@HomeFragment.findNavController()
-                                .navigate(R.id.domaniFragment)
-                            HomeScreenEvents.OtherDay() -> Toast.makeText(
-                                context,
-                                "da implementare",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            else -> {
-                                Toast.makeText(
+                    val response =
+                        RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
+                            DataObject.getSelectedCity()!!.latitude,
+                            DataObject.getSelectedCity()!!.longitude
+                        ).toDomain()
+
+                    binding.recyclerView.adapter = HomeAdapter(
+                        list = response.toHomeCards(),
+                        onClick = {
+                            when (it) {
+                                HomeScreenEvents.Today -> this@HomeFragment.findNavController()
+                                    .navigate(R.id.oggiFragment)
+                                HomeScreenEvents.Tomorrow -> this@HomeFragment.findNavController()
+                                    .navigate(R.id.domaniFragment)
+                                HomeScreenEvents.OtherDay() -> Toast.makeText(
                                     context,
-                                    "error",
+                                    "da implementare",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                else -> {
+                                    this@HomeFragment.findNavController()
+                                        .navigate(R.id.errorFragment)
+                                }
                             }
-                        }
-                    })
-            } catch (e: Exception) {
-                Log.e("HomeFragment", "Error: ${e.message}")
+                        })
+                    binding.loadingView.visibility = View.GONE
+                } catch (e: Exception) {
+                    binding.loadingView.visibility = View.GONE
+                    Log.e("HomeFragment", "Error: ${e.message}")
+                    this@HomeFragment.findNavController()
+                        .navigate(R.id.errorFragment)
+                }
             }
-        }
 
+        }
     }
 
     override fun onDestroyView() {

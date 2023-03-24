@@ -14,7 +14,7 @@ data class Daily(
     val time: List<OffsetDateTime>,
     val weathercode: List<Int>,
     val windspeed_10m_max: List<Double>
-) {
+) /*{
     fun toDomain(): List<HomeCards> {
         return time.mapIndexed { index, time ->
             HomeCards(
@@ -33,4 +33,4 @@ data class Daily(
         }
     }
 
-}
+}*/
