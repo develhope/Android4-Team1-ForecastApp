@@ -1,50 +1,35 @@
 package co.develhope.meteoapp.viewmodel
 
-import ApiResult
-import android.util.Log
+import ApiResponse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.develhope.meteoapp.network.ForecastApiService
-import co.develhope.meteoapp.network.dto.WeeklyData
+import co.develhope.meteoapp.network.RetrofitInstance
+import co.develhope.meteoapp.network.domainmodel.HomeCards
 import kotlinx.coroutines.launch
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class HomeViewModel : ViewModel() {
 
-    private var _weather =
-        MutableLiveData<ApiResult<WeeklyData>>()
-    val weather: LiveData<ApiResult<WeeklyData>>
-        get() = _weather
+    private val _response = MutableLiveData<ApiResponse<List<HomeCards>>>()
+    val response: LiveData<ApiResponse<List<HomeCards>>> = _response
 
-    private var forecastApiService: ForecastApiService
 
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.open-meteo.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        forecastApiService = retrofit.create(ForecastApiService::class.java)
-    }
-
-    fun getWeeklyForecast(latitude: Double, longitude: Double) {
-        _weather.postValue(ApiResult.Loading)
+    fun loadData(latitude: Double, longitude: Double) {
+        _response.postValue(ApiResponse.Loading)
         viewModelScope.launch {
             try {
-                val response = forecastApiService.getWeeklyEndPointDetails(latitude, longitude)
-                if (response.isSuccessful) {
-                    _weather.postValue(ApiResult.Success(response.code(), response.body()))
-                } else {
-                    _weather.postValue(ApiResult.Error(response.code(), response.message()))
-                }
+                val retrofitService = RetrofitInstance().serviceMeteoApi
+                val weeklyData = retrofitService.getWeeklyEndPointDetails(
+                    latitude = latitude,
+                    longitude = longitude
+                ).toDomain()
+                _response.postValue(ApiResponse.Success(200, weeklyData))
             } catch (e: Exception) {
-                _weather.postValue(ApiResult.Error(500, "ci sono problemi"))
-                Log.e("HomeViewModel", "Error: ${e.message}")
+                _response.postValue(ApiResponse.Error(500, e.message ?: "Error"))
             }
         }
-    }}
+    }
+
+}
