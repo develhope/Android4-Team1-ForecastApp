@@ -56,8 +56,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
-    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.6'
+    implementation 'androidx.activity:activity-ktx:1.7.0'
 
     def lifecycle_version = "2.5.1"
     // ViewModel
@@ -65,7 +65,6 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Annotation processor
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
     implementation 'com.airbnb.android:lottie:3.0.4'
