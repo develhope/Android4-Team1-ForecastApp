@@ -56,7 +56,6 @@ class SearchFragment : Fragment() {
                 return true
             }
 
-            //separa tutto con 3 funzioni, ascolta il testo, funzione che fa la chiamata, chiama la funzione che popola l'adapter con la lista di place, stessa funzione che userò per popolare le ricerche recenti
             override fun onQueryTextChange(newText: String?): Boolean {
                 manageView()
                 callingApi(newText.orEmpty())
