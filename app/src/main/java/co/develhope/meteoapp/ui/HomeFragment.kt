@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
                         binding.loadingView.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
-
                         binding.recyclerView.adapter = HomeAdapter(
                             list = response.body!!.toHomeCards(),
                             onClick = { homeScreenEvent ->
@@ -85,7 +84,7 @@ class HomeFragment : Fragment() {
 
                     }
                     else -> {
-                        binding.loadingView.visibility = View.GONE
+                       binding.loadingView.visibility = View.GONE
                         Log.e("HomeFragment", "Error")
                         this@HomeFragment.findNavController()
                             .navigate(R.id.errorFragment)
