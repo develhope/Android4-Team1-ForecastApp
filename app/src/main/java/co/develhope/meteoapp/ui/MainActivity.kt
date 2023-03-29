@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
                     true
                 }
+                R.id.homeFragment -> {
+                    if (!navController.popBackStack(R.id.homeFragment, false)) {
+                        it.onNavDestinationSelected(navController)
+                    }
+
+                    true
+                }
                 else -> {
                     it.onNavDestinationSelected(navController)
                 }
