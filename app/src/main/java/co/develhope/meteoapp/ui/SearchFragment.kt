@@ -16,7 +16,6 @@ import co.develhope.meteoapp.databinding.FragmentSearchBinding
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.DataObject.getSearchCity
 import co.develhope.meteoapp.network.RetrofitInstance
-import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 import co.develhope.meteoapp.ui.adapter.SearchPlaceAdapter
 import kotlinx.coroutines.launch
