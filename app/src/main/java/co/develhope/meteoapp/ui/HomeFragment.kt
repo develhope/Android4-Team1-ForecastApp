@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
         if (DataObject.getSelectedCity() == null) {
             this@HomeFragment.findNavController()
                 .navigate(R.id.cercaFragment)
+            Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
         } else {
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)

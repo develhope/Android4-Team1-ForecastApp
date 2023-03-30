@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,41 +36,50 @@ class TomorrowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.tomorrowRecyclerView.layoutManager = layoutManager
-        binding.tomorrowRecyclerView.setHasFixedSize(true)
-
-        val latitude = DataObject.getSelectedCity()!!.latitude
-        val longitude = DataObject.getSelectedCity()!!.longitude
-        viewModel.loadData(latitude, longitude)
 
 
-        viewModel.response.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is ApiResponse.Loading -> {
-                    binding.loadingView.visibility = View.VISIBLE
+        if (DataObject.getSelectedCity() == null) {
+            this@TomorrowFragment.findNavController()
+                .navigate(R.id.cercaFragment)
+            Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
+
+        } else {
+            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            binding.tomorrowRecyclerView.layoutManager = layoutManager
+            binding.tomorrowRecyclerView.setHasFixedSize(true)
+
+            val latitude = DataObject.getSelectedCity()!!.latitude
+            val longitude = DataObject.getSelectedCity()!!.longitude
+            viewModel.loadData(latitude, longitude)
+
+
+            viewModel.response.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is ApiResponse.Loading -> {
+                        binding.loadingView.visibility = View.VISIBLE
+                    }
+                    is ApiResponse.Success -> {
+                        binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
+                            item = response.body!!.toTomorrowRow()
+                        )
+                        binding.loadingView.visibility = View.GONE
+                    }
+                    is ApiResponse.Error -> {
+                        binding.loadingView.visibility = View.GONE
+                        Log.e("TomorrowFragment", "Error")
+                        this@TomorrowFragment.findNavController()
+                            .navigate(R.id.errorFragment)
+                    }
+                    else -> {
+                        binding.loadingView.visibility = View.GONE
+                        Log.e("TomorrowFragment", "Error")
+                        this@TomorrowFragment.findNavController()
+                            .navigate(R.id.errorFragment)
+                    }
                 }
-                is ApiResponse.Success -> {
-                    binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
-                        item = response.body!!.toTomorrowRow()
-                    )
-                    binding.loadingView.visibility = View.GONE
-                }
-                is ApiResponse.Error -> {
-                    binding.loadingView.visibility = View.GONE
-                    Log.e("TomorrowFragment", "Error")
-                    this@TomorrowFragment.findNavController()
-                        .navigate(R.id.errorFragment)
-                }
-                else -> {
-                    binding.loadingView.visibility = View.GONE
-                    Log.e("TomorrowFragment", "Error")
-                    this@TomorrowFragment.findNavController()
-                        .navigate(R.id.errorFragment)
-                }
+
+
             }
-
-
         }
     }
 
