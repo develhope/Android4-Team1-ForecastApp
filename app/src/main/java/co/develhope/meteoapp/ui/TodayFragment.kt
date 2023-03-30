@@ -54,6 +54,7 @@ class TodayFragment : Fragment() {
                         null
                     }
 
+
                 binding.rvTodayScreen.adapter = TodayScreenAdapter(
                     items = response.toTodayCardInfo()
                 )

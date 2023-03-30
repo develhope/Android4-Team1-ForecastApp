@@ -25,7 +25,7 @@ class TodayScreenAdapter(
 
 
 
-    class TodayForecastCardViewHolder(private val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
+    class TodayForecastCardViewHolder(val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
         fun bind(card: TodayScreenData.ForecastData) {
             rowCardForecastItemBinding.tvTodayHour.text = itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
@@ -56,6 +56,7 @@ class TodayScreenAdapter(
             rowCardForecastItemBinding.ivWaterDrop.setImageResource(R.drawable.water_drop)
             rowCardForecastItemBinding.toggle.setImageResource(R.drawable.toggle_icon_up)
 
+
             rowCardForecastItemBinding.toggle.setOnClickListener {
                 if (rowCardForecastItemBinding.cvTodayCard.visibility == View.GONE) {
                     TransitionManager.beginDelayedTransition(
@@ -66,6 +67,7 @@ class TodayScreenAdapter(
                     rowCardForecastItemBinding.cvTodayCard.visibility = View.VISIBLE
                     rowCardForecastItemBinding.myView.visibility = View.GONE
                     rowCardForecastItemBinding.toggle.rotation = 180F
+
                 } else {
                     TransitionManager.beginDelayedTransition(
                         rowCardForecastItemBinding.cvTodayCard,
@@ -124,12 +126,13 @@ class TodayScreenAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-
         when (holder) {
-
-            is TodayForecastCardViewHolder -> holder.bind(items[position] as TodayScreenData.ForecastData)
-            is TodayTitleViewHolder -> holder.bind(items[position] as TodayScreenData.TodayTitleObject)
+            is TodayForecastCardViewHolder -> {
+                holder.bind(items.getOrNull(position) as TodayScreenData.ForecastData)
+                if(position == 1)
+                    holder.rowCardForecastItemBinding.toggle.performClick()
+            }
+            is TodayTitleViewHolder -> holder.bind(items.getOrNull(position) as TodayScreenData.TodayTitleObject)
         }
     }
 
@@ -144,4 +147,6 @@ class TodayScreenAdapter(
 
         }
     }
+
+
 }
