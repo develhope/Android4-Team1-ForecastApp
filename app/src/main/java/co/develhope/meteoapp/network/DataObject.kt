@@ -29,9 +29,9 @@ object DataObject {
     }
 
     val getItemSearchList: List<HourlyItem> = listOf(
-        HourlyItem(" ", " ", Place("Palermo", 38.13205, 13.33561, "Sicilia")),
-        HourlyItem(" ", " ", Place("Catanzaro", 38.88247, 16.60086, "Calabria")),
-        HourlyItem(" ", " ", Place("Roma", 41.89193, 12.51133, "Lazio"))
+        HourlyItem("", "", Place("Palermo", 38.13205, 13.33561, "Sicilia")),
+        HourlyItem("", "", Place("Catanzaro", 38.88247, 16.60086, "Calabria")),
+        HourlyItem("", "", Place("Roma", 41.89193, 12.51133, "Lazio"))
     )
 
     fun getSearchCity(): List<HourlyItem> {

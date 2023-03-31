@@ -9,30 +9,44 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
 
-class TomorrowAdapter(private val item: List<TomorrowSealed>) :
+class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val typeTitle = 0
     private val typeRow = 1
 
-    class TitleTomorrowViewHolder(private val titleBinding: ItemTomorrowTitleBinding) :
+    inner class TitleTomorrowViewHolder(private val titleBinding: ItemTomorrowTitleBinding) :
         RecyclerView.ViewHolder(titleBinding.root) {
         fun bind(title: TomorrowSealed.Title) {
 
             titleBinding.city.text = title.titleTomorrow.city
             titleBinding.region.text = title.titleTomorrow.region
 
+
+            titleBinding.tomorrow.text = when(day){
+                1 -> "Domani"
+                2 -> OffsetDateTime.now().plusDays(2).format(DateTimeFormatter.ofPattern("EEEE"))
+                3 -> OffsetDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("EEEE"))
+                else -> OffsetDateTime.now().plusDays(7).format(DateTimeFormatter.ofPattern("EEEE"))
+            }
+
+
             val dateTime = title.titleTomorrow.day
             val offsetDateTime = OffsetDateTime.ofInstant(dateTime.toInstant(), ZoneOffset.UTC)
             val formattedDate =
-                DateTimeFormatter.ofPattern("dd MMMM yyyy").format(offsetDateTime.plusDays(1))
+                DateTimeFormatter.ofPattern("dd MMMM yyyy")
+                    .format(offsetDateTime.plusDays(day?.toLong() ?: 0L))
             titleBinding.day.text = formattedDate
+
         }
+
+
     }
 
 
@@ -44,7 +58,7 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>) :
             rowBinding.ivMoon.setImageResource(row.tomorrowRow.iconTomorrow)
             rowBinding.ivWaterDrop.setImageResource(R.drawable.water_drop)
             rowBinding.degrees.text =
-               row.tomorrowRow.degrees
+                row.tomorrowRow.degrees
             rowBinding.time.text =
                 itemView.context.getString(R.string.tv_time, row.tomorrowRow.time.hour)
             rowBinding.percentage.text =
