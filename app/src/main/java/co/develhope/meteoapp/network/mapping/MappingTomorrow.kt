@@ -22,9 +22,11 @@ fun List<TomorrowRow>?.toTomorrowRow(day: Int): List<TomorrowSealed> {
         *this
             .filter {
                 it.time.toLocalDate() == tomorrow
+
             }
             .map {
                 TomorrowSealed.Row(it)
+
             }
             .toTypedArray(),
     )
