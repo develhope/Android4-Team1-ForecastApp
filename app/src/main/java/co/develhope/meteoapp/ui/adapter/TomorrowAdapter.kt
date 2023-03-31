@@ -34,7 +34,8 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
                 3 -> OffsetDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("EEEE"))
                 4 -> OffsetDateTime.now().plusDays(4).format(DateTimeFormatter.ofPattern("EEEE"))
                 5 -> OffsetDateTime.now().plusDays(5).format(DateTimeFormatter.ofPattern("EEEE"))
-                else -> OffsetDateTime.now().plusDays(6).format(DateTimeFormatter.ofPattern("EEEE"))
+                6 -> OffsetDateTime.now().plusDays(6).format(DateTimeFormatter.ofPattern("EEEE"))
+                else -> OffsetDateTime.now().plusDays(7).format(DateTimeFormatter.ofPattern("EEEE"))
             }
 
 

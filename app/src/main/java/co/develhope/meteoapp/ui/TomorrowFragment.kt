@@ -43,12 +43,10 @@ class TomorrowFragment : Fragment() {
         }
 
 
-
-
         if (DataObject.getSelectedCity() == null) {
             this@TomorrowFragment.findNavController()
                 .navigate(R.id.cercaFragment)
-            Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Per favore seleziona una città per continuare", Toast.LENGTH_SHORT).show()
 
         } else {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
