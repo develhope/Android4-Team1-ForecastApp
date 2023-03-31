@@ -38,7 +38,7 @@ class TomorrowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var day = arguments?.getInt("day")
-        if(day == null){
+        if (day == null) {
             day = 1
         }
 

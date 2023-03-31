@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ItemTomorrowRowBinding
 import co.develhope.meteoapp.databinding.ItemTomorrowTitleBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
@@ -29,7 +28,7 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
             titleBinding.region.text = title.titleTomorrow.region
 
 
-            titleBinding.tomorrow.text = when(day){
+            titleBinding.tomorrow.text = when (day) {
                 1 -> "Domani"
                 2 -> OffsetDateTime.now().plusDays(2).format(DateTimeFormatter.ofPattern("EEEE"))
                 3 -> OffsetDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("EEEE"))
