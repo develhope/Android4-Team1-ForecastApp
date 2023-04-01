@@ -6,20 +6,27 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchData(
     @SerializedName("generationtime_ms")
-    val generationtimeMs: Double,
+    val generationtimeMs: Double?,
     @SerializedName("results")
-    val results: List<Result>
+    val results: List<Result?>?
 ) {
 
     fun toDomain(): List<Place> {
-        return results.map {
-            Place(
-                name = it.name,
-                latitude = it.latitude,
-                longitude = it.longitude,
-                region = it.country
-            )
-        }
+        return results
+            ?.filter {
+                it?.name != null
+                        && it.latitude != null
+                        && it.longitude != null
+                        && it.country != null
+            }
+            ?.map {
+                Place(
+                    name = it!!.name!!,
+                    latitude = it.latitude!!,
+                    longitude = it.longitude!!,
+                    region = it.country!!
+                )
+            }.orEmpty()
 
 
     }

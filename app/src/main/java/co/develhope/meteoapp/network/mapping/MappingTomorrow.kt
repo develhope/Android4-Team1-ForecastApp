@@ -6,9 +6,9 @@ import co.develhope.meteoapp.ui.adapter.TomorrowSealed
 import co.develhope.meteoapp.ui.adapter.TomorrowTitle
 import org.threeten.bp.OffsetDateTime
 
-fun List<TomorrowRow>?.toTomorrowRow(): List<TomorrowSealed> {
-    if(this == null) return listOf()
-    val tomorrow = OffsetDateTime.now().plusDays(1).toLocalDate()
+fun List<TomorrowRow>?.toTomorrowRow(day: Int): List<TomorrowSealed> {
+    if (this == null) return listOf()
+    val tomorrow = OffsetDateTime.now().plusDays(day.toLong()).toLocalDate()
 
     return listOf(
         TomorrowSealed.Title(
@@ -19,7 +19,15 @@ fun List<TomorrowRow>?.toTomorrowRow(): List<TomorrowSealed> {
             )
         ),
 
-        *this.filter { it.time.toLocalDate() == tomorrow }.map { TomorrowSealed.Row(it) }
+        *this
+            .filter {
+                it.time.toLocalDate() == tomorrow
+
+            }
+            .map {
+                TomorrowSealed.Row(it)
+
+            }
             .toTypedArray(),
     )
 }

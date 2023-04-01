@@ -37,11 +37,16 @@ class TomorrowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var day = arguments?.getInt("day")
+        if (day == null) {
+            day = 1
+        }
+
 
         if (DataObject.getSelectedCity() == null) {
             this@TomorrowFragment.findNavController()
                 .navigate(R.id.cercaFragment)
-            Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Per favore seleziona una città per continuare", Toast.LENGTH_SHORT).show()
 
         } else {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -53,6 +58,8 @@ class TomorrowFragment : Fragment() {
             viewModel.loadData(latitude, longitude)
 
 
+
+
             viewModel.response.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is ApiResponse.Loading -> {
@@ -60,7 +67,8 @@ class TomorrowFragment : Fragment() {
                     }
                     is ApiResponse.Success -> {
                         binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
-                            item = response.body!!.toTomorrowRow()
+                            item = response.body!!.toTomorrowRow(day ?: 0),
+                            day = day
                         )
                         binding.loadingView.visibility = View.GONE
                     }
@@ -82,6 +90,7 @@ class TomorrowFragment : Fragment() {
             }
         }
     }
+
 
 }
 

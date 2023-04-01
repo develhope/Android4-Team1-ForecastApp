@@ -31,16 +31,15 @@ class SearchPlaceAdapter(
     override fun onBindViewHolder(holder: HourlyItemViewHolder, position: Int) {
 
         val model = cardList.getOrNull(position)
-        holder.weather.text =
-            model?.weather.toString().lowercase()
+       // holder.weather.text =
+      //      model?.weather.toString().lowercase()
         holder.itemView.setOnClickListener {
 
             onClick(model?.city)
         }
 
 
-        holder.degrees.text =
-            "${model?.degrees}°"
+       holder.degrees.text = "${model?.degrees}"
         holder.city.text = "${model?.city?.name}, ${model?.city?.region}"
     }
 

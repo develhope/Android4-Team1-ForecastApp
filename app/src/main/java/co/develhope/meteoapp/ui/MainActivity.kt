@@ -4,6 +4,7 @@ package co.develhope.meteoapp.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -29,8 +30,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         },3000)*/
 
-        window.statusBarColor = resources.getColor(R.color.home_background, null)
 
+        window.statusBarColor = resources.getColor(R.color.home_background, null)
 
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
     }
 
 

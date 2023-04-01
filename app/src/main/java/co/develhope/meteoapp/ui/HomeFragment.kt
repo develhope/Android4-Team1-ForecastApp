@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.mapping.toHomeCards
+import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import co.develhope.meteoapp.viewmodel.HomeViewModel
 
@@ -55,26 +57,7 @@ class HomeFragment : Fragment() {
                         binding.loadingView.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
-                        binding.recyclerView.adapter = HomeAdapter(
-                            list = response.body!!.toHomeCards(),
-                            onClick = { homeScreenEvent ->
-                                when (homeScreenEvent) {
-                                    HomeScreenEvents.Today -> this@HomeFragment.findNavController()
-                                        .navigate(R.id.oggiFragment)
-                                    HomeScreenEvents.Tomorrow -> this@HomeFragment.findNavController()
-                                        .navigate(R.id.domaniFragment)
-                                    HomeScreenEvents.OtherDay() -> Toast.makeText(
-                                        context,
-                                        "da implementare", Toast.LENGTH_SHORT
-                                    ).show()
-                                    else -> {
-                                        Toast.makeText(
-                                            context,
-                                            "da implementare", Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                            })
+                        setUpAdapter(response.body.toHomeCards())
                         binding.loadingView.visibility = View.GONE
                     }
                     is ApiResponse.Error -> {
@@ -93,6 +76,21 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+    }
+    fun setUpAdapter(list : List<HomeScreenElements>){
+        binding.recyclerView.adapter = HomeAdapter(
+            list = list,
+            onClick = { homeScreenEvent ->
+                when (homeScreenEvent) {
+                    HomeScreenEvents.Today -> this@HomeFragment.findNavController()
+                        .navigate(R.id.oggiFragment)
+                    is HomeScreenEvents.Tomorrow -> this@HomeFragment.findNavController()
+                        .navigate(R.id.domaniFragment)
+                    is HomeScreenEvents.OtherDay -> this@HomeFragment.findNavController()
+                        .navigate(R.id.domaniFragment, bundleOf("day" to homeScreenEvent.day))
+                }
+            })
     }
 
     override fun onDestroyView() {

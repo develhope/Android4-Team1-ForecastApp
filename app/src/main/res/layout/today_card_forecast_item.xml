@@ -25,7 +25,6 @@
         android:layout_height="30dp"
         android:contentDescription="@string/today_icon"
         tools:srcCompat="@drawable/sun_icon"
-        app:layout_constraintBottom_toBottomOf="@id/tvTodayHour"
         app:layout_constraintEnd_toStartOf="@+id/tvTodayTemperature"
         app:layout_constraintStart_toEndOf="@+id/tvTodayHour"
         app:layout_constraintTop_toTopOf="@id/tvTodayHour"/>

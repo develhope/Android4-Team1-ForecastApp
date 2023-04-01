@@ -64,7 +64,7 @@ data class WeeklyData(
         return when (index) {
             0 -> HomeScreenEvents.Today
             1 -> HomeScreenEvents.Tomorrow
-            else -> HomeScreenEvents.OtherDay(index + 1)
+            else -> HomeScreenEvents.OtherDay(index)
         }
     }
 }
