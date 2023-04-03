@@ -101,8 +101,8 @@ class CardViewHolder(val binding: CardLayoutHomeBinding) : HomeViewHolder(bindin
                 return when (elements.cardsHome.key) {
                     HomeScreenEvents.Today -> binding.day.text =
                         itemView.context.getString(R.string.Today)
-                    //HomeScreenEvents.Tomorrow -> binding.day.text =
-                      //  itemView.context.getString(R.string.Tomorrow)
+                    HomeScreenEvents.Tomorrow -> binding.day.text =
+                        itemView.context.getString(R.string.Tomorrow)
                     else -> {
                         binding.day.text = DateTimeFormatterBuilder()
                             .appendText(DAY_OF_WEEK)

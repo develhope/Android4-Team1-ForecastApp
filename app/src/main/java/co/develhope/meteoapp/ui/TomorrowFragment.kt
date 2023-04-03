@@ -57,7 +57,7 @@ class TomorrowFragment : Fragment() {
             val longitude = DataObject.getSelectedCity()!!.longitude
             viewModel.loadData(latitude, longitude)
 
-
+           
 
 
             viewModel.response.observe(viewLifecycleOwner) { response ->
