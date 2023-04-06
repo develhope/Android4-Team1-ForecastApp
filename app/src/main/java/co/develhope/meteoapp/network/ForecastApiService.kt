@@ -2,6 +2,7 @@ package co.develhope.meteoapp.network
 
 import co.develhope.meteoapp.network.dto.DayData
 import co.develhope.meteoapp.network.dto.WeeklyData
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -40,5 +41,5 @@ interface ForecastApiService {
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
-    ): WeeklyData
+    ): Response<WeeklyData>
 }

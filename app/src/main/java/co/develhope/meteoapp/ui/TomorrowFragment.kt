@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.ui
 
 import ApiResponse
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,9 @@ import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.mapping.toTomorrowRow
 import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
 import co.develhope.meteoapp.viewmodel.TomorrowViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 
 class TomorrowFragment : Fragment() {
@@ -37,10 +41,16 @@ class TomorrowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var day = arguments?.getInt("day")
-        if (day == null) {
-            day = 1
+        val day = arguments?.getInt("day") ?: 1
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView?>(R.id.bottomNavigationView)
+        val dayTitle : String = if(day == 1){
+            "Domani"
+        }else{
+            OffsetDateTime.now().plusDays(day.toLong()).format(DateTimeFormatter.ofPattern("EEEE"))
         }
+
+        bottomNavigationView?.menu?.findItem(R.id.domaniFragment)?.title = dayTitle
 
 
         if (DataObject.getSelectedCity() == null) {
@@ -57,7 +67,7 @@ class TomorrowFragment : Fragment() {
             val longitude = DataObject.getSelectedCity()!!.longitude
             viewModel.loadData(latitude, longitude)
 
-
+           
 
 
             viewModel.response.observe(viewLifecycleOwner) { response ->

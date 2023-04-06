@@ -31,7 +31,7 @@ class Repository {
             RetrofitInstance().serviceMeteoApi.getWeeklyEndPointDetails(
                 DataObject.getSelectedCity()!!.latitude,
                 DataObject.getSelectedCity()!!.longitude
-            )
+            ).body()
         } else {
             null
         }

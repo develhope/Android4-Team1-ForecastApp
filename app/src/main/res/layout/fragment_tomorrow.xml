@@ -7,6 +7,8 @@
     android:background="@color/color_background"
     tools:context=".ui.TomorrowFragment">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tomorrow_recycler_view"
         android:layout_width="match_parent"
