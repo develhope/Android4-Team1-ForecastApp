@@ -28,8 +28,10 @@ object DataObject {
         }
     }
 
+    private var searchedCity: Place? = null
+
     val getItemSearchList: List<HourlyItem> = listOf(
-        HourlyItem("", "", Place("Monza",  45.69651, 9.18180, "Lombardia")),
+        HourlyItem("", "", Place("Monza",  getSelectedCity()?.latitude ?: 0.0, 9.18180, "Lombardia")),
         HourlyItem("", "", Place("Milano", 45.46427, 9.18951, "Lombardia")),
         HourlyItem("", "", Place("Agrigento", 37.31065, 13.57661, "Sicilia"))
     )

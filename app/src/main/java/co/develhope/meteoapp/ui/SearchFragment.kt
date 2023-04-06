@@ -49,23 +49,7 @@ class SearchFragment : Fragment() {
         binding.itemList.adapter = searchAdapter
 
 
-        /*binding.frame48.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModelSearch.apiCallResultSearch(s.toString())
-               // manageView()
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                viewModelSearch.apiCallResultSearch(s.toString())
-            }
-        })*/
-
-
-        binding.frame48.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+             binding.frame48.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //do nothings
                 return true

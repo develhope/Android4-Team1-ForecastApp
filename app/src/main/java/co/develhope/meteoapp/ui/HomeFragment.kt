@@ -60,18 +60,21 @@ class HomeFragment : Fragment() {
                         setUpAdapter(response.body.toHomeCards())
                         binding.loadingView.visibility = View.GONE
                     }
-                    is ApiResponse.Error -> {
-                        binding.loadingView.visibility = View.GONE
-                        Log.e("HomeFragment", "Error")
-                        this@HomeFragment.findNavController()
-                            .navigate(R.id.errorFragment)
-
-                    }
                     else -> {
                        binding.loadingView.visibility = View.GONE
                         Log.e("HomeFragment", "Error")
                         this@HomeFragment.findNavController()
                             .navigate(R.id.errorFragment)
+
+/*                        Dialog().
+                                clicklistener {
+                                    val latitude = DataObject.getSelectedCity()!!.latitude
+                                    val longitude = DataObject.getSelectedCity()!!.longitude
+                                    viewModel.loadData(latitude, longitude)
+                                }
+                                +check del place e naviga a search*/
+
+
                     }
                 }
             }
