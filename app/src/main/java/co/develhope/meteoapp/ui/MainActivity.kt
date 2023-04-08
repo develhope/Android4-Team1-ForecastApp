@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import co.develhope.meteoapp.R
+import co.develhope.meteoapp.network.DataObject
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.home_background, null)
 
+        DataObject.setSharedPrefe(getSharedPreferences("Place", MODE_PRIVATE))
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragmentContainerView)
