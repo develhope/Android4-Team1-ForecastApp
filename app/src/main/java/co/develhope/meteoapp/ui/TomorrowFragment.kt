@@ -16,13 +16,17 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTomorrowBinding
 import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.mapping.toTomorrowRow
+import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
+import co.develhope.meteoapp.ui.adapter.TomorrowSealed
 import co.develhope.meteoapp.viewmodel.TomorrowViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-
+private const val BUNDLE_LIST = "cardOpened"
 class TomorrowFragment : Fragment() {
 
     private var myBinding: FragmentTomorrowBinding? = null
@@ -67,18 +71,24 @@ class TomorrowFragment : Fragment() {
             val longitude = DataObject.getSelectedCity()!!.longitude
             viewModel.loadData(latitude, longitude)
 
-           
-
-
             viewModel.response.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is ApiResponse.Loading -> {
                         binding.loadingView.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
+                        val bundleCard = savedInstanceState?.getString(BUNDLE_LIST)//prendiamo il json con il bundle della lista
+                        val itemOpened: MutableList<TomorrowSealed.Row> = try {
+                            val listOfMyClassObject = object : TypeToken<MutableList<TomorrowSealed.Row>>() {}.type//gson per convertire una lista ha bisogno di questo costrutto con il toke, è così non ti fare domande
+                            Gson().fromJson(bundleCard, listOfMyClassObject)
+                        } catch (e: java.lang.Exception) {
+                            Log.e("card aperte?", e.toString())
+                            mutableListOf() //se non funziona torna lista vuota (quindi di card chiuse)
+                        }
                         binding.tomorrowRecyclerView.adapter = TomorrowAdapter(
-                            item = response.body!!.toTomorrowRow(day ?: 0),
-                            day = day
+                            item = response.body.toTomorrowRow(day),
+                            day = day,
+                            itemOpened = itemOpened
                         )
                         binding.loadingView.visibility = View.GONE
                     }
@@ -95,12 +105,14 @@ class TomorrowFragment : Fragment() {
                             .navigate(R.id.errorFragment)
                     }
                 }
-
-
             }
         }
     }
 
-
+    override fun onSaveInstanceState(outState: Bundle) {     //funzione di sistema che passa un bundle al onviewcreated, aggingiamo a questo bundle la lista di card aperte creata nel adapter
+        val dataString = Gson().toJson((binding.tomorrowRecyclerView.adapter as? TomorrowAdapter)?.itemOpened)      //convertiamo la lista in json, as? perché deve essere specificato che sia l'adapter specifico di questa recycler
+        outState.putString(BUNDLE_LIST, dataString)          //key word card opened per il riconoscimento, e lo aggiungiamo al bundle
+        super.onSaveInstanceState(outState)
+    }
 }
 

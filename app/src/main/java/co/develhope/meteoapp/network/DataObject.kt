@@ -30,9 +30,9 @@ object DataObject {
     }
 
     fun getSelectedCity(): Place? {
-        val getdati = sharedPrefe?.getString(CITYSHARED, null)
+        val getdati = sharedPrefe?.getString(CITYSHARED, null)//questa è la stringa che ha tutti i dati
         return try {
-            Gson().fromJson(getdati, HourlyItem::class.java).city
+            Gson().fromJson(getdati, HourlyItem::class.java).city //convertila in oggetto hourlyitem. .city serve a farsì che dopo aver lavorato con hourlyitems ci ritorna comunque place(city è la variabile dove salviamo place)
         } catch (e: java.lang.Exception) {
             Log.e("Casini con le shared", e.toString())
             null
@@ -51,9 +51,9 @@ object DataObject {
     }
 
     fun getSearchCity(): List<HourlyItem> {
-        val getdati = sharedPrefe?.getString(LASTCITYSHARED, null)
+        val getdati = sharedPrefe?.getString(LASTCITYSHARED, null)//questa è la lista che contiene i dati
         return try {
-            val listOfMyClassObject = object : TypeToken<ArrayList<HourlyItem?>?>() {}.type
+            val listOfMyClassObject = object : TypeToken<ArrayList<HourlyItem?>?>() {}.type//gson per convertire una lista ha bisogno di questo costrutto con il toke, è così non ti fare domande
             Gson().fromJson(getdati, listOfMyClassObject)
         } catch (e: java.lang.Exception) {
             Log.e("Casini con le shared", e.toString())
@@ -62,12 +62,18 @@ object DataObject {
     }
 
     fun setSearchCity(item: HourlyItem) {
-        val list = getSearchCity()
+        val list = getSearchCity().toMutableList()
 
-        if (item !in list) {
-            sharedPrefe
+        if (item !in list) { //se la città non è nella lista aggiungila alla prima posizione
+            list.add(0, item)
+
+            if(list.size > 5) {
+                list.removeAt(list.lastIndex) //se la lista è maggiore di 5 elimina l'ultimo elemento(così non sarà mai maggiore di 5)
+            }
+
+            sharedPrefe //infine salva
                 ?.edit()
-                ?.putString(LASTCITYSHARED, Gson().toJson((listOf(item) + list).subList(0, 4)))
+                ?.putString(LASTCITYSHARED, Gson().toJson(list))
                 ?.apply()
         }
     }

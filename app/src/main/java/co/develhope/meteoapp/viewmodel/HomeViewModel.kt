@@ -19,10 +19,12 @@ class HomeViewModel : ViewModel() {
     private var longitude : Double? = null
 
     fun loadData(latitude: Double, longitude: Double) {
-        if (_response.value == null || this.latitude != latitude || this.longitude != longitude ) {
+        if (_response.value == null || this.latitude != latitude || this.longitude != longitude || _response.value is ApiResponse.Error) {
+
             this.latitude = latitude
             this.longitude = longitude
             _response.postValue(ApiResponse.Loading)
+
             viewModelScope.launch {
                 try {
                     val retrofitService = RetrofitInstance().serviceMeteoApi
