@@ -14,7 +14,11 @@ import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
 
-class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
+class TomorrowAdapter(
+    private val item: List<TomorrowSealed>,
+    val day: Int?,
+    val itemOpened: MutableList<TomorrowSealed.Row> = mutableListOf() //impostiamo una mut list di row, mi serve a salvare gli elementi che saranno poi aperti
+) :  //aggiungiamo la lista al costruttore così possiamo passargliela quando creiamo l'adapter
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val typeTitle = 0
@@ -23,14 +27,13 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
     inner class TitleTomorrowViewHolder(private val titleBinding: ItemTomorrowTitleBinding) :
         RecyclerView.ViewHolder(titleBinding.root) {
         fun bind(title: TomorrowSealed.Title) {
-
             titleBinding.city.text = title.titleTomorrow.city
             titleBinding.region.text = title.titleTomorrow.region
 
-
             titleBinding.tomorrow.text = when (day) {
                 1 -> "Domani"
-                else -> OffsetDateTime.now().plusDays(day?.toLong() ?: 0).format(DateTimeFormatter.ofPattern("EEEE"))
+                else -> OffsetDateTime.now().plusDays(day?.toLong() ?: 0)
+                    .format(DateTimeFormatter.ofPattern("EEEE"))
             }
 
 
@@ -42,14 +45,30 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
             titleBinding.day.text = formattedDate
 
         }
-
-
     }
 
 
-    class RowTomorrowViewHolder(private val rowBinding: ItemTomorrowRowBinding) :
+    inner class RowTomorrowViewHolder(private val rowBinding: ItemTomorrowRowBinding) : //innerclass per accedere alla lista
         RecyclerView.ViewHolder(rowBinding.root) {
-        fun bind(row: TomorrowSealed.Row) {
+        fun bind(row: TomorrowSealed.Row, position: Int) {//aggiungiamo position perchè ci serve nel notify sotto
+
+            if (row in itemOpened) { //se l'elemento si trova dentro questa lista significa che è aperto)
+                TransitionManager.beginDelayedTransition(
+                    rowBinding.expandable,
+                    AutoTransition()
+                )
+                rowBinding.expandable.visibility = View.VISIBLE
+                rowBinding.myView.visibility = View.GONE
+                rowBinding.toggle.rotation = 180F
+            } else { //altrimenti è un elemento chiuso
+                TransitionManager.beginDelayedTransition(
+                    rowBinding.expandable,
+                    AutoTransition()
+                )
+                rowBinding.expandable.visibility = View.GONE
+                rowBinding.myView.visibility = View.VISIBLE
+                rowBinding.toggle.rotation = 0F
+            }
 
             //Row Elements
             rowBinding.ivMoon.setImageResource(row.tomorrowRow.iconTomorrow)
@@ -72,29 +91,14 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
             rowBinding.NNE.text = row.tomorrowRow.cvNNE
 
             rowBinding.toggle.setOnClickListener {
-                if (rowBinding.expandable.visibility == View.GONE) {
-                    TransitionManager.beginDelayedTransition(
-                        rowBinding.expandable,
-                        AutoTransition()
-
-                    )
-                    rowBinding.expandable.visibility = View.VISIBLE
-                    rowBinding.myView.visibility = View.GONE
-                    rowBinding.toggle.rotation = 180F
-                } else {
-                    TransitionManager.beginDelayedTransition(
-                        rowBinding.expandable,
-                        AutoTransition()
-                    )
-                    rowBinding.expandable.visibility = View.GONE
-                    rowBinding.myView.visibility = View.VISIBLE
-                    rowBinding.toggle.rotation = 0F
-
-
+                if (row in itemOpened) { //la row è nella lista, significa che è aperta e quindi la togliamo dalla lista per chiuderla
+                    itemOpened.remove(row)
+                } else { //se non è nella lista la aggiungiamo così si apre
+                    itemOpened.add(row)
                 }
+
+                notifyItemChanged(position) //diciamo all'adapter che è cambiato qualcosa così aggiorna l'elemento alla position data
             }
-
-
         }
     }
 
@@ -130,12 +134,8 @@ class TomorrowAdapter(private val item: List<TomorrowSealed>, val day: Int?) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TitleTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Title)
-            is RowTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Row)
-
-
+            is RowTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Row, position)
         }
-
-
     }
 
     override fun getItemCount(): Int {

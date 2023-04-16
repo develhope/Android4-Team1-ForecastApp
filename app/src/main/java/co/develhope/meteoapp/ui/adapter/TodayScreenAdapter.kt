@@ -24,11 +24,11 @@ class TodayScreenAdapter(
     private val titleTodayScreen = 0
 
 
-
     class TodayForecastCardViewHolder(val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
         fun bind(card: TodayScreenData.ForecastData) {
-            rowCardForecastItemBinding.tvTodayHour.text = itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
+            rowCardForecastItemBinding.tvTodayHour.text =
+                itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
             rowCardForecastItemBinding.ivTodayIcon.setImageResource(card.todayCardInfo.iconToday)
             card.todayCardInfo.temperature.also {
                 rowCardForecastItemBinding.tvTodayTemperature.text = it
@@ -129,7 +129,7 @@ class TodayScreenAdapter(
         when (holder) {
             is TodayForecastCardViewHolder -> {
                 holder.bind(items.getOrNull(position) as TodayScreenData.ForecastData)
-                if(position == 1)
+                if (position == 1)
                     holder.rowCardForecastItemBinding.toggle.performClick()
             }
             is TodayTitleViewHolder -> holder.bind(items.getOrNull(position) as TodayScreenData.TodayTitleObject)
@@ -139,6 +139,7 @@ class TodayScreenAdapter(
     override fun getItemCount(): Int {
         return items.size
     }
+
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
 

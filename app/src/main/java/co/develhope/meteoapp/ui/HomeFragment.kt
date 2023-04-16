@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
 import co.develhope.meteoapp.network.DataObject
+import co.develhope.meteoapp.network.domainmodel.HomeCards
+import co.develhope.meteoapp.network.dto.WeeklyData
 import co.develhope.meteoapp.network.mapping.toHomeCards
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
@@ -37,6 +40,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        DataObject.setSharedPrefe( //centralizziamo la creazione dentro application o DI
+            activity?.getSharedPreferences(
+                "Place", //mettiamo tutto nel viewmodel o repo
+                AppCompatActivity.MODE_PRIVATE
+            )
+        )
 
         if (DataObject.getSelectedCity() == null) {
             this@HomeFragment.findNavController()
@@ -61,27 +71,30 @@ class HomeFragment : Fragment() {
                         binding.loadingView.visibility = View.GONE
                     }
                     else -> {
-                       binding.loadingView.visibility = View.GONE
+                        binding.loadingView.visibility = View.GONE
                         Log.e("HomeFragment", "Error")
-                        this@HomeFragment.findNavController()
-                            .navigate(R.id.errorFragment)
+                            ErrorFragment(requireContext(), onOkClickListener = {
+                                if (DataObject.getSelectedCity() == null) {
+                                    this@HomeFragment.findNavController()
+                                        .navigate(R.id.cercaFragment)
+                                    Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
 
-/*                        Dialog().
-                                clicklistener {
-                                    val latitude = DataObject.getSelectedCity()!!.latitude
-                                    val longitude = DataObject.getSelectedCity()!!.longitude
+                                } else {
                                     viewModel.loadData(latitude, longitude)
                                 }
-                                +check del place e naviga a search*/
 
-
+                            }).show(childFragmentManager, ErrorFragment.TAG)
                     }
+
                 }
             }
         }
 
+
     }
-    fun setUpAdapter(list : List<HomeScreenElements>){
+
+
+    fun setUpAdapter(list: List<HomeScreenElements>) {
         binding.recyclerView.adapter = HomeAdapter(
             list = list,
             onClick = { homeScreenEvent ->

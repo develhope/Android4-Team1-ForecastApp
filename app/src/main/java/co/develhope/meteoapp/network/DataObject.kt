@@ -1,20 +1,42 @@
 package co.develhope.meteoapp.network
 
+import android.content.SharedPreferences
+import android.util.Log
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.network.domainmodel.Weather
 import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+
+private const val CITYSHARED = "city"
+private const val LASTCITYSHARED = "lastcity"
 
 object DataObject {
+    private var sharedPrefe: SharedPreferences? = null
 
-    private var selectedCity: Place? = null
+    fun setSharedPrefe(sharedPrefe: SharedPreferences?) {
+        this.sharedPrefe = sharedPrefe
+    }
 
-    fun setSelectedCity(place: Place) {
-        selectedCity = place
+    fun setSelectedCity(place: HourlyItem) {
+        setSearchCity(place)
+
+        sharedPrefe
+            ?.edit()
+            ?.putString(CITYSHARED, Gson().toJson(place))
+            ?.commit()
     }
 
     fun getSelectedCity(): Place? {
-        return selectedCity
+        val getdati = sharedPrefe?.getString(CITYSHARED, null)//questa è la stringa che ha tutti i dati
+        return try {
+            Gson().fromJson(getdati, HourlyItem::class.java).city //convertila in oggetto hourlyitem. .city serve a farsì che dopo aver lavorato con hourlyitems ci ritorna comunque place(city è la variabile dove salviamo place)
+        } catch (e: java.lang.Exception) {
+            Log.e("Casini con le shared", e.toString())
+            null
+        }
     }
 
     fun weatherIcon(weather: Weather): Int {
@@ -28,17 +50,32 @@ object DataObject {
         }
     }
 
-    private var searchedCity: Place? = null
-
-    val getItemSearchList: List<HourlyItem> = listOf(
-        HourlyItem("", "", Place("Monza",  getSelectedCity()?.latitude ?: 0.0, 9.18180, "Lombardia")),
-        HourlyItem("", "", Place("Milano", 45.46427, 9.18951, "Lombardia")),
-        HourlyItem("", "", Place("Agrigento", 37.31065, 13.57661, "Sicilia"))
-    )
-
     fun getSearchCity(): List<HourlyItem> {
+        val getdati = sharedPrefe?.getString(LASTCITYSHARED, null)//questa è la lista che contiene i dati
+        return try {
+            val listOfMyClassObject = object : TypeToken<ArrayList<HourlyItem?>?>() {}.type//gson per convertire una lista ha bisogno di questo costrutto con il toke, è così non ti fare domande
+            Gson().fromJson(getdati, listOfMyClassObject)
+        } catch (e: java.lang.Exception) {
+            Log.e("Casini con le shared", e.toString())
+            listOf()
+        }
+    }
 
-        return getItemSearchList
+    fun setSearchCity(item: HourlyItem) {
+        val list = getSearchCity().toMutableList()
+
+        if (item !in list) { //se la città non è nella lista aggiungila alla prima posizione
+            list.add(0, item)
+
+            if(list.size > 5) {
+                list.removeAt(list.lastIndex) //se la lista è maggiore di 5 elimina l'ultimo elemento(così non sarà mai maggiore di 5)
+            }
+
+            sharedPrefe //infine salva
+                ?.edit()
+                ?.putString(LASTCITYSHARED, Gson().toJson(list))
+                ?.apply()
+        }
     }
 
     fun intToEnumToIcon(code: Int?): Int {

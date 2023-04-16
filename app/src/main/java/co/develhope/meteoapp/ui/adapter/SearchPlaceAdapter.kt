@@ -14,7 +14,7 @@ import okhttp3.internal.notify
 
 class SearchPlaceAdapter(
     private var cardList: List<HourlyItem>,
-    private val onClick: (Place?) -> Unit
+    private val onClick: (HourlyItem?) -> Unit
 ) : RecyclerView.Adapter<SearchPlaceAdapter.HourlyItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -35,7 +35,7 @@ class SearchPlaceAdapter(
       //      model?.weather.toString().lowercase()
         holder.itemView.setOnClickListener {
 
-            onClick(model?.city)
+            onClick(model)
         }
 
 

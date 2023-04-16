@@ -1,32 +1,49 @@
 package co.develhope.meteoapp.ui
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Button
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentErrorBinding
 
-class ErrorFragment : Fragment() {
-    private var myBinding: FragmentErrorBinding? = null
-    private val binding get() = myBinding!!
+class ErrorFragment(private val context: Context, private val onOkClickListener: () -> Unit) :
+    DialogFragment() {
+
+    companion object {
+        const val TAG = "ErrorDialog"
+    }
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        myBinding = FragmentErrorBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_error, container, false)
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
 
-        binding.retryButton.setOnClickListener {
-            this@ErrorFragment.findNavController()
-                .navigate(R.id.cercaFragment)
+        val retryButton: View? = dialog?.findViewById(R.id.retry_button)
+        retryButton?.setOnClickListener {
+            onOkClickListener()
+            dismiss()
         }
     }
 }

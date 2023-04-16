@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,7 +32,6 @@ class SearchFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,21 +48,26 @@ class SearchFragment : Fragment() {
         binding.itemList.layoutManager = layoutManager
         binding.itemList.adapter = searchAdapter
 
-
-             binding.frame48.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.frame48.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //do nothings
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrEmpty()) {
+                    viewModelSearch.apiCallResultSearch(newText)
+                }
 
-                viewModelSearch.apiCallResultSearch(newText.orEmpty())
                 manageView()
                 return true
             }
 
+
         })
+
+
+
         viewModelSearch.response.observe(viewLifecycleOwner) { responseSearch ->
             when (responseSearch) {
                 is ApiResponse.Loading -> {
@@ -75,9 +80,7 @@ class SearchFragment : Fragment() {
                     this@SearchFragment.findNavController().navigate(R.id.errorFragment)
                 }
                 else -> {
-                    //binding.loadingView.visibility = View.GONE
-                    Log.e("SearchFragment", "Error: ${500}")
-                    this@SearchFragment.findNavController().navigate(R.id.errorFragment)
+                    searchAdapter.setNewList(getSearchCity())
                 }
             }
         }
@@ -85,7 +88,25 @@ class SearchFragment : Fragment() {
     }
 
     fun manageView() {
-        binding.ricercheRecenti.isVisible = binding.frame48.query.isEmpty()
+        if (binding.frame48.query.isEmpty()) {
+            binding.ricercheRecenti.visibility = VISIBLE
+
+            viewModelSearch.response.postValue(null)
+        } else {
+            binding.ricercheRecenti.visibility = GONE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        binding.frame48.setQuery(null, false)
+        binding.frame48.isIconified = true
     }
 }
 
