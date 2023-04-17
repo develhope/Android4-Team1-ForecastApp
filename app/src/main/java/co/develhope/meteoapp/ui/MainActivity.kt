@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         window.statusBarColor = resources.getColor(R.color.home_background, null)
 
-        DataObject.setSharedPrefe(getSharedPreferences("Place", MODE_PRIVATE))
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navController = findNavController(R.id.fragmentContainerView)
 

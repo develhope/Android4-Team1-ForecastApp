@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,9 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentHomeBinding
-import co.develhope.meteoapp.network.DataObject
-import co.develhope.meteoapp.network.domainmodel.HomeCards
-import co.develhope.meteoapp.network.dto.WeeklyData
 import co.develhope.meteoapp.network.mapping.toHomeCards
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
@@ -41,24 +37,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        DataObject.setSharedPrefe( //centralizziamo la creazione dentro application o DI
-            activity?.getSharedPreferences(
-                "Place", //mettiamo tutto nel viewmodel o repo
-                AppCompatActivity.MODE_PRIVATE
-            )
-        )
-
-        if (DataObject.getSelectedCity() == null) {
+        if (viewModel.isSelectedCityNull()) {
             this@HomeFragment.findNavController()
                 .navigate(R.id.cercaFragment)
             Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
         } else {
 
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-
-            val latitude = DataObject.getSelectedCity()!!.latitude
-            val longitude = DataObject.getSelectedCity()!!.longitude
-            viewModel.loadData(latitude, longitude)
+            viewModel.loadData()
 
 
             viewModel.response.observe(viewLifecycleOwner) { response ->
@@ -67,23 +53,32 @@ class HomeFragment : Fragment() {
                         binding.loadingView.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
-                        setUpAdapter(response.body.toHomeCards())
+                        setUpAdapter(
+                            response.body.toHomeCards(
+                                viewModel.getSelectedCityName(),
+                                viewModel.getSelectedCityRegion()
+                            )
+                        )
                         binding.loadingView.visibility = View.GONE
                     }
                     else -> {
                         binding.loadingView.visibility = View.GONE
                         Log.e("HomeFragment", "Error")
-                            ErrorFragment(requireContext(), onOkClickListener = {
-                                if (DataObject.getSelectedCity() == null) {
-                                    this@HomeFragment.findNavController()
-                                        .navigate(R.id.cercaFragment)
-                                    Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
+                        ErrorFragment(onOkClickListener = {
+                            if (viewModel.isSelectedCityNull()) {
+                                this@HomeFragment.findNavController()
+                                    .navigate(R.id.cercaFragment)
+                                Toast.makeText(
+                                    context,
+                                    "Seleziona una città per continuare",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                                } else {
-                                    viewModel.loadData(latitude, longitude)
-                                }
+                            } else {
+                                viewModel.loadData()
+                            }
 
-                            }).show(childFragmentManager, ErrorFragment.TAG)
+                        }).show(childFragmentManager, ErrorFragment.TAG)
                     }
 
                 }

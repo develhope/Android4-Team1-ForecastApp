@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_oggiFragment"
             app:destination="@id/oggiFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_errorFragment"
-            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/oggiFragment"
@@ -32,9 +29,5 @@
         android:name="co.develhope.meteoapp.ui.SearchFragment"
         android:label="fragment_cerca"
         tools:layout="@layout/fragment_search" />
-    <fragment
-        android:id="@+id/errorFragment"
-        android:name="co.develhope.meteoapp.ui.ErrorFragment"
-        android:label="fragment_error"
-        tools:layout="@layout/fragment_error" />
+
 </navigation>

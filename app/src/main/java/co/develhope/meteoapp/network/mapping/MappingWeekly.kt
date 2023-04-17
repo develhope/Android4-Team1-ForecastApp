@@ -7,14 +7,14 @@ import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
 import co.develhope.meteoapp.ui.adapter.home_adapter.Next5Days
 import co.develhope.meteoapp.ui.adapter.home_adapter.Title
 
-fun List<HomeCards>?.toHomeCards(): List<HomeScreenElements> {
+fun List<HomeCards>?.toHomeCards(name: String, region: String): List<HomeScreenElements> {
 
     return if (this == null) {
         listOf()
     } else {
         listOf(
 
-            HomeScreenElements.TitleHome(Title("${DataObject.getSelectedCity()?.name}, ${DataObject.getSelectedCity()?.region}")),
+            HomeScreenElements.TitleHome(Title("${name}, $region")),
             HomeScreenElements.CardsHome(this.first()),
             HomeScreenElements.SubTitleHome(Next5Days(R.string.next5days)),
         ) +

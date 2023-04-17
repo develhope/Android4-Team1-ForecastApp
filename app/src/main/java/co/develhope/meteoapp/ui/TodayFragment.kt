@@ -38,7 +38,7 @@ class TodayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (DataObject.getSelectedCity() == null) {
+        if (viewModelToday.isSelectedCityNull()) {
             this@TodayFragment.findNavController().navigate(R.id.cercaFragment)
             Toast.makeText(context, "Seleziona una città per continuare", Toast.LENGTH_SHORT).show()
         } else {
@@ -47,9 +47,7 @@ class TodayFragment : Fragment() {
             binding.rvTodayScreen.layoutManager = layoutManager
             binding.rvTodayScreen.setHasFixedSize(true)
 
-            val latitude = DataObject.getSelectedCity()!!.latitude
-            val longitude = DataObject.getSelectedCity()!!.longitude
-            viewModelToday.apiCallResultToday(latitude, longitude)
+            viewModelToday.apiCallResultToday()
 
             viewModelToday.response.observe(viewLifecycleOwner) { response ->
                 when (response) {
@@ -58,19 +56,28 @@ class TodayFragment : Fragment() {
                     }
                     is ApiResponse.Success -> {
                         binding.rvTodayScreen.adapter = TodayScreenAdapter(
-                            items = response.body!!.toTodayCardInfo()
+                            items = response.body!!.toTodayCardInfo(viewModelToday.getSelectedCityName(), viewModelToday.getSelectedCityRegion())
                         )
                         binding.loadingView.visibility = View.GONE
-                    }
-                    is ApiResponse.Error -> {
-                        binding.loadingView.visibility = View.GONE
-                        Log.e("TodayFragment", "Error")
-                        this@TodayFragment.findNavController().navigate(R.id.errorFragment)
                     }
                     else -> {
                         binding.loadingView.visibility = View.GONE
                         Log.e("TodayFragment", "Error")
-                        this@TodayFragment.findNavController().navigate(R.id.errorFragment)
+                        ErrorFragment(onOkClickListener = {
+                            if (viewModelToday.isSelectedCityNull()) {
+                                this@TodayFragment.findNavController()
+                                    .navigate(R.id.cercaFragment)
+                                Toast.makeText(
+                                    context,
+                                    "Seleziona una città per continuare",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            } else {
+                                viewModelToday.apiCallResultToday()
+                            }
+
+                        }).show(childFragmentManager, ErrorFragment.TAG)
                     }
                 }
             }

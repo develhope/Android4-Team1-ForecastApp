@@ -6,7 +6,7 @@ import co.develhope.meteoapp.ui.adapter.TodayScreenData
 import co.develhope.meteoapp.ui.adapter.TodayTitle
 import org.threeten.bp.OffsetDateTime
 
-fun List<TodayCardInfo>?.toTodayCardInfo(): List<TodayScreenData> {
+fun List<TodayCardInfo>?.toTodayCardInfo(name : String, region : String): List<TodayScreenData> {
     if (this == null) return listOf()
     val today = OffsetDateTime.now().toLocalDate()
     val currentHour = OffsetDateTime.now().hour
@@ -14,8 +14,8 @@ fun List<TodayCardInfo>?.toTodayCardInfo(): List<TodayScreenData> {
     return listOf(
         TodayScreenData.TodayTitleObject(
             TodayTitle(
-                "${DataObject.getSelectedCity()?.name},",
-                DataObject.getSelectedCity()?.region.orEmpty(),
+                "${name},",
+                region,
                 OffsetDateTime.now()
             )
         ),
