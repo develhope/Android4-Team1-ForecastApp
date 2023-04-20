@@ -15,11 +15,20 @@ import androidx.navigation.fragment.findNavController
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentErrorBinding
 
-class ErrorFragment(private val context: Context, private val onOkClickListener: () -> Unit) :
+class ErrorFragment(private val onOkClickListener: () -> Unit) :
     DialogFragment() {
 
     companion object {
         const val TAG = "ErrorDialog"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, getStyle())
+    }
+
+    private fun getStyle(): Int {
+        return R.style.DialogFragmentTheme
     }
 
 

@@ -59,6 +59,12 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.6'
     implementation 'androidx.activity:activity-ktx:1.7.0'
 
+    def koin_version = '3.4.0'
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
     def lifecycle_version = "2.5.1"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"

@@ -8,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.HomeCards
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
+import co.develhope.meteoapp.sharedpreferences.MySharedPrefsInterface
+import co.develhope.meteoapp.sharedpreferences.SharedImplementation
 import kotlinx.coroutines.launch
 
 
-class TomorrowViewModel : ViewModel() {
+class TomorrowViewModel(val sharedImplementation: MySharedPrefsInterface) : ViewModel() {
 
     private val _response = MutableLiveData<ApiResponse<List<TomorrowRow>>>()
     val response: LiveData<ApiResponse<List<TomorrowRow>>> = _response
@@ -19,9 +21,22 @@ class TomorrowViewModel : ViewModel() {
     private var latitude : Double? = null
     private var longitude : Double? = null
 
+    fun isSelectedCityNull() = sharedImplementation.getSelectedCity() == null
+    fun getSelectedCityLatitude() = sharedImplementation.getSelectedCity()?.latitude
+    fun getSelectedCityLongitude() = sharedImplementation.getSelectedCity()?.longitude
 
-    fun loadData(latitude: Double, longitude: Double) {
-        if (_response.value == null || this.latitude != latitude || this.longitude != longitude || _response.value is ApiResponse.Error) {
+    fun getSelectedCityName() = sharedImplementation.getSelectedCity()?.name.orEmpty()
+    fun getSelectedCityRegion() = sharedImplementation.getSelectedCity()?.region.orEmpty()
+
+
+    fun loadData(latitude: Double? = getSelectedCityLatitude(),
+                 longitude: Double? = getSelectedCityLongitude()) {
+        if (_response.value == null ||
+            this.latitude != latitude ||
+            this.longitude != longitude ||
+            _response.value is ApiResponse.Error ||
+            latitude != null ||
+            longitude != null) {
 
             this.latitude = latitude
             this.longitude = longitude
@@ -30,8 +45,8 @@ class TomorrowViewModel : ViewModel() {
                 try {
                     val retrofitService = RetrofitInstance().serviceMeteoApi
                     val hourlyData = retrofitService.getDayEndPointDetails(
-                        latitude = latitude,
-                        longitude = longitude
+                        latitude = latitude!!,
+                        longitude = longitude!!
                     ).toDomain()
                     _response.postValue(ApiResponse.Success(200, hourlyData))
                 } catch (e: Exception) {

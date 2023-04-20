@@ -14,7 +14,7 @@ import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
-class RetrofitInstance {
+class RetrofitInstance(private val gson: Gson) {
 
     private fun provideGeoCodingRetrofit(
         client: OkHttpClient,
@@ -25,12 +25,6 @@ class RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
-    }
-
-    suspend fun getPlaces (userSearch : String) : List<Place> {
-
-        return this.serviceGeoCodingApi.getDayEndPointDetails(userSearch).toDomain()
-
     }
     private fun provideRetrofit(
         client: OkHttpClient,
@@ -43,7 +37,8 @@ class RetrofitInstance {
             .build()
     }
 
-    private fun provideGson(): Gson = GsonBuilder()
+    private fun provideGson(): Gson =
+        GsonBuilder()
         .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeTypeAdapter())
         .create()
 
