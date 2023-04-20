@@ -8,22 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
-import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.mapping.toTodayCardInfo
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
 import co.develhope.meteoapp.viewmodel.TodayViewModel
+import org.koin.android.ext.android.inject
 
 
 class TodayFragment : Fragment() {
 
     private var _binding: FragmentTodayBinding? = null
     private val binding get() = _binding!!
-    private val viewModelToday: TodayViewModel by viewModels()
+    private val viewModelToday: TodayViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +55,10 @@ class TodayFragment : Fragment() {
                     }
                     is ApiResponse.Success -> {
                         binding.rvTodayScreen.adapter = TodayScreenAdapter(
-                            items = response.body!!.toTodayCardInfo(viewModelToday.getSelectedCityName(), viewModelToday.getSelectedCityRegion())
+                            items = response.body!!.toTodayCardInfo(
+                                viewModelToday.getSelectedCityName(),
+                                viewModelToday.getSelectedCityRegion()
+                            )
                         )
                         binding.loadingView.visibility = View.GONE
                     }

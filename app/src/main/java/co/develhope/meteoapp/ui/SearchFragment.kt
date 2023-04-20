@@ -17,12 +17,13 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
 import co.develhope.meteoapp.ui.adapter.SearchPlaceAdapter
 import co.develhope.meteoapp.viewmodel.SearchViewModel
+import org.koin.android.ext.android.inject
 
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private val viewModelSearch: SearchViewModel by viewModels()
+    private val viewModelSearch: SearchViewModel by inject()
     private var searchAdapter: SearchPlaceAdapter? = null
 
 

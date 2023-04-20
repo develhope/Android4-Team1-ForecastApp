@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 import com.google.gson.Gson
@@ -13,29 +12,29 @@ import com.google.gson.reflect.TypeToken
 private const val CITYSHARED = "city"
 private const val LASTCITYSHARED = "lastcity"
 
-class SharedImplementation(context: Context) :
+class SharedImplementation(context: Context, private val gson: Gson) : //anche in retrofit ist, gson nel costruttore
     MySharedPrefsInterface {
 
-    private  var sharedPrefs : SharedPreferences
-
-    init {
-        sharedPrefs = context.getSharedPreferences("Place", AppCompatActivity.MODE_PRIVATE)
-    }
+    private val sharedPrefs: SharedPreferences = context.getSharedPreferences(
+        "Place",
+        Context.MODE_PRIVATE
+    )
 
     override fun setSelectedCity(place: HourlyItem) {
         setSearchCity(place)
 
         sharedPrefs
             .edit()
-            ?.putString(CITYSHARED, Gson().toJson(place))
+            ?.putString(CITYSHARED, Gson().toJson(place)) //creiamo una private val di gson che vale per tutta la classe
             ?.commit()
     }
+
 
     override fun getSelectedCity(): Place? {
         val getdati =
             sharedPrefs.getString(CITYSHARED, null)//questa è la stringa che ha tutti i dati
         return try {
-            Gson().fromJson(
+            gson.fromJson( //dobbiamo avere un punto centrale nella di con gson, deve essere nel costruttore
                 getdati,
                 HourlyItem::class.java
             ).city //convertila in oggetto hourlyitem. .city serve a farsì che dopo aver lavorato con hourlyitems ci ritorna comunque place(city è la variabile dove salviamo place)
@@ -51,7 +50,7 @@ class SharedImplementation(context: Context) :
         return try {
             val listOfMyClassObject = object :
                 TypeToken<ArrayList<HourlyItem?>?>() {}.type//gson per convertire una lista ha bisogno di questo costrutto con il toke, è così non ti fare domande
-            Gson().fromJson(getdati, listOfMyClassObject)
+            gson.fromJson(getdati, listOfMyClassObject)
         } catch (e: java.lang.Exception) {
             Log.e("Casini con le shared", e.toString())
             listOf()

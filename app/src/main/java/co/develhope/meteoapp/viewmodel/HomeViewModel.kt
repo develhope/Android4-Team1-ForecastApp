@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.HomeCards
-import co.develhope.meteoapp.sharedpreferences.SharedImplementation
+import co.develhope.meteoapp.sharedpreferences.MySharedPrefsInterface
 import kotlinx.coroutines.launch
 
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val sharedImplementation: MySharedPrefsInterface) : ViewModel() {
 
     private val _response = MutableLiveData<ApiResponse<List<HomeCards>?>>()
     val response: LiveData<ApiResponse<List<HomeCards>?>> = _response
@@ -19,15 +19,11 @@ class HomeViewModel : ViewModel() {
     private var latitude: Double? = null
     private var longitude: Double? = null
 
-    val sharedImplementation: SharedImplementation? =
-        null  //quando ci saranno le dipendency questo sarà nel construttore del viewmodel
-
-    fun isSelectedCityNull() = sharedImplementation?.getSelectedCity() == null
-    fun getSelectedCityLatitude() = sharedImplementation?.getSelectedCity()?.latitude
-    fun getSelectedCityLongitude() = sharedImplementation?.getSelectedCity()?.longitude
-
-    fun getSelectedCityName() = sharedImplementation?.getSelectedCity()?.name.orEmpty()
-    fun getSelectedCityRegion() = sharedImplementation?.getSelectedCity()?.region.orEmpty()
+    fun isSelectedCityNull() = sharedImplementation.getSelectedCity() == null
+    private fun getSelectedCityLatitude() = sharedImplementation.getSelectedCity()?.latitude
+    private fun getSelectedCityLongitude() = sharedImplementation.getSelectedCity()?.longitude
+    fun getSelectedCityName() = sharedImplementation.getSelectedCity()?.name.orEmpty()
+    fun getSelectedCityRegion() = sharedImplementation.getSelectedCity()?.region.orEmpty()
 
     fun loadData(
         latitude: Double? = getSelectedCityLatitude(),

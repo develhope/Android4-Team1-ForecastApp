@@ -20,6 +20,7 @@ import co.develhope.meteoapp.viewmodel.TomorrowViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.koin.android.ext.android.inject
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -29,7 +30,7 @@ class TomorrowFragment : Fragment() {
 
     private var myBinding: FragmentTomorrowBinding? = null
     private val binding get() = myBinding!!
-    private val viewModel: TomorrowViewModel by viewModels()
+    private val viewModel: TomorrowViewModel by inject()
 
 
     override fun onCreateView(

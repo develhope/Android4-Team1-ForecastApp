@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
@@ -19,11 +18,12 @@ import co.develhope.meteoapp.network.mapping.toHomeCards
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenElements
 import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 import co.develhope.meteoapp.viewmodel.HomeViewModel
+import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
     private var baseContainerBinding: FragmentHomeBinding? = null
     private val binding get() = baseContainerBinding!!
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,8 @@ class HomeFragment : Fragment() {
         return binding.root
 
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

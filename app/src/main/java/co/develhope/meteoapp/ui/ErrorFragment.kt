@@ -22,6 +22,15 @@ class ErrorFragment(private val onOkClickListener: () -> Unit) :
         const val TAG = "ErrorDialog"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, getStyle())
+    }
+
+    private fun getStyle(): Int {
+        return R.style.DialogFragmentTheme
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
