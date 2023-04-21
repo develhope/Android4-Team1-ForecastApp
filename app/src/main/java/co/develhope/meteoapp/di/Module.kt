@@ -19,16 +19,16 @@ import org.koin.dsl.module
 
 val viewModelsModule = module {
     viewModel {
-        HomeViewModel(get())
+        HomeViewModel(get(), get())
     }
     viewModel {
-        SearchViewModel(get())
+        SearchViewModel(get(), get())
     }
     viewModel {
-        TodayViewModel(get())
+        TodayViewModel(get(), get())
     }
     viewModel {
-        TomorrowViewModel(get())
+        TomorrowViewModel(get(), get())
     }
 }  //koin può creare un'istanza di gson e passarla sia alla shared e a retrofit(single)
 

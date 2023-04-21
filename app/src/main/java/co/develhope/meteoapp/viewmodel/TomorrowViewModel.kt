@@ -10,10 +10,11 @@ import co.develhope.meteoapp.network.domainmodel.HomeCards
 import co.develhope.meteoapp.network.domainmodel.TomorrowRow
 import co.develhope.meteoapp.sharedpreferences.MySharedPrefsInterface
 import co.develhope.meteoapp.sharedpreferences.SharedImplementation
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 
-class TomorrowViewModel(val sharedImplementation: MySharedPrefsInterface) : ViewModel() {
+class TomorrowViewModel(val sharedImplementation: MySharedPrefsInterface, val gson: Gson) : ViewModel() {
 
     private val _response = MutableLiveData<ApiResponse<List<TomorrowRow>>>()
     val response: LiveData<ApiResponse<List<TomorrowRow>>> = _response
@@ -43,7 +44,7 @@ class TomorrowViewModel(val sharedImplementation: MySharedPrefsInterface) : View
             _response.postValue(ApiResponse.Loading)
             viewModelScope.launch {
                 try {
-                    val retrofitService = RetrofitInstance().serviceMeteoApi
+                    val retrofitService = RetrofitInstance(gson).serviceMeteoApi
                     val hourlyData = retrofitService.getDayEndPointDetails(
                         latitude = latitude!!,
                         longitude = longitude!!
