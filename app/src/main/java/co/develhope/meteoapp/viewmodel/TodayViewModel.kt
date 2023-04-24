@@ -8,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import co.develhope.meteoapp.network.RetrofitInstance
 import co.develhope.meteoapp.network.domainmodel.TodayCardInfo
 import co.develhope.meteoapp.sharedpreferences.MySharedPrefsInterface
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
-class TodayViewModel(val sharedImplementation: MySharedPrefsInterface, val gson: Gson) : ViewModel() {
+class TodayViewModel(
+    val sharedImplementation: MySharedPrefsInterface,
+    val retrofitInstance: RetrofitInstance
+) : ViewModel() {
 
     private val _response = MutableLiveData<ApiResponse<List<TodayCardInfo>>>()
     val response: LiveData<ApiResponse<List<TodayCardInfo>>> = _response
@@ -33,19 +35,35 @@ class TodayViewModel(val sharedImplementation: MySharedPrefsInterface, val gson:
             this.longitude != longitude ||
             _response.value is ApiResponse.Error ||
             latitude != null ||
-            longitude != null) {
-        _response.postValue(ApiResponse.Loading)
-        viewModelScope.launch {
-            try {
-                val retrofit = RetrofitInstance(gson).serviceMeteoApi
-                val hourlyData = retrofit.getDayEndPointDetails(
-                    latitude = getSelectedCityLatitude()!!,
-                    longitude = getSelectedCityLongitude()!!
-                ).toDomainToday()
-                _response.postValue(ApiResponse.Success(200, hourlyData))
-            } catch (e: Exception) {
-                _response.postValue(ApiResponse.Error(500, e.message ?: "Error"))
+            longitude != null
+        ) {
+            _response.postValue(ApiResponse.Loading)
+            viewModelScope.launch {
+                try {
+                    val retrofit = retrofitInstance.serviceMeteoApi
+                    val hourlyData = retrofit.getDayEndPointDetails(
+                        latitude = getSelectedCityLatitude()!!,
+                        longitude = getSelectedCityLongitude()!!
+                    )
+                    if (hourlyData.isSuccessful) {
+                        _response.postValue(
+                            ApiResponse.Success(
+                                hourlyData.code(),
+                                hourlyData.body()?.toDomainToday()
+                            )
+                        )
+                    } else {
+                        _response.postValue(
+                            ApiResponse.Error(
+                                hourlyData.code(),
+                                hourlyData.errorBody()?.toString() ?: "Error"
+                            )
+                        )
+                    }
+                } catch (e: Exception) {
+                    _response.postValue(ApiResponse.Error(500, e.message ?: "Error"))
+                }
             }
         }
     }
-}}
+}

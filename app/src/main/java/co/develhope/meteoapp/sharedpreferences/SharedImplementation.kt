@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken
 private const val CITYSHARED = "city"
 private const val LASTCITYSHARED = "lastcity"
 
-class SharedImplementation(context: Context, private val gson: Gson) : //anche in retrofit ist, gson nel costruttore
+class SharedImplementation(context: Context, private val gson: Gson) :
     MySharedPrefsInterface {
 
     private val sharedPrefs: SharedPreferences = context.getSharedPreferences(
@@ -25,7 +25,7 @@ class SharedImplementation(context: Context, private val gson: Gson) : //anche i
 
         sharedPrefs
             .edit()
-            ?.putString(CITYSHARED, Gson().toJson(place)) //creiamo una private val di gson che vale per tutta la classe
+            ?.putString(CITYSHARED, gson.toJson(place)) //creiamo una private val di gson che vale per tutta la classe
             ?.commit()
     }
 

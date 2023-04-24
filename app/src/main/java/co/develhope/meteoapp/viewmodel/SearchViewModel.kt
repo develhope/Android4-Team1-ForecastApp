@@ -12,7 +12,7 @@ import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
-class SearchViewModel(val sharedImplementation: MySharedPrefsInterface, val gson: Gson) : ViewModel() {
+class SearchViewModel(val sharedImplementation: MySharedPrefsInterface, val retrofitInstance: RetrofitInstance) : ViewModel() {
 
      val response = MutableLiveData<ApiResponse<List<HourlyItem>>>()
     fun getSearchCity() = sharedImplementation.getSearchCity()
@@ -22,7 +22,7 @@ class SearchViewModel(val sharedImplementation: MySharedPrefsInterface, val gson
         response.postValue(ApiResponse.Loading)
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance(gson).serviceGeoCodingApi.getDayEndPointDetails(userSearch).toDomain()
+                val response = retrofitInstance.serviceGeoCodingApi.getDayEndPointDetails(userSearch).toDomain()
                 val itemList = response.map { HourlyItem(city = it, degrees = "", weather = "") }
                 this@SearchViewModel.response.postValue(ApiResponse.Success(200, itemList))
             } catch (e: Exception) {

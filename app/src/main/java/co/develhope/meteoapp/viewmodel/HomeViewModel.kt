@@ -12,7 +12,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 
-class HomeViewModel(val sharedImplementation: MySharedPrefsInterface, val gson: Gson) : ViewModel() {
+class HomeViewModel(val sharedImplementation: MySharedPrefsInterface, val retrofitInstance: RetrofitInstance) : ViewModel() {
 
     private val _response = MutableLiveData<ApiResponse<List<HomeCards>?>>()
     val response: LiveData<ApiResponse<List<HomeCards>?>> = _response
@@ -44,7 +44,7 @@ class HomeViewModel(val sharedImplementation: MySharedPrefsInterface, val gson: 
 
             viewModelScope.launch {
                 try {
-                    val retrofitService = RetrofitInstance(gson).serviceMeteoApi
+                    val retrofitService = retrofitInstance.serviceMeteoApi
                     val weeklyData = retrofitService.getWeeklyEndPointDetails(
                         latitude = latitude!!,
                         longitude = longitude!!
