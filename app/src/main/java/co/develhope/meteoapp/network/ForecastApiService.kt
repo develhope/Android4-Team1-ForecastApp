@@ -23,7 +23,7 @@ interface ForecastApiService {
         ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
-    ): DayData
+    ): Response<DayData>
 
     @GET("v1/forecast")
     suspend fun getWeeklyEndPointDetails(
