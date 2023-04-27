@@ -100,7 +100,7 @@ class TomorrowFragment : Fragment() {
 
                     else -> {
                         binding.loadingView.visibility = View.GONE
-                        Log.e("TomorrowFragment", "Error")
+                        Log.e("HomeFragment", "Error")
                         ErrorFragment(onOkClickListener = {
                             if (viewModel.isSelectedCityNull()) {
                                 this@TomorrowFragment.findNavController()

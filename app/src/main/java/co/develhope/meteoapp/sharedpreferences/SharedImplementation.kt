@@ -69,7 +69,7 @@ class SharedImplementation(context: Context, private val gson: Gson) :
 
             sharedPrefs//infine salva
                 .edit()
-                ?.putString(LASTCITYSHARED, Gson().toJson(list))
+                ?.putString(LASTCITYSHARED, gson.toJson(list))
                 ?.apply()
         }
     }
