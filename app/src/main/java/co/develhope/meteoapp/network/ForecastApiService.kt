@@ -39,6 +39,10 @@ interface ForecastApiService {
             "rain_sum",
             "windspeed_10m_max"
         ),
+        @Query("hourly") hourly: List<String> = listOf(
+            "temperature_2m",
+            "weathercode"
+        ),
         @Query("current_weather") current_weather: Boolean = true,
         @Query("timezone") timezone: String = "Europe/Berlin",
     ): Response<WeeklyData>

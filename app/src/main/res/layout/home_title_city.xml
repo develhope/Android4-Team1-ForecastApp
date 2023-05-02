@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="42dp"
-    android:textColor="@color/white"
+    android:textColor="@color/home_title"
     android:textSize="32sp"
     android:textStyle="bold"
     tools:text="Palermo"

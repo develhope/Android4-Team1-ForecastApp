@@ -11,6 +11,8 @@ import com.google.gson.reflect.TypeToken
 
 private const val CITYSHARED = "city"
 private const val LASTCITYSHARED = "lastcity"
+private const val TEMPERATURE = "temperature"
+private const val CODE = "code"
 
 class SharedImplementation(context: Context, private val gson: Gson) :
     MySharedPrefsInterface {
@@ -72,6 +74,31 @@ class SharedImplementation(context: Context, private val gson: Gson) :
                 ?.putString(LASTCITYSHARED, gson.toJson(list))
                 ?.apply()
         }
+    }
+
+    override fun setTemperature(temperature: String) {
+        sharedPrefs
+            .edit()
+            ?.putString(TEMPERATURE, temperature)
+            ?.apply()
+    }
+
+    override fun getTemperature(): String {
+        return sharedPrefs
+            .getString(TEMPERATURE, "")
+            .orEmpty()
+    }
+
+    override fun setIconSun(code: Int) {
+        sharedPrefs
+            .edit()
+            ?.putInt(CODE, code)
+            ?.apply()
+    }
+
+    override fun getIconSun(): Int {
+        return sharedPrefs
+            .getInt(CODE, 0)
     }
 
 }

@@ -27,7 +27,7 @@
             tools:text="12"
             app:layout_constraintTop_toTopOf="@id/city_name"
             app:layout_constraintBottom_toBottomOf="@id/city_name"
-            android:textColor="@color/white"
+            android:textColor="@color/search_card_texts"
             android:textSize="@dimen/card_title_margin_start_top"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteY="16dp"/>
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@id/grade"
             app:layout_constraintEnd_toEndOf="@id/grade"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="@color/white"/>
+            android:textColor="@color/search_card_texts"/>
 
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Palermo"
-            android:textColor="@color/white"
+            android:textColor="@color/search_card_texts"
             android:textSize="18sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
