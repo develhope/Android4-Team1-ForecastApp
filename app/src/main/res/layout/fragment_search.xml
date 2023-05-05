@@ -8,24 +8,42 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="24dp">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/frame_48"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="21dp"
+            android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
         android:autofillHints="Cerca città"
         android:background="@drawable/rounded_corner"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:layout_weight="1"
         android:textColor="@color/color_title"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:searchIcon="@drawable/search_2"
         tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86dp"
+        app:srcCompat="@android:drawable/ic_menu_mylocation"
+        app:tint="@color/color_title" />
+
+
+</LinearLayout>
+
+
 
     <TextView
         android:id="@+id/ricercheRecenti"

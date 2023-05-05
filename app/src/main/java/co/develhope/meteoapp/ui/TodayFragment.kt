@@ -14,9 +14,12 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.mapping.toTodayCardInfo
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
+import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
 import co.develhope.meteoapp.viewmodel.TodayViewModel
+import com.google.gson.Gson
 import org.koin.android.ext.android.inject
 
+private const val BUNDLE_LIST = "cardOpened"
 
 class TodayFragment : Fragment() {
 
@@ -87,8 +90,15 @@ class TodayFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onSaveInstanceState(outState: Bundle) {     //funzione di sistema che passa un bundle al onviewcreated, aggingiamo a questo bundle la lista di card aperte creata nel adapter
+        val dataString =
+            Gson().toJson((binding.rvTodayScreen.adapter as? TodayScreenAdapter)?.itemOpened)      //convertiamo la lista in json, as? perché deve essere specificato che sia l'adapter specifico di questa recycler
+        outState.putString(
+            BUNDLE_LIST,
+            dataString
+        )          //key word card opened per il riconoscimento, e lo aggiungiamo al bundle
+        super.onSaveInstanceState(outState)
     }
 }
+
+

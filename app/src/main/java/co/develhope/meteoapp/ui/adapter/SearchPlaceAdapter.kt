@@ -7,9 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.network.domainmodel.Place
 import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
-import okhttp3.internal.notify
 
 
 class SearchPlaceAdapter(
@@ -31,20 +29,20 @@ class SearchPlaceAdapter(
     override fun onBindViewHolder(holder: HourlyItemViewHolder, position: Int) {
 
         val model = cardList.getOrNull(position)
-       // holder.weather.text =
-      //      model?.weather.toString().lowercase()
+        // holder.weather.text =
+        //      model?.weather.toString().lowercase()
         holder.itemView.setOnClickListener {
 
             onClick(model)
         }
 
 
-       holder.degrees.text = "${model?.degrees}"
+        holder.degrees.text = "${model?.degrees}"
         holder.city.text = "${model?.city?.name}, ${model?.city?.region}"
     }
 
-    fun setNewList(listNew : List<HourlyItem>){
-        if(listNew != cardList){
+    fun setNewList(listNew: List<HourlyItem>) {
+        if (listNew != cardList) {
             cardList = listNew
             notifyDataSetChanged()
         }

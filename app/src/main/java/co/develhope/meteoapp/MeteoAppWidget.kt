@@ -35,7 +35,6 @@ class MeteoAppWidget : AppWidgetProvider() {
     }
 }
 
-
 fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,

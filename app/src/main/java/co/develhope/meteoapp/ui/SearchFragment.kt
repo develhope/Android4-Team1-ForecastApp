@@ -1,6 +1,9 @@
 package co.develhope.meteoapp.ui
 
 import ApiResponse
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,16 +11,23 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchBinding
+import co.develhope.meteoapp.network.domainmodel.Place
+import co.develhope.meteoapp.ui.SearchScreen.HourlyItem
 import co.develhope.meteoapp.ui.adapter.SearchPlaceAdapter
 import co.develhope.meteoapp.viewmodel.SearchViewModel
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
 import org.koin.android.ext.android.inject
+
 
 class SearchFragment : Fragment() {
 
@@ -25,6 +35,14 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModelSearch: SearchViewModel by inject()
     private var searchAdapter: SearchPlaceAdapter? = null
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getLocationGeo()
+            }
+        }
 
 
     override fun onCreateView(
@@ -71,8 +89,6 @@ class SearchFragment : Fragment() {
 
         })
 
-
-
         viewModelSearch.response.observe(viewLifecycleOwner) { responseSearch ->
             when (responseSearch) {
                 is ApiResponse.Loading -> {
@@ -92,7 +108,52 @@ class SearchFragment : Fragment() {
             }
         }
 
+        binding.locationIcon.setOnClickListener {
+            getLocationGeo()
+        }
     }
+
+    fun getLocationGeo() {
+
+        val locationManager =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+        if ((ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+
+        } else {
+            locationManager.getCurrentLocation(
+                com.google.android.gms.location.LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY,
+                CancellationTokenSource().token,
+            )
+                .addOnSuccessListener { location ->
+                    val geoResult = Geocoder(requireContext()).getFromLocation(
+                        location.latitude,
+                        location.longitude,
+                        1
+                    )
+                    val placeGeo = Place(
+                        name = geoResult?.firstOrNull()?.locality.orEmpty(),
+                        latitude = location.latitude,
+                        longitude = location.longitude,
+                        region = geoResult?.firstOrNull()?.countryName.orEmpty()
+                    )
+                    viewModelSearch.setSelectedCity(HourlyItem("","", placeGeo))
+                    findNavController().navigate(R.id.homeFragment)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        context,
+                        "cerca una città manualmente",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        }
+    }
+
 
     fun manageView() {
         if (binding.frame48.query.isEmpty()) {

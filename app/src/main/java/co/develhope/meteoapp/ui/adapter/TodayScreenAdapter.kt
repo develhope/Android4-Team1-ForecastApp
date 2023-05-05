@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
@@ -17,7 +16,8 @@ import org.threeten.bp.format.DateTimeFormatter
 
 
 class TodayScreenAdapter(
-    private var items: List<TodayScreenData>
+    private var items: List<TodayScreenData>,
+    val itemOpened: MutableList<TomorrowSealed.Row> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val forecastTodayScreen = 1
@@ -26,7 +26,8 @@ class TodayScreenAdapter(
 
     class TodayForecastCardViewHolder(val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
-        fun bind(card: TodayScreenData.ForecastData) {
+        fun bind(card: TodayScreenData.ForecastData,  position: Int?=null) {
+
             rowCardForecastItemBinding.tvTodayHour.text =
                 itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
             rowCardForecastItemBinding.ivTodayIcon.setImageResource(card.todayCardInfo.iconToday)

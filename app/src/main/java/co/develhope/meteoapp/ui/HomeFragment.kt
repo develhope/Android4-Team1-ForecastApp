@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                             )
                         )
                         binding.loadingView.visibility = View.GONE
-                        val appWidgetManager: AppWidgetManager =
+                        val appWidgetManager: AppWidgetManager =  //fai funzione
                             AppWidgetManager.getInstance(context)
 
                         val thisWidget = ComponentName(requireContext(), MeteoAppWidget::class.java)
@@ -115,7 +115,6 @@ class HomeFragment : Fragment() {
                         .navigate(R.id.domaniFragment)
                     is HomeScreenEvents.OtherDay -> this@HomeFragment.findNavController()
                         .navigate(R.id.domaniFragment, bundleOf("day" to homeScreenEvent.day))
-                    else -> {}
                 }
             })
     }
