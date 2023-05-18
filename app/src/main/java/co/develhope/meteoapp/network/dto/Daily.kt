@@ -14,23 +14,4 @@ data class Daily(
     val time: List<OffsetDateTime>,
     val weathercode: List<Int>,
     val windspeed_10m_max: List<Double>
-) /*{
-    fun toDomain(): List<HomeCards> {
-        return time.mapIndexed { index, time ->
-            HomeCards(
-                day = time,
-                min = 0,
-                max = 0,
-                rain = 0,
-                wind = 0,
-                icon = 0,
-                degree = temperature_2m_max.getOrNull(index).toString(),
-                degree2 = "",
-                dataPercent = "",
-                dataKMH = "",
-                key = HomeScreenEvents.Today //da eliminare le logiche vanno attuate sulle date
-            )
-        }
-    }
-
-}*/
+)

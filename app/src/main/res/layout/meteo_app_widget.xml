@@ -1,0 +1,45 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@color/color_background">
+
+    <ImageView
+        android:id="@+id/sunIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sun_icon"
+        android:padding="4dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="25°C"
+        android:textSize="28sp"
+        android:textColor="@color/color_title"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/sunIcon"
+        android:layout_toEndOf="@+id/sunIcon"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/cityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sunIcon"
+        android:layout_alignEnd="@+id/temperatureTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="@color/color_title"
+        android:text="Palermo"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

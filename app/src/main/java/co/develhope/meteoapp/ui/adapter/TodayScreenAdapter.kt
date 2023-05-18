@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.network.DataObject
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.TodayCardForecastItemBinding
 import co.develhope.meteoapp.databinding.TodayScreenTitleItemBinding
@@ -17,16 +16,46 @@ import org.threeten.bp.format.DateTimeFormatter
 
 
 class TodayScreenAdapter(
-    private var items: List<TodayScreenData>
+    private var items: List<TodayScreenData>,
+    val itemOpened: MutableList<TodayScreenData.ForecastData> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val forecastTodayScreen = 1
     private val titleTodayScreen = 0
 
+    init {
+        if (itemOpened.isEmpty()) {
+            itemOpened.add(items.first{it is TodayScreenData.ForecastData} as TodayScreenData.ForecastData)
+        }
+    }
 
-    class TodayForecastCardViewHolder(val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
+
+    inner class TodayForecastCardViewHolder(val rowCardForecastItemBinding: TodayCardForecastItemBinding) :
         RecyclerView.ViewHolder(rowCardForecastItemBinding.root) {
-        fun bind(card: TodayScreenData.ForecastData) {
+        fun bind(
+            card: TodayScreenData.ForecastData,
+            position: Int
+        ) {
+
+            if (card in itemOpened) {
+                TransitionManager.beginDelayedTransition(
+                    rowCardForecastItemBinding.constraintCard,
+                    AutoTransition()
+                )
+                rowCardForecastItemBinding.constraintCard.visibility = View.VISIBLE
+                rowCardForecastItemBinding.myView.visibility = View.GONE
+                rowCardForecastItemBinding.toggle.rotation = 180F
+            } else {
+                TransitionManager.beginDelayedTransition(
+                    rowCardForecastItemBinding.constraintCard,
+                    AutoTransition()
+                )
+                rowCardForecastItemBinding.constraintCard.visibility = View.GONE
+                rowCardForecastItemBinding.myView.visibility = View.VISIBLE
+                rowCardForecastItemBinding.toggle.rotation = 0F
+            }
+
+
             rowCardForecastItemBinding.tvTodayHour.text =
                 itemView.context.getString(R.string.tv_time, card.todayCardInfo.date.hour)
             rowCardForecastItemBinding.ivTodayIcon.setImageResource(card.todayCardInfo.iconToday)
@@ -56,35 +85,18 @@ class TodayScreenAdapter(
             rowCardForecastItemBinding.ivWaterDrop.setImageResource(R.drawable.water_drop)
             rowCardForecastItemBinding.toggle.setImageResource(R.drawable.toggle_icon_up)
 
-
             rowCardForecastItemBinding.toggle.setOnClickListener {
-                if (rowCardForecastItemBinding.cvTodayCard.visibility == View.GONE) {
-                    TransitionManager.beginDelayedTransition(
-                        rowCardForecastItemBinding.cvTodayCard,
-                        AutoTransition()
-
-                    )
-                    rowCardForecastItemBinding.cvTodayCard.visibility = View.VISIBLE
-                    rowCardForecastItemBinding.myView.visibility = View.GONE
-                    rowCardForecastItemBinding.toggle.rotation = 180F
-
-                } else {
-                    TransitionManager.beginDelayedTransition(
-                        rowCardForecastItemBinding.cvTodayCard,
-                        AutoTransition()
-                    )
-                    rowCardForecastItemBinding.cvTodayCard.visibility = View.GONE
-                    rowCardForecastItemBinding.myView.visibility = View.VISIBLE
-                    rowCardForecastItemBinding.toggle.rotation = 0F
-
-
+                if (card in itemOpened) { //la row è nella lista, significa che è aperta e quindi la togliamo dalla lista per chiuderla
+                    itemOpened.remove(card)
+                } else { //se non è nella lista la aggiungiamo così si apre
+                    itemOpened.add(card)
                 }
+                notifyItemChanged(position)
             }
-
         }
     }
 
-    class TodayTitleViewHolder(private val todayScreenTitleItemBinding: TodayScreenTitleItemBinding) :
+    inner class TodayTitleViewHolder(private val todayScreenTitleItemBinding: TodayScreenTitleItemBinding) :
         RecyclerView.ViewHolder(todayScreenTitleItemBinding.root) {
         fun bind(title: TodayScreenData.TodayTitleObject) {
             "${title.title.city} ${title.title.region}".also {
@@ -126,13 +138,15 @@ class TodayScreenAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is TodayForecastCardViewHolder -> {
-                holder.bind(items.getOrNull(position) as TodayScreenData.ForecastData)
-                if (position == 1)
-                    holder.rowCardForecastItemBinding.toggle.performClick()
+        when (holder.itemViewType) {
+            titleTodayScreen -> (holder as TodayTitleViewHolder).bind(items[position] as TodayScreenData.TodayTitleObject)
+            forecastTodayScreen -> {
+                (holder as TodayForecastCardViewHolder).bind(
+                    items[position] as TodayScreenData.ForecastData,
+                    position
+                )
+
             }
-            is TodayTitleViewHolder -> holder.bind(items.getOrNull(position) as TodayScreenData.TodayTitleObject)
         }
     }
 
@@ -148,6 +162,4 @@ class TodayScreenAdapter(
 
         }
     }
-
-
 }

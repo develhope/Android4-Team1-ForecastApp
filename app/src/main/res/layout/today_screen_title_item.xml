@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
         android:text="@string/city_region"
-        android:textColor="@color/text_today_screen"
+        android:textColor="@color/color_title"
         android:textSize="15sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

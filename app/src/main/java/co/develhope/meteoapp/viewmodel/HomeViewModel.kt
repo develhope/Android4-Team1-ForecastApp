@@ -59,6 +59,12 @@ class HomeViewModel(
                                 weeklyData.body()?.toDomain()
                             )
                         )
+                        sharedImplementation.setTemperature(
+                            weeklyData.body()?.toTemperature().orEmpty()
+                        )
+                        sharedImplementation.setIconSun(
+                            weeklyData.body()?.toIcon() ?: 0
+                        )
                     } else {
                         _response.postValue(
                             ApiResponse.Error(

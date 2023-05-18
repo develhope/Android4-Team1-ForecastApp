@@ -9,6 +9,7 @@ import co.develhope.meteoapp.ui.adapter.home_adapter.HomeScreenEvents
 data class WeeklyData(
     val current_weather: CurrentWeather,
     val daily: Daily,
+    val hourly: Hourly,
     val daily_units: DailyUnits,
     val elevation: Double,
     val generationtime_ms: Double,
@@ -43,6 +44,13 @@ data class WeeklyData(
 
             )
         }
+    }
+
+    fun toTemperature() : String { //deve essere una lista
+       return "${hourly.temperature2m.firstOrNull()?.toInt().toString()}°" //oggetto di dominio, fai un let/if else che se non c'è il dato esce un -
+    }
+    fun toIcon() : Int {
+        return intToEnumToIcon(hourly.weathercode.firstOrNull()?.toInt())
     }
 
     private fun intToEnumToIcon(code: Int?): Int {
