@@ -46,7 +46,7 @@ data class WeeklyData(
         }
     }
 
-    fun toTemperature() : String {
+    fun toTemperature() : String { //deve essere una lista
        return "${hourly.temperature2m.firstOrNull()?.toInt().toString()}°" //oggetto di dominio, fai un let/if else che se non c'è il dato esce un -
     }
     fun toIcon() : Int {

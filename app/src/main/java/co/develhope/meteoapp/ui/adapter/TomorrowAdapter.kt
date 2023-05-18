@@ -50,7 +50,10 @@ class TomorrowAdapter(
 
     inner class RowTomorrowViewHolder(private val rowBinding: ItemTomorrowRowBinding) : //innerclass per accedere alla lista
         RecyclerView.ViewHolder(rowBinding.root) {
-        fun bind(row: TomorrowSealed.Row, position: Int) {//aggiungiamo position perchè ci serve nel notify sotto
+        fun bind(
+            row: TomorrowSealed.Row,
+            position: Int
+        ) {//aggiungiamo position perchè ci serve nel notify sotto
 
             if (row in itemOpened) { //se l'elemento si trova dentro questa lista significa che è aperto)
                 TransitionManager.beginDelayedTransition(
@@ -133,8 +136,10 @@ class TomorrowAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TitleTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Title)
-            is RowTomorrowViewHolder -> holder.bind(item[position] as TomorrowSealed.Row, position)
+            is TitleTomorrowViewHolder ->
+                holder.bind(item[position] as TomorrowSealed.Title)
+            is RowTomorrowViewHolder ->
+                holder.bind(item[position] as TomorrowSealed.Row, position)
         }
     }
 

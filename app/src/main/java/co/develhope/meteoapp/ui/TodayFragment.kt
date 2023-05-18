@@ -14,9 +14,10 @@ import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentTodayBinding
 import co.develhope.meteoapp.network.mapping.toTodayCardInfo
 import co.develhope.meteoapp.ui.adapter.TodayScreenAdapter
-import co.develhope.meteoapp.ui.adapter.TomorrowAdapter
+import co.develhope.meteoapp.ui.adapter.TodayScreenData
 import co.develhope.meteoapp.viewmodel.TodayViewModel
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.koin.android.ext.android.inject
 
 private const val BUNDLE_LIST = "cardOpened"
@@ -57,11 +58,22 @@ class TodayFragment : Fragment() {
                         binding.loadingView.visibility = View.VISIBLE
                     }
                     is ApiResponse.Success -> {
+                        val bundleCard =
+                        savedInstanceState?.getString(BUNDLE_LIST)//prendiamo il json con il bundle della lista
+                        val itemOpened: MutableList<TodayScreenData.ForecastData> = try {
+                            val listOfMyClassObject = object :
+                                TypeToken<MutableList<TodayScreenData.ForecastData>>() {}.type//gson per convertire una lista ha bisogno di questo costrutto con il toke, è così non ti fare domande
+                            Gson().fromJson(bundleCard, listOfMyClassObject)
+                        } catch (e: java.lang.Exception) {
+                            Log.e("card aperte?", e.toString())
+                            mutableListOf() //se non funziona torna lista vuota (quindi di card chiuse)
+                        }
                         binding.rvTodayScreen.adapter = TodayScreenAdapter(
                             items = response.body!!.toTodayCardInfo(
                                 viewModelToday.getSelectedCityName(),
-                                viewModelToday.getSelectedCityRegion()
-                            )
+                                viewModelToday.getSelectedCityRegion(),
+                            ),
+                            itemOpened = itemOpened
                         )
                         binding.loadingView.visibility = View.GONE
                     }
